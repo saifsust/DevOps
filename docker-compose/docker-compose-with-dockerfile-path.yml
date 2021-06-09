@@ -1,0 +1,16 @@
+version: "2"
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: ./docker/build/mysql/Dockerfile
+    image: mysql:1.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: docker_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    volumes:
+    - /home/saif/Documents/project/Online-ticket-selling-platform/docker/data/mysql:/var/lib/mysql
+    ports:
+    - 13306:3306
