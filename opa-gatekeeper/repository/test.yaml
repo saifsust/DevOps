@@ -16,6 +16,8 @@ spec:
     - sh
     - -c 
     - sleep 3600
+  - image: alpine/curl
+    name: alpine 
   dnsPolicy: ClusterFirst
   restartPolicy: Always
 status: {}
