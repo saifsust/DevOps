@@ -1,0 +1,30 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8srequiredrepository
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRequiredRepository
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            repository:
+              type: object
+              properties:
+                image:
+                  type: string
+  targets:
+  - target: admission.k8s.gatekeeper.sh
+    rego: |
+      package k8srequiredrepository
+      
+      violation[{"msg": msg}]{
+        provided := input.review.object.spec.containers[_].image
+        required := input.parameters.repository.image
+        
+        not strings.any_prefix_match(provided, required)
+        msg := sprintf("You must provide image %v but you provide %v", [required, provided])  
+      }
