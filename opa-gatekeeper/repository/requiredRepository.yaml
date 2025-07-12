@@ -14,8 +14,10 @@ spec:
             repository:
               type: object
               properties:
-                image:
-                  type: string
+                images:
+                  type: array
+                  items:
+                    type: string
   targets:
   - target: admission.k8s.gatekeeper.sh
     rego: |
@@ -23,7 +25,7 @@ spec:
       
       violation[{"msg": msg}]{
         provided := input.review.object.spec.containers[_].image
-        required := input.parameters.repository.image
+        required := input.parameters.repository.images
         
         not strings.any_prefix_match(provided, required)
         msg := sprintf("You must provide image %v but you provide %v", [required, provided])  
