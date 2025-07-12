@@ -31,3 +31,8 @@ sudo sysctl --system
 - configure containerd `sudo containerd config default | sudo tee /etc/containerd/config.toml` and set `SystemdCgroup = true`
 - install [kubeadm](https://v1-29.docs.kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 - setup [kubernetes cluster](https://v1-29.docs.kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
+- setup **node IP address** for resolving network subnet conflict within /etc/default/kubelet 
+```shell
+cat /etc/default/kubelet 
+KUBELET_EXTRA_ARGS="--node-ip=192.168.0.30"
+```
