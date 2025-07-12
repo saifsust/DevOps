@@ -11,3 +11,4 @@ OPA is typically integrated with kubernetes as validation admission webhook (Gat
 - Restrict hostPath volume mounts
 - Disallow latest image tags
 - Predefine number of replicas of Deployments, ReplicaSets
+
