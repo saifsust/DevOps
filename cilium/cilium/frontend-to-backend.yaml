@@ -1,0 +1,15 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: frontend-to-backend
+  namespace: secure-app
+spec:
+  endpointSelector:
+    matchLabels:
+      run: frontend
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        run: backend
+    authentication:
+      mode: "required"

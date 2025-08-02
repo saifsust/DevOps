@@ -1,0 +1,13 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: backend-to-frontend-inbound
+  namespace: secure-app
+spec:
+  endpointSelector:
+    matchLabels:
+      run: backend
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        run: frontend
