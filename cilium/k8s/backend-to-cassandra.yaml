@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: backend-to-cassandra
+  namespace: secure-app
+spec:
+  podSelector:
+    matchLabels:
+      run: backend
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: cassandra
+      podSelector:
+        matchLabels:
+          run: cassandra
