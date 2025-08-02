@@ -1,0 +1,6 @@
+1. docker.io/istio/examples-bookinfo-details-v1:1.20.3 -> port: 9080
+2. docker.io/istio/examples-bookinfo-ratings-v1:1.20.3 -> port: 9080
+3. docker.io/istio/examples-bookinfo-reviews-v1:1.20.3 -> port: 9080 -> mount-> /opt/ibm/wlp/output -> LOG_DIR ->  "/tmp/logs"
+4. docker.io/istio/examples-bookinfo-reviews-v2:1.20.3 -> port: 9080 -> mount-> /opt/ibm/wlp/output -> LOG_DIR ->  "/tmp/logs"
+5. docker.io/istio/examples-bookinfo-reviews-v3:1.20.3 -> port: 9080 -> mount-> /opt/ibm/wlp/output -> LOG_DIR ->  "/tmp/logs"
+6. docker.io/istio/examples-bookinfo-productpage-v1:1.20.3 -> port: 9080
