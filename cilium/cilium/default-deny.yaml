@@ -6,6 +6,9 @@ metadata:
 spec:
   endpointSelector: {}
   ingress:
-  - {}
+    - {}
   egress:
-  - {}
+    - toPorts:
+      - ports:
+        - port: "53" # DNS resolution. kube-dns allowed to serve k8s service
+          protocol: ANY
