@@ -1,0 +1,12 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-external-dns
+  namespace: secure-app
+spec:
+  endpointSelector:
+    matchLabels:
+      run: database
+  egress:
+  - toEntities:
+    - world   
