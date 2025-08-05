@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredLabels
+metadata:
+  name: must-have-env-label
+spec:
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Pod", "Namespace"]
+  parameters:
+    label: env
