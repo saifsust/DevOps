@@ -1,0 +1,15 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: RequiredDeploymentLabels
+metadata:
+  name: parameters-deployment 
+spec:
+  match:
+    kinds: 
+    - apiGroups: ["apps"]
+      kinds: ["Deployment"]
+  parameters:
+     deploymentLabel: env
+     podLabel: pod-env
+     replicas:
+       minReplicas: 2
+       maxReplicas: 5 

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    env: test
+  name: test
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+     pod-env: test
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+       pod-env: test
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+status: {}

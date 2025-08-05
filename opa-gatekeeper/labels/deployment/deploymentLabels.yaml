@@ -1,0 +1,68 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: requireddeploymentlabels
+spec:
+  crd:
+    spec:
+     names:
+      kind: RequiredDeploymentLabels
+      shortNames:
+      - rdl
+     validation:
+      openAPIV3Schema:
+         type: object
+         properties:
+            deploymentLabel:
+              type: string
+            podLabel:
+                type: string
+            replicas:
+               type: object
+               properties:
+                  minReplicas:
+                      type: integer
+                  maxReplicas:
+                      type: integer
+            
+  targets:
+  - target: admission.k8s.gatekeeper.sh
+    rego: |
+      package requireddeploymentlabels
+      
+      violation[{"msg": msg}]{
+        required := input.parameters.deploymentLabel
+        provided := input.review.object.metadata.labels
+        not hasLabel(required, provided)
+        msg := sprintf("You must provide deploy label %v", [required])
+      }
+     
+      violation[{"msg": msg}]{
+       required := input.parameters.podLabel
+       provided := input.review.object.spec.template.metadata.labels
+       not hasLabel(required, provided)
+       msg := sprintf("You must provide pod label %v", [required])
+      }
+      
+      hasLabel(required, provideds){
+          provideds[required]
+      }
+      
+      violation[{"msg": msg}]{
+        required := input.parameters.replicas.minReplicas
+        provided := input.review.object.spec.replicas
+        
+        provided < required
+        msg := sprintf("You must not provide less than replicas %v", [required])
+      }
+      
+      violation[{"msg": msg}]{
+        required := input.parameters.replicas.maxReplicas
+        provided := input.review.object.spec.replicas
+        
+        provided > required
+        msg := sprintf("You must not provided replicas greater than %v",[required])
+      }
+      
+ 
+      
