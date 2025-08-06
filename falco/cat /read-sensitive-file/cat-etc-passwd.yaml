@@ -1,0 +1,9 @@
+# Your custom rules!
+- rule: read_passwd
+  condition: >
+    evt.type=open or evt.type=openat
+    and fd.name=/etc/passwd
+    and proc.name=cat
+  desc: if sensitive file is read . should show warning message to SRE engineer
+  output: "At %evt.time user-name=%user.name within container=%container.name open a sensitive file "
+  priority: Warning
