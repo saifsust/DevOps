@@ -1,0 +1,13 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: RequiredDeploymentNamespace
+metadata:
+  name: must-have-in-namespace
+spec:
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Pod"]
+    - apiGroups: ["apps"]
+      kinds: ["Deployment"]
+  parameters:
+    namespaces: ["developer", "stage"] 
