@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-env: test
+  name: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: test
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        tier: test
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+status: {}

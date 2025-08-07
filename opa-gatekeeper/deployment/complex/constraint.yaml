@@ -1,0 +1,15 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: DeploymentConfiguration
+metadata:
+  name: deployment-conf
+spec:
+  match:
+   kinds:
+   - apiGroups: ["apps"]
+     kinds: ["Deployment", "DaemonSet"]
+  parameters:
+    namespaces: ["dev", "stg"]
+    labels:
+    - key: app-env
+      value: test
+    podLabel: tier

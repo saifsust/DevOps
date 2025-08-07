@@ -1,0 +1,74 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: deploymentconfiguration
+spec:
+  crd:
+    spec:
+      names:
+        kind: DeploymentConfiguration
+        shortNames:
+        - dconf
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+           namespaces:
+             type: array
+             items: 
+                type: string
+           labels:
+             type: array
+             items:
+               type: object
+               properties:
+                 key:
+                  type: string
+                 value: 
+                  type: string
+           podLabel:
+             type: string
+  targets:
+  - target: admission.k8s.gatekeeper.sh
+    rego: |
+     package deploymentconfiguration
+     
+     violation[{"msg": msg}]{
+       provided := input.review.object.metadata.namespace
+       required := input.parameters.namespaces
+       
+       not any_namespace_match(required, provided)
+       msg := sprintf("You must provided namespace within %v",[required])
+     }
+     
+     any_namespace_match(required, provided){
+       some idx;
+       required[idx] == provided
+     }
+     
+     violation[{"msg": msg}]{
+      provided := input.review.object.metadata.labels
+      required := input.parameters.labels
+      
+      not any_label_match(required, provided)
+      msg := sprintf("You must provide labels  %v", [required])
+     }
+     
+     any_label_match(required, provided){
+      some idx
+      label := required[idx];
+      label.value == provided[label.key]
+     }
+    
+     violation[{"msg": msg}]{
+       required := input.parameters.podLabel
+       provided := input.review.object.spec.template.metadata.labels
+      
+       not any_pod_label_match(required, provided)
+       msg := sprintf("You must provided pod labels %v", [required])
+     }
+    
+     any_pod_label_match(required, provided){
+        provided[required]
+     }
+    
