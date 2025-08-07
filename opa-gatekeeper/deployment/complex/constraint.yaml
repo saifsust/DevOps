@@ -13,3 +13,6 @@ spec:
     - key: app-env
       value: test
     podLabel: tier
+    replicas:
+        minReplicas: 2
+        maxReplicas: 5

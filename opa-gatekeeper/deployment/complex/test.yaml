@@ -5,7 +5,7 @@ metadata:
     app-env: test
   name: test
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       tier: test

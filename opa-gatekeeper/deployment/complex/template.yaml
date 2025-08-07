@@ -28,6 +28,13 @@ spec:
                   type: string
            podLabel:
              type: string
+           replicas:
+            type: object
+            properties:
+              minReplicas: 
+                type: integer
+              maxReplicas:
+                type: integer
   targets:
   - target: admission.k8s.gatekeeper.sh
     rego: |
@@ -72,3 +79,18 @@ spec:
         provided[required]
      }
     
+     violation[{"msg": msg}]{
+        provided := input.review.object.spec.replicas
+        required := input.parameters.replicas.minReplicas
+         
+       provided < required
+       msg := sprintf("You must not provide replicas less than %v", [required])
+     }
+    
+     violation[{"msg": msg}]{
+       provided := input.review.object.spec.replicas
+       required := input.parameters.replicas.maxReplicas
+       
+       provided > required
+       msg := sprintf("You must not provide replicas greater than %v", [required])
+     }
