@@ -1,0 +1,11 @@
+- rule: read_sensitive_file
+  desc: >
+    if any pod read sensitive file of prod system. need to notify site engineer to take action properly when need to take
+  condition: >
+    (evt.type=open or evt.type=openat)
+    and (proc.name=cat or proc.name=vi or proc.name=nano)
+    and fd.name=/etc/group
+  output: >
+    At %evt.time user.name=%user.name open a sensitive file within container=%container.name and repos=%container.image.repository
+  priority: Emergency
+  tags: [sensitive]

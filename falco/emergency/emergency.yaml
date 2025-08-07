@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    tier: emergency
+  name: emergency
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      tier: emergency
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 40%
+      maxSurge: 20%
+  template:
+    metadata:
+      labels:
+        tier: emergency
+    spec:
+      containers:
+      - command:
+        - sh
+        - -c
+        - while true; do cat /etc/group && sleep 5; done
+        image: busybox
+        name: emergency
+        resources: {}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+status: {}
