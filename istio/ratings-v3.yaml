@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ratings-v3
+  name: ratings-v3
+  namespace: secure-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ratings-v3
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ratings-v3
+    spec:
+      containers:
+      - image: docker.io/istio/examples-bookinfo-ratings-v1:1.20.3
+        name: ratings-v3
+        resources: {}
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 9080
+        env:
+        - name: SERVICE_VERSION
+          value: "v2"
+        - name: MONGO_DB_URL
+          value: "mongodb://mongodb-svc.secure-app.svc.cluster.local:27017/test"
+status: {}
