@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mongodb
+  name: mongodb
+  namespace: secure-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - image: saifsust/mongodb-server:istio
+        name: mongodb-server
+        imagePullPolicy: Always
+        resources: {}
+        ports:
+        - containerPort: 27019
+status: {}

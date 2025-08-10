@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mysql-server
+  name: mysql-server
+  namespace: secure-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-server
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mysql-server
+    spec:
+      containers:
+      - image: saifsust/mysql-server:istio
+        name: mysql-server
+        resources: {}
+        imagePullPolicy: Always
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "password"
+status: {}
