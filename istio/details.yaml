@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: details
+  name: details
+  namespace: secure-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: details
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: details
+    spec:
+      containers:
+      - image: docker.io/istio/examples-bookinfo-details-v1:1.20.3
+        name: examples-bookinfo-details-v1
+        ports:
+        - containerPort: 9080
+        resources: {}
+        env:
+        - name: ENABLE_EXTERNAL_BOOK_SERVICE
+          value: "true"
+        - name: DO_NOT_ENCRYPT
+          value: "false"
+status: {}

@@ -1,0 +1,1 @@
+1. k -n secure-app run tmp --image=nginx -it --rm --restart=Never -- curl --max-time 10 -H 'x-request-id=xxxx-xxxx-xxxx-xxxx'  http://details-svc:9080/details/234 | jq
