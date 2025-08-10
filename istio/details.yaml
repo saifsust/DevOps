@@ -19,8 +19,8 @@ spec:
         app: details
     spec:
       containers:
-      - image: docker.io/istio/examples-bookinfo-details-v1:1.20.3
-        name: examples-bookinfo-details-v1
+      - image: saifsust/details:istio
+        name: details
         ports:
         - containerPort: 9080
         resources: {}
