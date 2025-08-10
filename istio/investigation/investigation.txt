@@ -6,3 +6,6 @@
 1. k -n secure-app run tmp --image=nginx --rm -it --restart=Never -- curl --max-time 3 http://ratings-v1-svc:9080/ratings/123 | jq
 2. k -n secure-app run tmp --image=nginx --rm -it --restart=Never -- curl --max-time 3 http://ratings-v2-svc:9080/ratings/123 | jq
 3. k -n secure-app run tmp --image=nginx --rm -it --restart=Never -- curl --max-time 3 http://ratings-v3-svc:9080/ratings/123 | jq
+
+## reviews
+1.  k -n secure-app run tmp --image=nginx --rm -it --restart=Never  -- curl --max-time 3  http://reviews-v1-svc.secure-app.svc.cluster.local:9080/reviews/123 | jq
