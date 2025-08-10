@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ratings-v2
+  name: ratings-v2
+  namespace: secure-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ratings-v2
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ratings-v2
+    spec:
+      containers:
+      - image: docker.io/istio/examples-bookinfo-ratings-v1:1.20.3
+        name: examples-bookinfo-ratings-v1
+        resources: {}
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 9080
+        env:
+        - name: SERVICE_VERSION
+          value: "v2"
+        - name: DB_TYPE
+          value: "mysql"
+        - name: MYSQL_DB_HOST
+          value: "mysql-svc.secure-app.svc.cluster.local"
+        - name: MYSQL_DB_PORT
+          value: "3306"
+        - name: MYSQL_DB_USER
+          value: "root"
+        - name: MYSQL_DB_PASSWORD
+          value: "password" 
+status: {}
