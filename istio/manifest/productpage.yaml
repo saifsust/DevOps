@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: productpage
+  name: productpage
+  namespace: secure-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: productpage
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: productpage
+    spec:
+      containers:
+      - image: saifsust/productpage:istio
+        name: productpage
+        ports:
+        - containerPort: 9080
+        resources: {}
+        env:
+        - name: SERVICES_DOMAIN
+          value: ".svc.cluster.local"
+        - name: DETAILS_HOSTNAME
+          value: "details-svc"
+        - name: DETAILS_SERVICE_PORT
+          value: "9080"
+        - name: RATINGS_HOSTNAME
+          value: "ratings-v2-svc"
+        - name: RATINGS_SERVICE_PORT
+          value: "9080"
+        - name: REVIEWS_HOSTNAME
+          value: "reviews-v2-svc"
+        - name: REVIEWS_SERVICE_PORT
+          value: "9080"
+status: {}
