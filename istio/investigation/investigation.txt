@@ -9,3 +9,5 @@
 
 ## reviews
 1.  k -n secure-app run tmp --image=nginx --rm -it --restart=Never  -- curl --max-time 3  http://reviews-v1-svc.secure-app.svc.cluster.local:9080/reviews/123 | jq
+2. curl http://${RATINGS_HOSTNAME}${SERVICE_DOMAIN}:${RATINGS_SERVICE_PORT}/ratings/1234
+3. k -n secure-app run tmp --image=nginx --rm -it --restart=Never  -- curl --max-time 3  http://reviews-v2-svc.secure-app.svc.cluster.local:9080/reviews/123 | jq

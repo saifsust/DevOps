@@ -189,6 +189,7 @@ public class LibertyRestEndpoint extends Application {
 
       if (ratings_enabled) {
         JsonObject ratingsResponse = getRatings(Integer.toString(productId), requestHeaders);
+        System.out.println("rating response: "+ ratingsResponse);
         if (ratingsResponse != null) {
           if (ratingsResponse.containsKey("ratings")) {
             JsonObject ratings = ratingsResponse.getJsonObject("ratings");

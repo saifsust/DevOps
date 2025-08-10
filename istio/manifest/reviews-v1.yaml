@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: reviews-v1
+  name: reviews-v1
+  namespace: secure-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reviews-v1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: reviews-v1
+    spec:
+      containers:
+      - image: saifsust/reviews:istio
+        name: reviews
+        resources: {}
+        imagePullPolicy: Always
+        env:
+        - name: ENABLE_RATINGS
+          value: "false"
+status: {}

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: reviews-v2
+  name: reviews-v2
+  namespace: secure-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reviews-v2
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: reviews-v2
+    spec:
+      containers:
+      - image: saifsust/reviews:istio
+        name: reviews
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9080
+        resources: {}
+        env:
+        - name: ENABLE_RATINGS
+          value: "true"
+        - name: STAR_COLOR
+          value: "red"
+        - name: RATINGS_HOSTNAME
+          value: "ratings-v3-svc"
+        - name: SERVICES_DOMAIN
+          value: "secure-app.svc.cluster.local"
+        - name: RATINGS_SERVICE_PORT
+          value: "9080"
+status: {}
