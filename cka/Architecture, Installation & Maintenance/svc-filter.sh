@@ -1,0 +1,1 @@
+kubectl get service redis-service -o jsonpath='{.spec.ports[0].targetPort}'
