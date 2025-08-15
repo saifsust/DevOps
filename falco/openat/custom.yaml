@@ -1,0 +1,12 @@
+- rule: sensitive file read warning
+  desc: >
+    shadow is very sensitive file. so need to be aware of it.
+  condition: >
+    (container.id != host
+    and evt.dir = "<"
+    and evt.type = openat
+    and proc.name in (cat, nano, tail)
+    and fd.name in ( "/etc/passwd", "/etc/group", "/etc/shadow", "/var/log/syslog"))
+  output: Shadow file is readed at (time=%evt.time, type=%evt.type,container-name=%container.name,user=%user.name,user-uid=%user.uid)
+  priority: WARNING
+  tags: [Sensitive, Risky, Warning]
