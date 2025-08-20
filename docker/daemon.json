@@ -1,0 +1,11 @@
+{
+  "hosts": [
+    "unix:///var/run/docker.sock",
+    "tcp://0.0.0.0:2376"
+  ],
+  "tlsverify": true,
+  "tlscacert": "/home/vagrant/.docker/ca.crt",
+  "tlscert": "/home/vagrant/.docker/dockerd-server.crt",
+  "tlskey": "/home/vagrant/.docker/dockerd-server.key",
+   "group": "vagrant"
+}
