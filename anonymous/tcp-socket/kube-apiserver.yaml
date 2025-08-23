@@ -1,0 +1,22 @@
+livenessProbe:
+  failureThreshold: 8
+  tcpSocket:
+    port: 6443
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 15
+---
+readinessProbe:
+  failureThreshold: 3
+  tcpSocket:
+    port: 6443
+  periodSeconds: 1
+  timeoutSeconds: 15
+---
+startupProbe:
+  failureThreshold: 24
+  tcpSocket:
+    port: 6443
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 15
