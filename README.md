@@ -36,3 +36,9 @@ sudo sysctl --system
 cat /etc/default/kubelet 
 KUBELET_EXTRA_ARGS="--node-ip=192.168.0.30"
 ```
+# IPVS
+- need to install ipvsadm
+- need to add hosts within /etc/hosts
+```/etc/hosts
+192.168.0.100 controlplane
+```
