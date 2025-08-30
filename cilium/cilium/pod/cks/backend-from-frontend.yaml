@@ -1,0 +1,13 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-backend-from-frontend
+  namespace: cks
+spec:
+  endpointSelector:
+    matchLabels:
+      cks-app: backend
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        cks-app: frontend
