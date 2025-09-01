@@ -1,0 +1,35 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: deny-all
+  namespace: cassandra
+spec:
+  endpointSelector: {}
+  ingress:
+  - {}
+  egress:
+  - {}
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-cassandra-db-from-backend
+  namespace: cassandra
+spec:
+  endpointSelector: 
+    matchLabels:
+      cks-app: cassandra-db
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        k8s-app: kube-dns
+        k8s:io.kubernetes.pod.namespace: kube-system
+    toPorts:
+    - ports:
+      - port: "53"
+        protocol: ANY
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        cks-app: backend-app
+        io.kubernetes.pod.namespace: cks
