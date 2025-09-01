@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: List
+items:
+- apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    name: allow-backend-from-frontend
+    namespace: cks
+  spec:
+    endpointSelector:
+      matchLabels:
+        cks-app: backend-app
+    ingress:
+    - fromEndpoints:
+      - matchLabels:
+          cks-app: frontend-app
+- apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    name: allow-backend-to-cassandra
+    namespace: cks
+  spec:
+    egress:
+    - toEndpoints:
+      - matchLabels:
+          cks-app: cassandra-db
+          io.kubernetes.pod.namespace: cassandra
+    endpointSelector:
+      matchLabels:
+        cks-app: backend-app
+- apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    name: allow-dns
+    namespace: cks
+  spec:
+    egress:
+    - toEndpoints:
+      - matchLabels:
+          io.kubernetes.pod.namespace: kube-system
+          k8s-app: kube-dns
+      toPorts:
+      - ports:
+        - port: "53"
+          protocol: ANY
+    endpointSelector: {}
+- apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    name: allow-frontend-to-backend
+    namespace: cks
+  spec:
+    egress:
+    - toEndpoints:
+      - matchLabels:
+          cks-app: backend-app
+    endpointSelector:
+      matchLabels:
+        cks-app: frontend-app
+- apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    name: deny-all
+    namespace: cks
+  spec:
+    egress:
+    - {}
+    endpointSelector: {}
+    ingress:
+    - {}

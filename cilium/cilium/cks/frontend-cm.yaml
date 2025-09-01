@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  index.html: Hi FRONTEND
+kind: ConfigMap
+metadata:
+  name: frontend-cm
+  namespace: cks

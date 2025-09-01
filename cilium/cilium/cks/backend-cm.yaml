@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  index.html: HI backend APP
+kind: ConfigMap
+metadata:
+  name: backend-cm
+  namespace: cks

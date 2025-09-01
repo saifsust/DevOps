@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  index.html: Hi DATABASE
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: database-cm
+  namespace: cassandra
