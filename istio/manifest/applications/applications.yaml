@@ -8,20 +8,12 @@ items:
     name: details
     namespace: cks
   spec:
-    progressDeadlineSeconds: 600
     replicas: 1
-    revisionHistoryLimit: 10
     selector:
       matchLabels:
         app: details
-    strategy:
-      rollingUpdate:
-        maxSurge: 25%
-        maxUnavailable: 25%
-      type: RollingUpdate
     template:
       metadata:
-        creationTimestamp: null
         labels:
           app: details
       spec:
@@ -32,12 +24,11 @@ items:
           - name: DO_NOT_ENCRYPT
             value: "false"
           image: saifsust/details:istio
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: details
           ports:
           - containerPort: 9080
             protocol: TCP
-          resources: {}
 - apiVersion: apps/v1
   kind: Deployment
   metadata:
@@ -52,54 +43,38 @@ items:
       matchLabels:
         app: ratings
         version: v1
-    strategy:
-      rollingUpdate:
-        maxSurge: 25%
-        maxUnavailable: 25%
-      type: RollingUpdate
     template:
       metadata:
-        creationTimestamp: null
         labels:
           app: ratings
           version: v1
       spec:
         containers:
         - image: saifsust/ratings:istio
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: ratings-v1
           ports:
           - containerPort: 9080
             protocol: TCP
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-        dnsPolicy: ClusterFirst
-        restartPolicy: Always
 - apiVersion: apps/v1
   kind: Deployment
   metadata:
     labels:
-      app: ratings-v2
+      app: ratings
+      version: v2
     name: ratings-v2
     namespace: cks
   spec:
-    progressDeadlineSeconds: 600
     replicas: 1
-    revisionHistoryLimit: 10
     selector:
       matchLabels:
-        app: ratings-v2
-    strategy:
-      rollingUpdate:
-        maxSurge: 25%
-        maxUnavailable: 25%
-      type: RollingUpdate
+        app: ratings
+        version: v2
     template:
       metadata:
-        creationTimestamp: null
         labels:
-          app: ratings-v2
+          app: ratings
+          version: v2
       spec:
         containers:
         - env:
@@ -116,38 +91,30 @@ items:
           - name: MYSQL_DB_PASSWORD
             value: password
           image: saifsust/ratings:istio
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: ratings-v2
           ports:
           - containerPort: 9080
             protocol: TCP
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
 - apiVersion: apps/v1
   kind: Deployment
   metadata:
     labels:
-      app: ratings-v3
+      app: ratings
+      version: v3
     name: ratings-v3
     namespace: cks
   spec:
-    progressDeadlineSeconds: 600
     replicas: 1
-    revisionHistoryLimit: 10
     selector:
       matchLabels:
-        app: ratings-v3
-    strategy:
-      rollingUpdate:
-        maxSurge: 25%
-        maxUnavailable: 25%
-      type: RollingUpdate
+        app: ratings
+        version: v3
     template:
       metadata:
-        creationTimestamp: null
         labels:
-          app: ratings-v3
+          app: ratings
+          version: v3
       spec:
         containers:
         - env:
@@ -156,7 +123,7 @@ items:
           - name: MONGO_DB_URL
             value: mongodb://mongodb-svc.cassandra.svc.cluster.local:27017/test
           image: saifsust/ratings:istio
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: ratings-v3
           ports:
           - containerPort: 9080
@@ -165,61 +132,48 @@ items:
   kind: Deployment
   metadata:
     labels:
-      app: reviews-v1
+      app: reviews
+      version: v1
     name: reviews-v1
     namespace: cks
   spec:
-    progressDeadlineSeconds: 600
     replicas: 1
-    revisionHistoryLimit: 10
     selector:
       matchLabels:
-        app: reviews-v1
-    strategy:
-      rollingUpdate:
-        maxSurge: 25%
-        maxUnavailable: 25%
-      type: RollingUpdate
+        app: reviews
+        version: v1
     template:
       metadata:
-        creationTimestamp: null
         labels:
-          app: reviews-v1
+          app: reviews
+          version: v1
       spec:
         containers:
         - env:
           - name: ENABLE_RATINGS
             value: "false"
           image: saifsust/reviews:istio
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: reviews
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
 - apiVersion: apps/v1
   kind: Deployment
   metadata:
     labels:
-      app: reviews-v2
+      app: reviews
+      version: v2
     name: reviews-v2
     namespace: cks
   spec:
-    progressDeadlineSeconds: 600
     replicas: 1
-    revisionHistoryLimit: 10
     selector:
       matchLabels:
-        app: reviews-v2
-    strategy:
-      rollingUpdate:
-        maxSurge: 25%
-        maxUnavailable: 25%
-      type: RollingUpdate
+        app: reviews
+        version: v2
     template:
       metadata:
-        creationTimestamp: null
         labels:
-          app: reviews-v2
+          app: reviews
+          version: v2
       spec:
         containers:
         - env:
@@ -228,25 +182,21 @@ items:
           - name: STAR_COLOR
             value: red
           - name: RATINGS_HOSTNAME
-            value: ratings-v3-svc
+            value: ratings-svc
           - name: SERVICES_DOMAIN
             value: cks.svc.cluster.local
           - name: RATINGS_SERVICE_PORT
             value: "9080"
           image: saifsust/reviews:istio
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: reviews
           ports:
           - containerPort: 9080
             protocol: TCP
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
+  ## Deployments Service
 - apiVersion: v1
   kind: Service
   metadata:
-    labels:
-      app: details
     name: details-svc
     namespace: cks
   spec:
@@ -256,17 +206,11 @@ items:
       targetPort: 9080
     selector:
       app: details
-    sessionAffinity: None
     type: ClusterIP
-  status:
-    loadBalancer: {}
 - apiVersion: v1
   kind: Service
   metadata:
-    labels:
-      app: ratings
-      version: v1
-    name: ratings-v1-svc
+    name: ratings-svc
     namespace: cks
   spec:
     ports:
@@ -275,83 +219,22 @@ items:
       targetPort: 9080
     selector:
       app: ratings
-      version: v1
-    sessionAffinity: None
     type: ClusterIP
-  status:
-    loadBalancer: {}
 - apiVersion: v1
   kind: Service
   metadata:
-    labels:
-      app: ratings-v2
-    name: ratings-v2-svc
+    name: reviews-svc
     namespace: cks
   spec:
     ports:
-    - port: 9080
+    - nodePort: 30001
+      port: 9080
       protocol: TCP
       targetPort: 9080
     selector:
-      app: ratings-v2
-    sessionAffinity: None
-    type: ClusterIP
-  status:
-    loadBalancer: {}
-- apiVersion: v1
-  kind: Service
-  metadata:
-    labels:
-      app: ratings-v3
-    name: ratings-v3-svc
-    namespace: cks
-  spec:
-    ports:
-    - port: 9080
-      protocol: TCP
-      targetPort: 9080
-    selector:
-      app: ratings-v3
-    sessionAffinity: None
-    type: ClusterIP
-  status:
-    loadBalancer: {}
-- apiVersion: v1
-  kind: Service
-  metadata:
-    labels:
-      app: reviews-v1
-    name: reviews-v1-svc
-    namespace: cks
-  spec:
-    ports:
-    - port: 9080
-      protocol: TCP
-      targetPort: 9080
-    selector:
-      app: reviews-v1
-    sessionAffinity: None
-    type: ClusterIP
-  status:
-    loadBalancer: {}
-- apiVersion: v1
-  kind: Service
-  metadata:
-    labels:
-      app: reviews-v2
-    name: reviews-v2-svc
-    namespace: cks
-  spec:
-    ports:
-    - port: 9080
-      protocol: TCP
-      targetPort: 9080
-    selector:
-      app: reviews-v2
-    sessionAffinity: None
-    type: ClusterIP
-  status:
-    loadBalancer: {}
+      app: reviews
+    type: NodePort
+  ## Cilium Network Policies
 - apiVersion: cilium.io/v2
   kind: CiliumNetworkPolicy
   metadata:
@@ -367,24 +250,14 @@ items:
       - ports:
         - port: "53"
           protocol: ANY
+        rules:
+          dns:
+          - matchPattern: '*'
     endpointSelector: {}
 - apiVersion: cilium.io/v2
   kind: CiliumNetworkPolicy
   metadata:
-    name: allow-ratings-v2-from-reviews-v2
-    namespace: cks
-  spec:
-    endpointSelector:
-      matchLabels:
-        app: ratings-v3
-    ingress:
-    - fromEndpoints:
-      - matchLabels:
-          app: reviews-v2
-- apiVersion: cilium.io/v2
-  kind: CiliumNetworkPolicy
-  metadata:
-    name: allow-ratings-v2-to-mysql
+    name: allow-ratings-v2-to-mysql-server
     namespace: cks
   spec:
     egress:
@@ -398,7 +271,8 @@ items:
           protocol: TCP
     endpointSelector:
       matchLabels:
-        app: ratings-v2
+        app: ratings
+        version: v2
 - apiVersion: cilium.io/v2
   kind: CiliumNetworkPolicy
   metadata:
@@ -416,24 +290,52 @@ items:
           protocol: TCP
     endpointSelector:
       matchLabels:
-        app: ratings-v3
+        app: ratings
+        version: v3
 - apiVersion: cilium.io/v2
   kind: CiliumNetworkPolicy
   metadata:
-    name: allow-reviews-v2-to-ratings-v3
+    name: allow-ratings-inbound-from-reviews
+    namespace: cks
+  spec:
+    endpointSelector:
+      matchLabels:
+        app: ratings
+    ingress:
+    - fromEndpoints:
+      - matchLabels:
+          app: reviews
+          version: v2
+- apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    name: allow-reviews-inbound-from-world
+    namespace: cks
+  spec:
+    endpointSelector:
+      matchLabels:
+        app: reviews
+    ingress:
+    - fromEntities:
+      - world
+- apiVersion: cilium.io/v2
+  kind: CiliumNetworkPolicy
+  metadata:
+    name: allow-reviews-v2-to-ratings
     namespace: cks
   spec:
     egress:
     - toEndpoints:
       - matchLabels:
-          app: ratings-v3
+          app: ratings
       toPorts:
       - ports:
         - port: "9080"
           protocol: TCP
     endpointSelector:
       matchLabels:
-        app: reviews-v2
+        app: reviews
+        version: v2
 - apiVersion: cilium.io/v2
   kind: CiliumNetworkPolicy
   metadata:
