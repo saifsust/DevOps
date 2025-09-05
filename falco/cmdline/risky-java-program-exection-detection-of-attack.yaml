@@ -1,0 +1,15 @@
+- rule: Attacking Program Detected
+  desc: >
+    Attacking program is detected within a container
+  condition: >
+    evt.type in (execve,execveat)
+    and evt.dir = <
+    and evt.num > 0
+    and proc.cmdline contains attack
+  priority: ALERT
+  tags: [Risky, ProgramaticAttack]
+  output: >
+    Risky attacking program is detected at (
+    time=%evt.time, container-name=%container.name, user-name=%user.name, UID=%user.uid, namespace=%k8s.ns.name,
+    image-repository=%container.image.repository, cmd=%proc.cmdline
+    )
