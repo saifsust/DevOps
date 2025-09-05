@@ -1,0 +1,9 @@
+
+trivy image saifsust/ubuntu:24.04 --format=cyclonedx --output=cyclonedx
+trivy sbom --severity=CRITICAL cyclonedx
+
+trivy config /manifest/deployment.yaml
+
+trivy repo https://github.com/saifsust/DevOps.git --format=spdx-json
+
+trivy fs ./
