@@ -1,0 +1,17 @@
+- rule: Risky Program is executed
+  desc: >
+    A risky program is running within a container
+  condition: >
+    evt.type in (execve,execveat)
+    and evt.dir = <
+    and evt.num > 0
+    and container.id != host
+    and proc.cmdline endswith '.java'
+  priority: WARNING
+  tags: [Notification, Warning]
+  output: >
+    A program is attacked within your system
+    (
+    time=%evt.time,user-name=%user.name,UID=%user.uid,container-name=%container.name,repos=%container.image.repository,
+    ipc=%container.ipc,namespace=%k8s.ns.name
+    )
