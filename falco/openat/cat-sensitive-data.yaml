@@ -1,0 +1,14 @@
+# Your custom rules!
+- rule: System Sensitive Accessing Activities
+  desc: >
+    Malicious activities are detected with your system. Must take action as sooner as possible
+  condition: >
+    evt.type = openat
+    and evt.num > 0
+    and evt.dir = <
+    and container.id != host
+    and proc.name = cat
+    and fd.name = /etc/passwd
+  priority: WARNING
+  tags: [malicious, sensitive]
+  output: Malicious activities detected at time=%evt.time,contaienr-name=%container.name,user-name=%user.name,user-id=%user.uid,repo=%container.image.repository,cmd=%proc.cmdline
