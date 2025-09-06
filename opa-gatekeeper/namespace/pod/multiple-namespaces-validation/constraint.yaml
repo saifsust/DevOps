@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: PodMustBeInNamespaces
+metadata:
+ name: required-pod-namespace-conf
+spec:
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Pod"]
+  parameters:
+    namespaces: ["cks", "cassandra"]
