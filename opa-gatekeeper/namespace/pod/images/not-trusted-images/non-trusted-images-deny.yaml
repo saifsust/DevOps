@@ -1,0 +1,31 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: nontrustedimagedeny
+spec:
+  crd:
+    spec:
+      names:
+        kind: NonTrustedImageDeny
+      validation:
+       openAPIV3Schema:
+          type: object
+          properties:
+             trustedImages:
+                  type: array
+                  items:
+                    type: string
+  targets:
+  - target: admission.k8s.gatekeeper.sh
+    rego: |
+     package nontrustedimagedeny
+     
+     violation[{"msg": msg}]{
+       provided := input.review.object.spec.containers[_].image
+       required := input.parameters.trustedImages
+       not match_any(required, provided)
+       msg := sprintf("You must fetch images from %v", [required])
+     }
+     match_any(required, provided){
+      strings.any_prefix_match(provided, required)
+     }

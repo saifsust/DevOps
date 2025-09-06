@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: NonTrustedImageDeny
+metadata:
+  name: non-trusted-image-deny-policy
+spec:
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Pod"]
+  parameters:
+    trustedImages: ["saifsust/"] 
