@@ -14,4 +14,5 @@
 13.Pod Security -> a namespace has a label -> pod-security.kubernetes.io/enforce=restricted. deployment was not working. Need to make workable it (securityContex -> seccomp, allowPrivileEscalation=false and capabilities.drop-> all etc)
 14.Docker need remove root and replace with given user name and also yaml file there was environment value with password. Only field to be changed.
 15.Docker group change to root and chown change "unix://var/lib/docker.sock", remove developer user from a group docker
-16.  
+16.Need to update deployment all containers , securityContext -> runAsNonRoot=true and allowPrivilegeEscalation=false
+17.
