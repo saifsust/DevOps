@@ -15,4 +15,14 @@
 14.Docker need remove root and replace with given user name and also yaml file there was environment value with password. asked to only one field to be changed.
 15.Docker group change to root and chown change "unix://var/lib/docker.sock", remove developer user from a group docker
 16.Need to update deployment all containers , securityContext -> runAsNonRoot=true and allowPrivilegeEscalation=false
-17. ReplicatinController related question need to practice
+17.ReplicatinController related question need to practice
+extrac practice need to prepare for exam
+18.EventRateLimit setup
+19.Cilium engressDeny,IngressDeny, ICMP, DNS allow
+20.Falco Rules
+21.Gatekeeper -> Rego language
+22.Seccomp -> Unconfined, RuntimeDefault, Localhost -> profile
+23.AppArmor-> install profile-> apparmor_parser , as-status and used in container
+24.kubeSec -> risk analysis
+25.Trivy-> scanning image, sbom and config
+26.BOM-> generate spdx,cyclonedx etc format and detect version of library and report generation
