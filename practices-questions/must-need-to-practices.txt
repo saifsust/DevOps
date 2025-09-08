@@ -1,7 +1,8 @@
+Practice Topics for CKA, CKS, CKAD
 1. anonymous-auth = true and system:anonymous need to delete (kube-bench) (2 questions)
 2. ETCD --client-ca-certificate (kube-bench)
 3. Falco Rule -> need to identify /dev/mem used within a container
-4. Audit Policy -> need to add extra rule -> request body logs for specific resources
+4. Audit Policy -> need to add extra rule -> request body logs for specific resources, specific namespace resources need to be logged.
 5. Network Policy -> namespace -> prod-> labels env: prod deny ingress traffic and allow data namespace to prod namespace 
 6. ETCD Encryption Configuration (need to encrypt secrets and also decrypt) (prev)
 7. ImagePolicyWebhook -> certificates are given and host dns. admission-control-config.yaml existed but kubeconfig does not container host dns
@@ -26,3 +27,6 @@ extrac practice need to prepare for exam
 24.kubeSec -> risk analysis
 25.Trivy-> scanning image, sbom and config
 26.BOM-> generate spdx,cyclonedx etc format and detect version of library and report generation
+27.Affinity, PersistentVolume and PersistentVolumeClaim etc
+28.Create JOB, backoffLimit, completions
+29. Network Policy
