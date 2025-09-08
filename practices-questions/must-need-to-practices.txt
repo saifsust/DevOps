@@ -15,4 +15,4 @@
 14.Docker need remove root and replace with given user name and also yaml file there was environment value with password. Only field to be changed.
 15.Docker group change to root and chown change "unix://var/lib/docker.sock", remove developer user from a group docker
 16.Need to update deployment all containers , securityContext -> runAsNonRoot=true and allowPrivilegeEscalation=false
-17.
+17. ReplicatinController related question need to practice
