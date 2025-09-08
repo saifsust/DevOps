@@ -1,0 +1,17 @@
+1. anonymous-auth = false (kube-bench) (2 questions)
+2. ETCD --client-ca-certificate (kube-bench)
+3. Falco Rule -> need to identify /dev/mem used within a container
+4. Audit Policy -> need to add extra rule -> request body logs for specific resources
+5. Network Policy -> namespace -> prod-> labels env: prod deny ingress traffic and allow data namespace to prod namespace 
+6. ETCD Encryption Configuration (need to encrypt secrets and also decrypt) (prev)
+7. ImagePolicyWebhook -> certificates are given and host dns. admission-control-config.yaml existed but kubeconfig does not container host dns
+8. projected volume -> serviceAccount -> need to be disable automountServiceAccountToken and deployment need to mount token using projected volume and only read-only access
+9. Istio-> istio-injection=enabled and PeerAuthentication -> mTLS -> mode-> STRICT
+10.create TLS secret using given certificates
+11.SBOM -> need to scanner a libraries and it's version from a deployment images (alpine) and scale down deployment and generate report. Trivy was not there. Need to use BOM
+11.update worker node according to controlplane k8s version
+12.Ingress update using TLS secret 
+13.Pod Security -> a namespace has a label -> pod-security.kubernetes.io/enforce=restricted. deployment was not working. Need to make workable it (securityContex -> seccomp, allowPrivileEscalation=false and capabilities.drop-> all etc)
+14.Docker need remove root and replace with given user name and also yaml file there was environment value with password. Only field to be changed.
+15.Docker group change to root and chown change "unix://var/lib/docker.sock", remove developer user from a group docker
+16.  
