@@ -1,4 +1,4 @@
-1. anonymous-auth = false (kube-bench) (2 questions)
+1. anonymous-auth = true and system:anonymous need to delete (kube-bench) (2 questions)
 2. ETCD --client-ca-certificate (kube-bench)
 3. Falco Rule -> need to identify /dev/mem used within a container
 4. Audit Policy -> need to add extra rule -> request body logs for specific resources
