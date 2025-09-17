@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+    index.html: |
+      Hi, You'r seeing frontend APP view
+kind: ConfigMap
+metadata:
+    name: nginx-conf
+    namespace: cks

@@ -15,6 +15,9 @@ spec:
       labels:
         app: tester
     spec:
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
       automountServiceAccountToken: false
       containers:
         - image: saifsust/non-privileged-nginx:stable
