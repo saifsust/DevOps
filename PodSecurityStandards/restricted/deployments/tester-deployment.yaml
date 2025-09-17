@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: tester
+  name: tester
+  namespace: cks
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tester
+  template:
+    metadata:
+      labels:
+        app: tester
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - image: saifsust/non-privileged-nginx:stable
+          imagePullPolicy: Always
+          name: nginx
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html
+              name: projected
+              readOnly: true
+            - mountPath: /var/run/secrets/kubernetes.io/serviceaccount/
+              name: projected
+              readOnly: true
+      restartPolicy: Always
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+      serviceAccount: tester
+      volumes:
+        - name: projected
+          projected:
+            defaultMode: 420
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 86400
+                  path: token
+              - configMap:
+                  items:
+                    - key: index.html
+                      path: index.html
+                  name: nginx-conf
