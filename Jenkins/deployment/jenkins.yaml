@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: jenkins-controller
+  name: jenkins-controller
+  namespace: jenkins-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins-controller
+  template:
+    metadata:
+      labels:
+        app: jenkins-controller
+    spec:
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: "Equal"
+        effect: NoSchedule
+      affinity:
+        nodeAffinity:
+         requiredDuringSchedulingIgnoredDuringExecution:
+           nodeSelectorTerms:
+           - matchExpressions:
+             - key: kubernetes.io/hostname 
+               operator: In
+               values:
+               - controlplane
+      volumes:
+      - name: jenkins-storage
+        persistentVolumeClaim:
+          claimName: jenkins-pvc
+      containers:
+      - image: jenkins/jenkins:jdk21
+        name: jenkins
+        ports:
+        - containerPort: 8080
+        - containerPort: 50000
