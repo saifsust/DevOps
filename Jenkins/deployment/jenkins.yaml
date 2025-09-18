@@ -29,11 +29,8 @@ spec:
                values:
                - controlplane
       volumes:
-      - name: jenkins-storage
-        persistentVolumeClaim:
-          claimName: jenkins-pvc
       containers:
-      - image: jenkins/jenkins:jdk21
+      - image: saifsust/jenkins:docker
         name: jenkins
         ports:
         - containerPort: 8080
