@@ -15,3 +15,6 @@ openssl req -new -subj="/CN=client/O=controlplane" -key key.pem -extensions v3_c
 openssl x509 -days 3650 -req -in client.csr -CA ca.pem -CAkey ca-key.pem -CAcreateserial -passin pass:bjit1234 -extensions v3_ca -extfile openssl.cnf -out cert.pem
 
 rm client.csr docker-server.csr
+
+openssl verify -CAfile ca.pem docker-server.pem
+openssl verify -CAfile ca.pem cert.pem
