@@ -32,6 +32,7 @@ spec:
       containers:
       - image: saifsust/jenkins:docker
         name: jenkins
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         - containerPort: 50000
