@@ -17,11 +17,15 @@ RUN echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_releas
 RUN apt-get update && \
     apt-get install -y docker-ce-cli
 
-USER jenkins
 
 ARG DOCKER_GROUP_ID
 RUN if [ -n "$DOCKER_GROUP_ID" ]; then groupadd -g $DOCKER_GROUP_ID docker; fi
 RUN if [ -n "$DOCKER_GROUP_ID" ]; then usermod -aG docker jenkins; fi
+
+COPY certs /home/certs
+
+ENV DOCKER_CERT_PATH=/home/certs
+ENV DOCKER_TLS_VERIFY=1
 
 EXPOSE 8080 50000
 
