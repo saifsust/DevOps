@@ -1,6 +1,6 @@
-openssl genrsa -aes256 -passout pass:bjit1234 -out ca.key 2048
+openssl genrsa -aes256 -passout pass:bjit1234 -out ca-key.pem 2048
 
-openssl req -new -x509 -days 3650 -passin pass:bjit1234 -key ca.key -subj="/CN=docker-ca/O=controlplane" -extensions v3_ca -config openssl.cnf -out ca.pem
+openssl req -new -x509 -days 3650 -passin pass:bjit1234 -key ca-key.pem -subj="/CN=docker-ca/O=controlplane" -extensions v3_ca -config openssl.cnf -out ca.pem
 
 openssl genrsa -out docker-server-key.pem 2048
 
