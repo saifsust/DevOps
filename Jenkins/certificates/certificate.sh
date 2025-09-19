@@ -18,3 +18,9 @@ rm client.csr docker-server.csr
 
 openssl verify -CAfile ca.pem docker-server.pem
 openssl verify -CAfile ca.pem cert.pem
+
+
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+openssl s_client -connect 192.168.0.30:2376
