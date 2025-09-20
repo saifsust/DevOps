@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+    environment{
+        DOCKER_HOST = 'tcp://192.168.0.30:2376'
+    }
+    stages {
+        stage('Docker version checker') {
+            steps {
+                sh 'docker --version'
+            }
+        }
+        stage('Docker List of Images') {
+             steps {
+                sh 'docker images'
+             }
+        }
+    }
+}
