@@ -29,6 +29,21 @@ spec:
                values:
                - controlplane
       volumes:
+      - name: work-dir
+        persistentVolumeClaim:
+            claimName: jenkins-pvc
+      - name: certs
+        projected:
+         sources:
+         - secret:
+             name: jenkins-cert
+             items:
+             - key: cert
+               path: cert.pem
+             - key: key
+               path: key.pem
+             - key: ca
+               path: ca.pem
       containers:
       - image: saifsust/jenkins:docker
         name: jenkins
@@ -36,3 +51,16 @@ spec:
         ports:
         - containerPort: 8080
         - containerPort: 50000
+        volumeMounts:
+        - name: work-dir
+          mountPath: /var/jenkins_home
+        - name: certs
+          mountPath: /home/.docker
+        env:
+        - name: DOCKER_TLS_VERIFY
+          value: "1"
+        - name: DOCKER_HOST
+          valueFrom:
+           configMapKeyRef:
+              name: jenkins-conf
+              key: host
