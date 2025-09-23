@@ -29,9 +29,9 @@ spec:
                values:
                - controlplane
       volumes:
-      - name: work-dir
+      - name: jenkins-home-directory
         persistentVolumeClaim:
-            claimName: jenkins-pvc
+         claimName: jenkins-pvc 
       - name: certs
         projected:
          sources:
@@ -52,7 +52,7 @@ spec:
         - containerPort: 8080
         - containerPort: 50000
         volumeMounts:
-        - name: work-dir
+        - name: jenkins-home-directory
           mountPath: /var/jenkins_home
         - name: certs
           mountPath: /home/.docker
