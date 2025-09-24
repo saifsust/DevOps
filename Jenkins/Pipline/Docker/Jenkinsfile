@@ -11,5 +11,10 @@ pipeline {
                 sh 'docker images'
              }
         }
+        stage('Kubernetes List of Pods'){
+            steps{
+                sh 'kubectl get pods'
+            }
+        }
     }
 }
