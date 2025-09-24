@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Kubernetes List of Pods'){
             steps{
-                sh 'kubectl get pods'
+                sh 'kubectl get pods --all-namespaces'
             }
         }
     }
