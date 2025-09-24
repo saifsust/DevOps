@@ -15,6 +15,7 @@ spec:
       labels:
         app: jenkins-controller
     spec:
+      serviceAccount: jenkins-sa
       tolerations:
       - key: node-role.kubernetes.io/control-plane
         operator: "Equal"
@@ -35,6 +36,20 @@ spec:
       - name: certs
         projected:
          sources:
+         - secret:
+            name: jenkins-kube-secret
+            items:
+            - key: ca
+              path: ca.crt
+            - key: cert
+              path: client.crt
+            - key: key
+              path: client.key
+         - configMap:
+            name: jenkins-kube-conf
+            items:
+            - key: config
+              path: config 
          - secret:
              name: jenkins-cert
              items:
