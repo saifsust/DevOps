@@ -15,7 +15,6 @@ spec:
       labels:
         app: jenkins-controller
     spec:
-      serviceAccount: jenkins-sa
       tolerations:
       - key: node-role.kubernetes.io/control-plane
         operator: "Equal"
