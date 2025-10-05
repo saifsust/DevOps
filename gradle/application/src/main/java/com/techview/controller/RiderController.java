@@ -19,8 +19,8 @@ public class RiderController {
         return ResponseEntity
                 .ok(List.of(
                         new Rider(1, "Helal", RiderType.Bicycle),
-                        new Rider(2, "Austik", RiderType.Motorcycle),
-                        new Rider(3, "Abrahum", RiderType.Bicycle),
+                        new Rider(2, "Austin", RiderType.Motorcycle),
+                        new Rider(3, "Abraham", RiderType.Bicycle),
                         new Rider(4, "Saiful", RiderType.Bicycle)
                 ));
     }
