@@ -36,19 +36,22 @@ spec:
         projected:
          sources:
          - secret:
-            name: jenkins-kube-secret
+            name: kube-conf-secret
             items:
-            - key: ca
-              path: ca.crt
-            - key: cert
+            - key: tls.crt
               path: client.crt
-            - key: key
+            - key: tls.key
               path: client.key
          - configMap:
             name: jenkins-kube-conf
             items:
             - key: config
-              path: config 
+              path: config
+         - configMap:
+             name: kube-root-ca.crt
+             items:
+               - key: ca.crt
+                 path: ca.crt
          - secret:
              name: jenkins-cert
              items:
