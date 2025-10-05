@@ -10,3 +10,7 @@ tasks.register("CopyDockerfile", Copy as Class<Task>){
     }
 }
 
+tasks.register("ReplaceApplicationJar"){
+    println 'ReplacementTask'
+}
+
