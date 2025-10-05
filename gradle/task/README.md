@@ -3,3 +3,7 @@
 ```shell
 ./gradlew task CopyDockerfile
 ```
+- Docker Image Build and Show all of images
+```shell
+./gradlew clean task DockerImages
+```
