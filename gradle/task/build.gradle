@@ -6,6 +6,14 @@ plugins {
 
 version = '0.0.1'
 
+tasks.register('BuildDockerImage', Exec) {
+    def file = new File("${projectDir}/build/docker/Dockerfile")
+    if (file.isFile()) {
+        commandLine 'docker', 'build', '-t', "saifsust/task:$version", "$projectDir/build/docker"
+    }
+    dependsOn("CopyDockerfile")
+}
+
 tasks.register("CopyDockerfile", Copy) {
     from("source/Dockerfile")
     into("$projectDir/build/docker")
