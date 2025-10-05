@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = {"com.techview.*"})
-public class TechViewApp {
+public class RiderApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(TechViewApp.class, args);
+        SpringApplication.run(RiderApp.class, args);
     }
 }
