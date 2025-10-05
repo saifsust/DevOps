@@ -1,16 +1,25 @@
-plugins{
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
     id 'base'
 }
 
-tasks.register("CopyDockerfile", Copy as Class<Task>){
-    Copy it ->{
-        it.from("source/Dockerfile")
-        it.into("../docker")
+version = '0.0.1'
+
+tasks.register("CopyDockerfile", Copy) {
+    from("source/Dockerfile")
+    into("$projectDir/build/docker")
+
+    //TIP replace app name with custom version
+    //follow the url -> https://docs.gradle.org/current/userguide/working_with_files.html#using_copyspec_filter
+    filter(ReplaceTokens, tokens: ["APPLICATION": String.format("%s-%s", project.name, version)])
+
+    doFirst {
+        println 'Start to copy Dockerfile'
+    }
+
+    doLast {
         println 'Successfully copied Dockerfile'
     }
-}
-
-tasks.register("ReplaceApplicationJar"){
-    println 'ReplacementTask'
 }
 
