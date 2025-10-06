@@ -1,8 +1,10 @@
 plugins {
     id 'java'
+    id 'org.springframework.boot' version '3.5.6'
+    id 'io.spring.dependency-management' version '1.1.7'
 }
 
-version = '0.0.1'
+version = '0.0.2'
 description = 'Gradle Java Learning project'
 
 java {
@@ -11,14 +13,28 @@ java {
     }
 }
 
-ext {
-    springBootVersion = '3.5.6'
-}
-
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+}
+
+bootJar {
+    enabled = true
+}
+
+tasks.named('clean') {
+    delete fileTree("$projectDir/docker").matching {
+        include "rider-app-*.jar"
+    }
+}
+
+tasks.register('BootJarCopyToDocker', Copy) {
+    from("$projectDir/build/libs/rider-app-${version}.jar")
+    into("$projectDir/docker")
+    doLast {
+        println 'Successfully copied bootJar'
+    }
 }
