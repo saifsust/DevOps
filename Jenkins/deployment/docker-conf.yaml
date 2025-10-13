@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  docker-email: c2FpZnVsLnN1c3QuY3NlQGdtYWlsLmNvbQ==
+  docker-password: U0BpRmxpVDBO
+  docker-username: c2FpZnN1c3Q=
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: docker-conf
+  namespace: jenkins-system

@@ -74,6 +74,21 @@ spec:
         - name: certs
           mountPath: /home/.docker
         env:
+        - name: DOCKER_REGISTRY_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: docker-conf
+              key: docker-email
+        - name: DOCKER_REGISTRY_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: docker-conf
+              key: docker-username
+        - name: DOCKER_REGISTRY_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: docker-conf
+              key: docker-password
         - name: DOCKER_TLS_VERIFY
           value: "1"
         - name: DOCKER_HOST
