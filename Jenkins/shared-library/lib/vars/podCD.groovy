@@ -98,11 +98,11 @@ def call() {
                 }
             }
 
-            stage('clean workspace') {
-                steps {
-                    cleanWs()
-                }
-            }
+//            stage('clean workspace') {
+//                steps {
+//                    cleanWs()
+//                }
+//            }
 
         }
     }
