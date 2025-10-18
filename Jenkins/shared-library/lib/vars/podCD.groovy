@@ -12,7 +12,7 @@ def call(def podName, def namespace, def images){
         stages {
             stage('Preset and Git Checkout') {
                 steps {
-                   println ${POD_YAML}
+                   println POD_YAML
                 }
                 post {
                     success {
