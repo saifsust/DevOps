@@ -1,5 +1,5 @@
-import org.aktota.utils.PodUtils
 import org.aktota.utils.AppUtils
+import org.aktota.utils.PodUtils
 
 def call(def appName) {
     def podUtil = (new PodUtils())
@@ -9,10 +9,10 @@ def call(def appName) {
         environment {
             GIT_CREDENTIAL_ID = 'gitRootAccess'
             GIT_REPOSITORY = "${appUtil.applications()[appName]}"
+            APP_NAME = "${appName}"
             DOCKER_IMAGE_VERSION = ''
         }
         parameters {
-            APP_NAME = "${appName}"
             string(name: 'GIT_BRANCH', defaultValue: 'master', description: 'Git Branch to build docker image', trim: true)
             choice(name: 'DEPLOY_ENV', choices: ['cks', 'graphql-system', 'cka', 'test'])
         }
@@ -75,7 +75,7 @@ def call(def appName) {
             stage('Update Manifest Image') {
                 steps {
                     script {
-                        def podYaml = podUtil.getDeployYaml("${params.APP_NAME}", "${params.APP_NAME}-" + env.BUILD_NUMBER, "${params.DEPLOY_ENV}", ["${DOCKER_IMAGE_VERSION}"])
+                        def podYaml = podUtil.getDeployYaml("${env.APP_NAME}", "${env.APP_NAME}-" + env.BUILD_NUMBER, "${params.DEPLOY_ENV}", ["${DOCKER_IMAGE_VERSION}"])
                         println podYaml
                         podUtil.writeYaml(podYaml, String.format("%s/workspace/%s", env.JENKINS_HOME, env.JOB_NAME))
                     }
