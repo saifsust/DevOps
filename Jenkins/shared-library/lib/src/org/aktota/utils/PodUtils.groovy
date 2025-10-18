@@ -31,7 +31,8 @@ spec:
         if(file.exists()){
             file.delete();
         }
-        if(file.createNewFile()){
+        if(file.mkdir()){
+            file.createNewFile()
             println 'Successfully resource is created.'
         }
         file.write(contents)
