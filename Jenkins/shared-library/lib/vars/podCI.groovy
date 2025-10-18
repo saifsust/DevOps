@@ -1,21 +1,20 @@
 import org.aktota.utils.AppUtils
 
-def call() {
+def call(def appName) {
     def appUtil = (new AppUtils())
     pipeline {
         agent any
         environment {
             GIT_CREDENTIAL_ID = 'gitRootAccess'
-            DOCKER_IMAGE_VERSION = ''
         }
         parameters {
-            choice(name: 'APP_NAME', description: 'Choose app for deploying', choices: "${appUtil.getAppNames()}")
+            GIT_REPOSITORY = "${appUtil.applications()[appName]}"
             string(name: 'GIT_BRANCH', defaultValue: 'master', description: 'Git Branch to build docker image', trim: true)
         }
         stages {
             stage('Preset and Git Checkout') {
                 steps {
-                    git url: "${appUtil.applications()[APP_NAME]}", branch: "${params.GIT_BRANCH.trim()}", credentialsId: GIT_CREDENTIAL_ID
+                    git url: "${params.GIT_REPOSITORY.trim()}", branch: "${params.GIT_BRANCH.trim()}", credentialsId: GIT_CREDENTIAL_ID
                 }
                 post {
                     success {
