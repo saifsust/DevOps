@@ -12,7 +12,8 @@ def call(def podName, def namespace, def images){
         stages {
             stage('Preset and Git Checkout') {
                 steps {
-                   sh 'echo $POD_YAML'
+                   println podYaml
+                   sh 'echo $POD_YAML >> resource.yaml'
                 }
                 post {
                     success {
