@@ -14,7 +14,7 @@ def call(def gitRepository, def podName, def namespace, def images) {
 
             stage('Preset and Git Checkout') {
                 steps {
-                    git url: ${gitRepository}, branch: 'master', credentialsId: 'gitRootAccess'
+                    git url: "${gitRepository}", branch: 'master', credentialsId: 'gitRootAccess'
                 }
                 post {
                     success {
