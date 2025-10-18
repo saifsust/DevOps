@@ -4,7 +4,7 @@ def call(def podName, def namespace, def images) {
     println podName
 
     def podUtil = (new PodUtils())
-    def podYaml = (podUtil).getDeployYaml(podName, namespace, images)
+    def podYaml = podUtil.getDeployYaml(podName, namespace, images)
     pipeline {
         agent any
         environment {
@@ -16,8 +16,8 @@ def call(def podName, def namespace, def images) {
                 steps {
                     git url: 'https://github.com/saifsust/mock-server.git', branch: 'master', credentialsId: 'gitRootAccess'
                 }
-                post{
-                    success{
+                post {
+                    success {
                         sh 'git checkout master'
                     }
                 }
@@ -25,8 +25,8 @@ def call(def podName, def namespace, def images) {
 
             stage('K8s Deployment Yaml Preparation') {
                 steps {
-                    script{
-                        (podUtil).writeYaml(podYaml, String.format("%s/workspace/%s", env.JENKINS_HOME, env.JOB_NAME))
+                    script {
+                        podUtil.writeYaml(podYaml, String.format("%s/workspace/%s", env.JENKINS_HOME, env.JOB_NAME))
                         sh 'kubectl apply -f api/docker/resource.yaml'
                     }
                 }
@@ -37,11 +37,11 @@ def call(def podName, def namespace, def images) {
                 }
             }
 
-//            stage('clean workspace') {
-//                steps {
-//                    cleanWs()
-//                }
-//            }
+            stage('clean workspace') {
+                steps {
+                    cleanWs()
+                }
+            }
         }
     }
 }
