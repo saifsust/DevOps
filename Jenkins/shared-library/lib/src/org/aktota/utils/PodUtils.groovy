@@ -51,6 +51,7 @@ spec:
             - NET_BIND_SERVICE
         seccompProfile:
             type: RuntimeDefault
+        allowPrivilegeEscalation: false
 """
     }
 }
