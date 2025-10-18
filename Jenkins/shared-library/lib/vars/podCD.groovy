@@ -6,12 +6,14 @@ def call(def podName, def namespace, def images){
     def podYaml = (new PodUtils()).getDeployYaml(podName, namespace, images)
     pipeline {
         agent any
+        environment{
+            POD_YAML = ${podYaml}
+        }
         stages {
             stage('Preset and Git Checkout') {
                 steps {
                     script{
-                        println podYaml
-                        sh  "echo ${podYaml}"
+                        sh  "echo $POD_YAML"
                     }
                 }
                 post {
