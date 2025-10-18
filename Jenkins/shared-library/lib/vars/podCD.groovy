@@ -11,7 +11,7 @@ def call(def podName, def namespace, def images){
                 steps {
                     script{
                         println podYaml
-                        sh  'echo $podYaml | kubectl apply -f -'
+                        sh  'echo ${podYaml}'
                     }
                 }
                 post {
