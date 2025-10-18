@@ -12,7 +12,7 @@ def call(def podName, def namespace, def images){
         stages {
             stage('Preset and Git Checkout') {
                 steps {
-                   println POD_YAML
+                   sh 'kubectl apply -f - $POD_YAML'
                 }
                 post {
                     success {
