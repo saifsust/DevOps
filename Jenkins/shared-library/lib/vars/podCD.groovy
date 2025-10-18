@@ -4,8 +4,8 @@ def call(def podName, def namespace, def images) {
     println podName
 
     def podUtil = (new PodUtils())
-    def podYaml = podUtil.getDeployYaml(podName, namespace, images)
-    podUtil.writeYaml(podYaml)
+    def podYaml = (podUtil).getDeployYaml(podName, namespace, images)
+    (podUtil).writeYaml(podYaml)
     pipeline {
         agent any
         environment {
