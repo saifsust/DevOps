@@ -16,7 +16,7 @@ def call() {
         stages {
             stage('Preset and Git Checkout') {
                 steps {
-                    git url: applications()[APP_NAME], branch: "${params.GIT_BRANCH.trim()}", credentialsId: GIT_CREDENTIAL_ID
+                    git url: "${appUtil.applications()[APP_NAME]}", branch: "${params.GIT_BRANCH.trim()}", credentialsId: GIT_CREDENTIAL_ID
                 }
                 post {
                     success {
