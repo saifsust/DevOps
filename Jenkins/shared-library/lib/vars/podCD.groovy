@@ -12,7 +12,7 @@ def call(def podName, def namespace, def images){
         stages {
             stage('Preset and Git Checkout') {
                 steps {
-                     sh label: "Deploy APP", script: "echo $POD_YAML"
+                     sh label: "Deploy APP", script: "echo $POD_YAML > resource.yaml"
                 }
                 post {
                     success {
