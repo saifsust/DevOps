@@ -23,11 +23,11 @@ def call(def podName, def namespace, def images) {
                 }
             }
 
-            stage('clean workspace') {
-                steps {
-                    //cleanWs()
-                }
-            }
+//            stage('clean workspace') {
+//                steps {
+//                    cleanWs()
+//                }
+//            }
         }
     }
 }
