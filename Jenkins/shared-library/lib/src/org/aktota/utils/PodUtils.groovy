@@ -7,8 +7,10 @@ class PodUtils implements Serializable {
 apiVersion: v1
 kind: Pod
 metadata:
-  name: {0}
-  namespace: {1}
+  labels:
+    app: {0}
+  name: {1}
+  namespace: {2}
 spec:
   serviceAccount: default
   securityContext:
@@ -17,23 +19,23 @@ spec:
      runAsNonRoot: true
   automountServiceAccountToken: true
   containers:
-{2}
+{3}
 """
 
-    def getDeployYaml(def podName, def namespace, def images) {
+    def getDeployYaml(def label, def podName, def namespace, def images) {
         def containerSpec = images.collect { getContainers(it, podName) }.join("\n")
-        return MessageFormat.format(template, podName, namespace, containerSpec) as String
+        return MessageFormat.format(template, label, podName, namespace, containerSpec) as String
     }
 
-    static def writeYaml(def contents, def path){
-       def file =  new File("$path/k8s/resource.yaml")
-        if(file.exists()){
+    static def writeYaml(def contents, def path) {
+        def file = new File("$path/k8s/resource.yaml")
+        if (file.exists()) {
             file.deleteDir()
         }
 
         file.getParentFile().mkdir()
 
-        if(file.createNewFile()){
+        if (file.createNewFile()) {
             println 'Successfully resource is created.'
         }
         file.write(contents)
