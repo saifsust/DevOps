@@ -14,7 +14,7 @@ def call(def podName, def namespace, def images){
                 steps {
                    println podYaml
                     sh 'rm resource.yaml'
-                    sh 'echo $POD_YAML > resource.yaml'
+                    sh '$POD_YAML > resource.yaml'
                     sh 'ls -ltra'
                 }
                 post {
