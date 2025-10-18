@@ -75,6 +75,7 @@ def call() {
                         def podYaml = podUtil.getDeployYaml("${params.APP_NAME}-" + env.BUILD_NUMBER, "${params.DEPLOY_ENV}", ["${DOCKER_IMAGE_VERSION}"])
                         println podYaml
                         podUtil.writeYaml(podYaml, String.format("%s/workspace/%s", env.JENKINS_HOME, env.JOB_NAME))
+                        sh 'ls -ltra'
                     }
                 }
                 post {
