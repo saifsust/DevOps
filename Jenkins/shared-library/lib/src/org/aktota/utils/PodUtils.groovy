@@ -23,7 +23,7 @@ EOF
 
     def getDeployYaml(def podName, def namespace, def images) {
         def containerSpec = images.collect { getContainers(it) }.join("\n")
-        return MessageFormat.format(template, podName, namespace, containerSpec)
+        return MessageFormat.format(template, podName, namespace, containerSpec) as String
     }
 
     private def getContainers(def imageName) {
