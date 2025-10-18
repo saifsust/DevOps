@@ -14,6 +14,7 @@ spec:
   securityContext:
      runAsUser: 1000
      runAsGroup: 1000
+     runAsNonRoot: true
   automountServiceAccountToken: true
   containers:
 {2}
@@ -37,6 +38,12 @@ spec:
         return """
   - image: ${imageName}
     name: app-${imageName}
+    securityContext:
+        capabilities:
+            drop:
+            - ALL
+            add:
+            - NET_BIND_SERVICE
     env:
     - name: IMAGE_NAME_ENV
       value: "${imageName}"
