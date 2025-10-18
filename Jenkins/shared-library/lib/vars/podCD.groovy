@@ -25,7 +25,7 @@ def call(def podName, def namespace, def images) {
 
             stage('clean workspace') {
                 steps {
-                    cleanWs()
+                    //cleanWs()
                 }
             }
         }
