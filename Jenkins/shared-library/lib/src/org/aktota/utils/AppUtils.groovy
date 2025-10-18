@@ -2,7 +2,7 @@ package org.aktota.utils
 
 class AppUtils implements Serializable {
     def getAppNames() {
-        return applications().keySet().toList()
+        return applications().keySet().join("\n")
     }
 
     def applications() {
