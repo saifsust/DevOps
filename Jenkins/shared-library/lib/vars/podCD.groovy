@@ -12,10 +12,7 @@ def call(def podName, def namespace, def images){
         stages {
             stage('Preset and Git Checkout') {
                 steps {
-                   println podYaml
-                    sh 'rm resource.yaml'
-                    sh '$POD_YAML > resource.yaml'
-                    sh 'ls -ltra'
+                     sh label: "Deploy APP", script: "kubectl apply -f ${podYaml}"
                 }
                 post {
                     success {
