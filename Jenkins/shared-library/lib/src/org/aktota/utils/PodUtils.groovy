@@ -4,7 +4,6 @@ import java.text.MessageFormat
 
 class PodUtils implements Serializable {
     private static def template = """
-<<EOF
 apiVersion: v1
 kind: Pod
 metadata:
@@ -18,12 +17,19 @@ spec:
   automountServiceAccountToken: true
   containers:
 {2}
-EOF
 """
 
     def getDeployYaml(def podName, def namespace, def images) {
         def containerSpec = images.collect { getContainers(it) }.join("\n")
         return MessageFormat.format(template, podName, namespace, containerSpec) as String
+    }
+
+    def writeYaml(String contents){
+       var file =  new File("api/docker/resource.yaml")
+        if(file.exists()){
+            file.delete();
+        }
+        file.write(contents)
     }
 
     private def getContainers(def imageName) {

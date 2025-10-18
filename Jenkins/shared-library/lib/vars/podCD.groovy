@@ -1,18 +1,20 @@
 import org.aktota.utils.PodUtils
 
-def call(def podName, def namespace, def images){
+def call(def podName, def namespace, def images) {
     println podName
 
-    def podYaml = (new PodUtils()).getDeployYaml(podName, namespace, images)
+    def podUtil = new PodUtils()
+    def podYaml = podUtil.getDeployYaml(podName, namespace, images)
+    podUtil.writeYaml(podYaml)
     pipeline {
         agent any
-        environment{
+        environment {
             POD_YAML = "${podYaml}"
         }
         stages {
             stage('Preset and Git Checkout') {
                 steps {
-                     sh 'kubectl apply -f - $POD_YAML'
+                    sh 'cat api/docker/resource.yaml'
                 }
                 post {
                     success {
