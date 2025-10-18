@@ -1,10 +1,7 @@
-import org.aktota.utils.PodUtils
 import org.aktota.utils.AppUtils
 
 
 def call() {
-    def podUtil = (new PodUtils())
-    def appUtil = (new AppUtils())
     pipeline {
         agent any
         environment {
@@ -12,9 +9,21 @@ def call() {
             DOCKER_IMAGE_VERSION = ''
         }
         parameters {
-            choice(name: 'APP_NAME', description: 'Choose app for deploying', choices: appUtil.getAppNames())
-            string(name: 'GIT_BRANCH', defaultValue: 'master', description: 'Git Branch to build docker image', trim: true)
-            choice(name: 'DEPLOY_ENV', choices: ['cks', 'graphql-system', 'cka', 'test'])
+            script{
+                def appUtil = (new AppUtils())
+                properties([
+                        parameters([
+                                choice(
+                                        name: 'APP_CHOICE',
+                                        choices: appUtil.getAppNames(),
+                                        description: 'Select the application for deployment'
+                                )
+                        ])
+                ])
+            }
+          //  choice(name: 'APP_NAME', description: 'Choose app for deploying', choices: appUtil.getAppNames())
+          //  string(name: 'GIT_BRANCH', defaultValue: 'master', description: 'Git Branch to build docker image', trim: true)
+          //  choice(name: 'DEPLOY_ENV', choices: ['cks', 'graphql-system', 'cka', 'test'])
         }
         stages {
             stage('Preset and Git Checkout') {
