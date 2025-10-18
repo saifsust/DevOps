@@ -12,6 +12,7 @@ def call(def appName) {
             DOCKER_IMAGE_VERSION = ''
         }
         parameters {
+            APP_NAME = "${appName}"
             string(name: 'GIT_BRANCH', defaultValue: 'master', description: 'Git Branch to build docker image', trim: true)
             choice(name: 'DEPLOY_ENV', choices: ['cks', 'graphql-system', 'cka', 'test'])
         }
