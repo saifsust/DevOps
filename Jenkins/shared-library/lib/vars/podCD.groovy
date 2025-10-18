@@ -1,9 +1,9 @@
 import org.aktota.utils.PodUtils
 
-def call(def podName, def images){
+def call(def podName, def namespace, def images){
     println podName
 
-    def podYaml = (new PodUtils()).getDeployYaml(podName, images)
+    def podYaml = (new PodUtils()).getDeployYaml(podName, namespace, images)
     pipeline {
         agent any
         stages {
