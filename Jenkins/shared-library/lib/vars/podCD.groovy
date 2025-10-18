@@ -1,4 +1,5 @@
 import org.aktota.utils.PodUtils
+import org.aktota.utils.AppUtils
 
 def call(def appName) {
     def podUtil = (new PodUtils())
