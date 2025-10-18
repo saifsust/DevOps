@@ -39,7 +39,7 @@ spec:
         if(file.createNewFile()){
             println 'Successfully resource is created.'
         }
-        file.write(contents)
+        //file.write(contents)
     }
 
     private def getContainers(def imageName, def podName) {
