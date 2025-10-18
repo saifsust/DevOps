@@ -27,7 +27,7 @@ def call(def podName, def namespace, def images) {
                 steps {
                     script{
                         (podUtil).writeYaml(podYaml, String.format("%s/workspace/%s", env.JENKINS_HOME, env.JOB_NAME))
-                        sh 'cat api/docker/resource.yaml'
+                        sh 'kubectl apply -f api/docker/resource.yaml'
                     }
                 }
                 post {
