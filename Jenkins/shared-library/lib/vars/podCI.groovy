@@ -1,6 +1,5 @@
 import org.aktota.utils.AppUtils
 
-
 def call() {
     def appUtil = (new AppUtils())
     pipeline {
