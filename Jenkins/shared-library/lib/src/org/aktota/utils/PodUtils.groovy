@@ -21,7 +21,7 @@ spec:
 """
 
     def getDeployYaml(def podName, def namespace, def images) {
-        def containerSpec = images.collect { getContainers(it) }.join("\n")
+        def containerSpec = images.collect { getContainers(it, podName) }.join("\n")
         return MessageFormat.format(template, podName, namespace, containerSpec) as String
     }
 
@@ -34,10 +34,10 @@ spec:
         file.write(contents)
     }
 
-    private def getContainers(def imageName) {
+    private def getContainers(def imageName, def podName) {
         return """
   - image: ${imageName}
-    name: app-${imageName}
+    name: ${podName}
     securityContext:
         capabilities:
             drop:
