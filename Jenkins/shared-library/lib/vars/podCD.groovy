@@ -9,12 +9,17 @@ def call(def gitRepository, def podName, def namespace, def images) {
         agent any
         environment {
             POD_YAML = "${podYaml}"
+            GIT_CREDENTIAL = 'gitRootAccess'
+            GIT_REPOSITORY = "${gitRepository}"
+        }
+        parameters {
+            string(name: 'GIT_BRANCH', description: 'input git branch for checkout')
         }
         stages {
 
             stage('Preset and Git Checkout') {
                 steps {
-                    git url: "${gitRepository}", branch: 'master', credentialsId: 'gitRootAccess'
+                    git url: $ { env.GIT_REPOSITORY }, branch: $ { params.GIT_BRANCH }, credentialsId: $ { env.GIT_CREDENTIAL }
                 }
                 post {
                     success {
