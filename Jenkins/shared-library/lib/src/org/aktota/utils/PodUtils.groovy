@@ -36,9 +36,9 @@ spec:
             file.getParentFile().mkdir()
         }
 
-        if(file.createNewFile()){
-            println 'Successfully resource is created.'
-        }
+//        if(file.createNewFile()){
+//            println 'Successfully resource is created.'
+//        }
         //file.write(contents)
     }
 
