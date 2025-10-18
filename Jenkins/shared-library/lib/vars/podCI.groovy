@@ -72,7 +72,7 @@ def call() {
             stage('Update Manifest Image') {
                 steps {
                     script{
-                        def podYaml = podUtil.getDeployYaml("${params.APP_NAME}", "${params.DEPLOY_ENV}", "${DOCKER_IMAGE_VERSION}")
+                        def podYaml = podUtil.getDeployYaml("${params.APP_NAME}", "${params.DEPLOY_ENV}", ['${DOCKER_IMAGE_VERSION}'])
                         println podYaml
                         // podUtil.writeYaml(podYaml, String.format("%s/workspace/%s", env.JENKINS_HOME, env.JOB_NAME))
                     }
