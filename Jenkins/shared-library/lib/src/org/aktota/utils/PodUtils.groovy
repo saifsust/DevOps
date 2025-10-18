@@ -25,7 +25,7 @@ spec:
     }
 
     static def writeYaml(def contents){
-       var file =  new File("api/docker/resource.yaml")
+       def file =  new File("api/docker/resource.yaml")
         if(file.exists()){
             file.delete();
         }
