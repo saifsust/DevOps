@@ -1,2 +1,3 @@
 @Library('aktota@main') _
-podCD('nginx','cks',['nginx'])
+podCI()
+//podCD()
