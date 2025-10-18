@@ -1,7 +1,10 @@
 import org.aktota.utils.PodUtils
+import org.aktota.utils.AppUtils
+
 
 def call() {
     def podUtil = (new PodUtils())
+    def appUtil = (new AppUtils())
     pipeline {
         agent any
         environment {
@@ -9,7 +12,7 @@ def call() {
             DOCKER_IMAGE_VERSION = ''
         }
         parameters {
-            choice(name: 'APP_NAME', description: 'Choose app for deploying', choices: getAppNames())
+            choice(name: 'APP_NAME', description: 'Choose app for deploying', choices: appUtil.getAppNames())
             string(name: 'GIT_BRANCH', defaultValue: 'master', description: 'Git Branch to build docker image', trim: true)
             choice(name: 'DEPLOY_ENV', choices: ['cks', 'graphql-system', 'cka', 'test'])
         }
@@ -35,67 +38,7 @@ def call() {
                     }
                 }
             }
-
-            stage('Prepare For Docker') {
-                steps {
-                    sh './gradlew :api:DockerCopyJar'
-                }
-                post {
-                    success {
-                        println 'Successfully Jar is copied to docker directory'
-                    }
-                }
-            }
-
-            stage('Build Docker Image') {
-                steps {
-                    sh './gradlew :api:DockerBuildImage'
-                }
-                post {
-                    success {
-                        println 'Successfully docker image is built'
-                    }
-                }
-            }
-            stage('Push Image') {
-                steps {
-                    script {
-                        DOCKER_IMAGE_VERSION = sh(script: './gradlew :api:DockerPush -q', returnStdout: true).trim()
-                    }
-                }
-                post {
-                    success {
-                        println 'Successfully docker image is pushed'
-                    }
-                }
-            }
-            stage('Update Manifest Image') {
-                steps {
-                    script {
-                        def podYaml = podUtil.getDeployYaml("${params.APP_NAME}","${params.APP_NAME}-" + env.BUILD_NUMBER, "${params.DEPLOY_ENV}", ["${DOCKER_IMAGE_VERSION}"])
-                        println podYaml
-                        podUtil.writeYaml(podYaml, String.format("%s/workspace/%s", env.JENKINS_HOME, env.JOB_NAME))
-                        sh 'ls -ltra'
-                    }
-                }
-                post {
-                    success {
-                        println "Successfully docker image is pushed ${DOCKER_IMAGE_VERSION}"
-                    }
-                }
-            }
         }
     }
-}
-
-def getAppNames() {
-    return applications().keySet().toList()
-}
-
-def applications() {
-    return [
-            'mock-server': 'https://github.com/saifsust/mock-server.git',
-            'workspace'  : 'https://github.com/saifsust/workspace.git'
-    ]
 }
 
