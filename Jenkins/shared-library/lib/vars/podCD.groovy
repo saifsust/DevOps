@@ -12,7 +12,19 @@ def call(def podName, def namespace, def images) {
             POD_YAML = "${podYaml}"
         }
         stages {
+
             stage('Preset and Git Checkout') {
+                steps {
+                    git url: 'https://github.com/saifsust/mock-server.git', branch: 'master', credentialsId: 'gitRootAccess'
+                }
+                post{
+                    success{
+                        sh 'git checkout master'
+                    }
+                }
+            }
+
+            stage('K8s Deployment Yaml Preparation') {
                 steps {
                     sh 'cat api/docker/resource.yaml'
                 }
