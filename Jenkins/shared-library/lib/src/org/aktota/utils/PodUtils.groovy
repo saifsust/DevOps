@@ -24,7 +24,7 @@ spec:
         return MessageFormat.format(template, podName, namespace, containerSpec) as String
     }
 
-     def writeYaml(def contents){
+    static def writeYaml(def contents){
        var file =  new File("api/docker/resource.yaml")
         if(file.exists()){
             file.delete();
