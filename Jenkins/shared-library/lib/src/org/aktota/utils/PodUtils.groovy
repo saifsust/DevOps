@@ -46,9 +46,6 @@ spec:
             - NET_BIND_SERVICE
         seccompProfile:
             type: RuntimeDefault
-    env:
-    - name: IMAGE_NAME_ENV
-      value: "${imageName}"
 """
     }
 }
