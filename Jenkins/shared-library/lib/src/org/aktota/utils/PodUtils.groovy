@@ -43,6 +43,7 @@ spec:
         return """
   - image: ${imageName}
     name: ${podName}
+    imagePullPolicy: Always
     securityContext:
         capabilities:
             drop:
