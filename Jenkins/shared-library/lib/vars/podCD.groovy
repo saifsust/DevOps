@@ -5,7 +5,7 @@ def call(def podName, def namespace, def images) {
 
     def podUtil = (new PodUtils())
     def podYaml = (podUtil).getDeployYaml(podName, namespace, images)
-    (podUtil).writeYaml(podYaml, String.format("%s/%s",env.JENKINS_HOME, env.JOB_NAME))
+    (podUtil).writeYaml(podYaml, String.format("%s/%s", env.JENKINS_HOME, env.WORKSPACE, env.JOB_NAME))
     pipeline {
         agent any
         environment {
@@ -20,6 +20,12 @@ def call(def podName, def namespace, def images) {
                     success {
                         println 'shared library tested successfully'
                     }
+                }
+            }
+
+            stage('clean workspace') {
+                steps {
+                    cleanWs()
                 }
             }
         }
