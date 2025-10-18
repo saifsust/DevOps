@@ -1,16 +1,2 @@
 @Library('aktota@main') _
-pipeline {
-  agent any
-  stages {
-    stage('Preset and Git Checkout') {
-      steps {
-        helloWorld('GIT check out')
-      }
-      post {
-        success {
-          println 'shared library tested successfully'
-        }
-      }
-    }
-  }
-}
+podCD('nginx','cks',['nginx'])
