@@ -5,7 +5,6 @@ def call(def podName, def namespace, def images) {
 
     def podUtil = (new PodUtils())
     def podYaml = (podUtil).getDeployYaml(podName, namespace, images)
-    (podUtil).writeYaml(podYaml, String.format("%s/workspace/%s", env.JENKINS_HOME, env.JOB_NAME))
     pipeline {
         agent any
         environment {
@@ -25,6 +24,7 @@ def call(def podName, def namespace, def images) {
             }
 
             stage('K8s Deployment Yaml Preparation') {
+                (podUtil).writeYaml(podYaml, String.format("%s/workspace/%s", env.JENKINS_HOME, env.JOB_NAME))
                 steps {
                     sh 'cat api/docker/resource.yaml'
                 }
