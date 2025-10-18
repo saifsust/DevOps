@@ -13,7 +13,7 @@ def call(def gitRepository, def podName, def namespace, def images) {
             GIT_REPOSITORY = "${gitRepository}"
         }
         parameters {
-            string(name: 'GIT_BRANCH', description: 'input git branch for checkout')
+            string(name: 'GIT_BRANCH', defaultValue: 'master', description: 'input git branch for checkout')
         }
         stages {
 
