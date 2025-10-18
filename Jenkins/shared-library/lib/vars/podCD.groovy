@@ -7,7 +7,7 @@ def call(def podName, def namespace, def images){
     pipeline {
         agent any
         environment{
-            POD_YAML = ${podYaml}
+            POD_YAML = "${podYaml}"
         }
         stages {
             stage('Preset and Git Checkout') {
