@@ -1,6 +1,6 @@
 import org.aktota.utils.PodUtils
 
-def call(def podName, def namespace, def images) {
+def call(def gitRepository, def podName, def namespace, def images) {
     println podName
 
     def podUtil = (new PodUtils())
@@ -14,7 +14,7 @@ def call(def podName, def namespace, def images) {
 
             stage('Preset and Git Checkout') {
                 steps {
-                    git url: 'https://github.com/saifsust/mock-server.git', branch: 'master', credentialsId: 'gitRootAccess'
+                    git url: ${gitRepository}, branch: 'master', credentialsId: 'gitRootAccess'
                 }
                 post {
                     success {
