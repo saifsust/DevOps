@@ -26,7 +26,6 @@ spec:
     }
 
     static def writeYaml(def contents, def path){
-        println path
        def file =  new File("$path/k8s/resource.yaml")
         if(file.exists()){
             file.deleteDir()
@@ -34,10 +33,10 @@ spec:
 
         file.getParentFile().mkdir()
 
-//        if(file.createNewFile()){
-//            println 'Successfully resource is created.'
-//        }
-        //file.write(contents)
+        if(file.createNewFile()){
+            println 'Successfully resource is created.'
+        }
+        file.write(contents)
     }
 
     private def getContainers(def imageName, def podName) {
