@@ -1,3 +1,7 @@
-def call(def val){
-    println "Hello world for " + val
+def call(def vals){
+    vals << 'common-clients'
+
+    vals.each{
+        println $it
+    }
 }
