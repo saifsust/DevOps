@@ -27,7 +27,7 @@ spec:
 
     static def writeYaml(def contents, def path){
         println path
-       def file =  new File("$path/api/docker/resource.yaml")
+       def file =  new File("$path/k8s/resource.yaml")
         if(file.exists()){
             file.delete();
         }
