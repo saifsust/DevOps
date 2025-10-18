@@ -11,7 +11,6 @@ def call() {
         parameters {
             choice(name: 'APP_NAME', description: 'Choose app for deploying', choices: "${appUtil.getAppNames()}")
             string(name: 'GIT_BRANCH', defaultValue: 'master', description: 'Git Branch to build docker image', trim: true)
-            choice(name: 'DEPLOY_ENV', choices: ['cks', 'graphql-system', 'cka', 'test'])
         }
         stages {
             stage('Preset and Git Checkout') {
