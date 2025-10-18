@@ -19,7 +19,7 @@ def call(def gitRepository, def podName, def namespace, def images) {
 
             stage('Preset and Git Checkout') {
                 steps {
-                    git url: $ { env.GIT_REPOSITORY }, branch: $ { params.GIT_BRANCH }, credentialsId: $ { env.GIT_CREDENTIAL }
+                    git url: ${ env.GIT_REPOSITORY }, branch: ${ params.GIT_BRANCH }, credentialsId: ${ env.GIT_CREDENTIAL }
                 }
                 post {
                     success {
