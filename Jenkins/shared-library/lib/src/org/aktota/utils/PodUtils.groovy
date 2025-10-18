@@ -8,6 +8,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: {0}
+  namespace: {1}
 spec:
   serviceAccount: default
   securityContext:
@@ -15,12 +16,12 @@ spec:
      runAsGroup: 1000
   automountServiceAccountToken: true
   containers:
-{1}
+{2}
 """
 
-    def getDeployYaml(def podName, def images) {
+    def getDeployYaml(def podName, def namespace, def images) {
         def containerSpec = images.collect { getContainers(it) }.join("\n")
-        return MessageFormat.format(template, podName, containerSpec)
+        return MessageFormat.format(template, podName, namespace, containerSpec)
     }
 
     private def getContainers(def imageName) {
