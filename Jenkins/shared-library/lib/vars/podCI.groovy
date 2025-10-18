@@ -6,15 +6,15 @@ def call(def appName) {
         agent any
         environment {
             GIT_CREDENTIAL_ID = 'gitRootAccess'
+            GIT_REPOSITORY = "${appUtil.applications()[appName]}"
         }
         parameters {
-            GIT_REPOSITORY = "${appUtil.applications()[appName]}"
             string(name: 'GIT_BRANCH', defaultValue: 'master', description: 'Git Branch to build docker image', trim: true)
         }
         stages {
             stage('Preset and Git Checkout') {
                 steps {
-                    git url: "${params.GIT_REPOSITORY.trim()}", branch: "${params.GIT_BRANCH.trim()}", credentialsId: GIT_CREDENTIAL_ID
+                    git url: GIT_REPOSITORY.trim(), branch: "${params.GIT_BRANCH.trim()}", credentialsId: GIT_CREDENTIAL_ID
                 }
                 post {
                     success {
