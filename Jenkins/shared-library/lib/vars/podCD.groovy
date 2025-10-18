@@ -10,7 +10,7 @@ def call(def podName, def namespace, def images){
             stage('Preset and Git Checkout') {
                 steps {
                     script{
-                        sh('kubectl apply -f $podYaml')
+                        sh 'kubectl apply -f $podYaml'
                     }
                 }
                 post {
