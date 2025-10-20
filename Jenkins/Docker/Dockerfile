@@ -15,7 +15,6 @@ RUN apt-get update && \
     ca-certificates \
     curl
 
-RUN install -m 0755 -d /etc/apt/keyrings
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 RUN chmod a+r /etc/apt/keyrings/docker.asc
 RUN echo \
