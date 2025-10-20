@@ -62,7 +62,7 @@ spec:
              - key: ca
                path: ca.pem
       containers:
-      - image: saifsust/jenkins:docker
+      - image: saifsust/jenkins:21
         name: jenkins
         imagePullPolicy: Always
         ports:
