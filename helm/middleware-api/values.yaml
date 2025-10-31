@@ -1,0 +1,15 @@
+
+namespace: graphql-system
+appName: search-api
+containerPort: 8080
+replicasCount: 2
+image: saifsust/api:0.1.0
+selector: search-app
+
+service:
+  name: search-api-svc
+  targetPort: 8080
+  port: 8080
+  type: NodePort
+  nodePort: 31000
+

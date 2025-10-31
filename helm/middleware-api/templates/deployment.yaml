@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName}}
+  namespace: {{ .Values.namespace}}
+spec:
+  replicas: {{ .Values.replicasCount}}
+  selector:
+    matchLabels:
+      app: {{.Values.selector}}
+  template:
+    metadata:
+      labels:
+        app: {{.Values.selector}}
+    spec:
+      containers:
+        - image: {{ .Values.image}}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.containerPort}}
+              protocol: TCP
+          name: app
+          securityContext:
+            runAsUser: 1000
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop:
+                - ALL
+              add:
+                - NET_BIND_SERVICE
