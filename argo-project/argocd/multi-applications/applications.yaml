@@ -4,6 +4,10 @@ metadata:
   name: multi-apps
   namespace: argocd
 spec:
+  syncPolicy:
+    automated:
+      enabled: true
+      selfHeal: true
   project: multi-app-proj
   sources:
     - repoURL:  https://github.com/saifsust/DevOps.git
