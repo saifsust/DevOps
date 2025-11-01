@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: multi-apps
+  namespace: argocd
+spec:
+  project: multi-app-proj
+  sources:
+    - repoURL:  https://github.com/saifsust/DevOps.git
+      path: helm/middleware-api
+      targetRevision: main
+      helm:
+        valueFiles:
+          - values-stg.yaml
+    - repoURL: https://github.com/saifsust/DevOps.git
+      path: helm/mock-server
+      targetRevision: main
+      helm:
+        valueFiles:
+          - values-stg.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: graphql-system
