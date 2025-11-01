@@ -1,0 +1,6 @@
+apiVersion: v2
+name: mock-server
+description: experimental purpose mock-server developed
+type: application
+version: 0.0.8
+appVersion: "1.16.0"

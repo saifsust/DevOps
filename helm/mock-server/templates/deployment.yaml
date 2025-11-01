@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.appName}}
+  namespace: {{ .Values.namespace }}
+  labels:
+    build: {{.Values.appName}}-{{ .Values.build | default "test" }}
+spec:
+  replicas: {{.Values.replicasCount}}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+       maxSurge: {{.Values.strategy.maxSurge}}
+       maxUnavailable: {{.Values.strategy.maxUnavailable}}
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+      build: {{ .Values.build }}
+  template:
+    metadata:
+      labels:
+        app: {{.Values.appName}}
+        build: {{.Values.build }}
+    spec:
+      containers:
+        - image: saifsust/mock-server:{{- .Values.tag}}
+          name: app
+          ports:
+            - containerPort: {{.Values.port.containerPort}}
+              protocol: TCP
+          securityContext:
+              runAsUser: 1000
+              runAsNonRoot: true
+              capabilities:
+                drop:
+                  - ALL
+                add:
+                  - NET_BIND_SERVICE
+          env:
+            - name: PROFILE
+              valueFrom:
+                configMapKeyRef:
+                   name: {{.Values.configMap.name}}
+                   key: {{.Values.configMap.activeProfileKey}}

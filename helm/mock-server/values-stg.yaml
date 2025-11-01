@@ -1,0 +1,19 @@
+appName: mock-server-app
+namespace: graphql-system
+tag: 8
+build: "1.2.3"
+replicasCount: 2
+strategy:
+   maxSurge: 50%
+   maxUnavailable: 10%
+port:
+  containerPort: 8080
+configMap:
+  name: mock-server-conf
+  activeProfileKey: profile
+  activeProfileVal: cabinet
+
+service:
+  type: NodePort
+  targetPort: 8080
+  nodePort: 31001
