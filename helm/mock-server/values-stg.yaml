@@ -2,7 +2,7 @@ appName: mock-server-app
 namespace: graphql-system
 tag: 8
 build: "1.2.3"
-replicasCount: 2
+replicasCount: 1
 strategy:
    maxSurge: 50%
    maxUnavailable: 10%
