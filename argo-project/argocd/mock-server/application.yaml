@@ -5,8 +5,8 @@ metadata:
   namespace: argocd
 spec:
   project: graphql-proj
-  source:
-    helm:
+  sources:
+  - helm:
       valueFiles:
         - values-stg.yaml
     path: helm/mock-server
