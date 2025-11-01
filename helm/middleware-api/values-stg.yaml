@@ -2,7 +2,7 @@
 namespace: graphql-system
 appName: search-api
 containerPort: 8080
-replicasCount: 2
+replicasCount: 1
 image: saifsust/api:0.1.0
 selector: search-app
 
