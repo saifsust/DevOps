@@ -15,4 +15,4 @@ frontend:
   virtualService:
     name: beauty-frontend-app-vs
     http:
-      name: beauty-frontend-app-http
+      name: beauty-frontend-app-vs-http
