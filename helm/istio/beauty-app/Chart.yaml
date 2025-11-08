@@ -1,6 +1,6 @@
 apiVersion: v2
-name: istio-app
-description: istio configuration check application
+name: beauty-app
+description: beauty app configuration check application
 type: application
 version: 0.1.0
 appVersion: "1.16.0"
