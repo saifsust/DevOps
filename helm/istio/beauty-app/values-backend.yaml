@@ -11,7 +11,7 @@ deployment:
       value: backend
 configMap:
   name: backend-conf
-  data: <h1> Beauty Backend APP is loaded </h1>
+  data: <h1> Hi, Backend APP </h1>
 service:
   name: beauty-backend-svc
   type: NodePort
