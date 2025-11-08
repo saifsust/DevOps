@@ -12,8 +12,8 @@ spec:
     - name: {{ .Values.frontend.destinationRule.subset.name}}
       labels:
         {{ range .Values.frontend.destinationRule.selectors}}
-         app: {{- .app }}
-         version: {{- .version }}
+         app: {{ .app }}
+         version: {{ .version }}
         {{ end }}
       trafficPolicy:
          loadBalancer:
