@@ -1,0 +1,23 @@
+targetNamespace: argocd
+project:
+  name: beauty-proj
+  sourceRepos: https://github.com/saifsust/DevOps.git
+  destination:
+      namespace: graphql-system
+      server: https://kubernetes.default.svc
+secret:
+  name: beauty-proj-secret
+  git: https://github.com/saifsust/DevOps.git
+  username: saiful.sust.cse@gmail.com
+  password: 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
+
+application:
+  name: beauty-app
+  destination:
+     server: https://kubernetes.default.svc
+     namespace: graphql-system
+  source:
+    repoURL: https://github.com/saifsust/DevOps.git
+    path: helm/istio/beauty-app
+    targetRevision: master
+    helm: values-frontend.yaml
