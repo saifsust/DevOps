@@ -8,7 +8,7 @@ frontend:
   destinationRule:
     name: beauty-frontend-app-dr
     subset:
-      name: beauty-frontend-app-route
+      name: beauty-frontend-app-subset
     selectors:
       - app: frontend-app
         version: "v1"
