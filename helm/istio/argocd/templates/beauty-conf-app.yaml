@@ -12,9 +12,11 @@ spec:
     helm:
       valueFiles:
         - {{ .Values.configuration.source.helm }}
-  destination:
-    server: {{ .Values.configuration.destination.server }}
-    namespace: {{ .Values.configuration.destination.namespace }}
+  destinations:
+    {{ range .Values.configuration.destinations }}
+    - server: { { .server } }
+      namespace: { { .namespace } }
+    {{ end }}
   syncPolicy:
     automated:
       prune: true

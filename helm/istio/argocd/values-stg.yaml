@@ -35,9 +35,11 @@ backend:
 
 configuration:
   name: beauty-config-app
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: graphql-system
+  destinations:
+   - server: https://kubernetes.default.svc
+     namespace: graphql-system
+   - server: https://kubernetes.default.svc
+     namespace: istio-system
   source:
     repoURL: https://github.com/saifsust/DevOps.git
     path: helm/istio/configurations/istio
