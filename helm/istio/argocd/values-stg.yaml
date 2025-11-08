@@ -11,8 +11,8 @@ secret:
   username: saiful.sust.cse@gmail.com
   password: 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
 
-application:
-  name: beauty-app
+frontend:
+  name: beauty-frontend-app
   destination:
      server: https://kubernetes.default.svc
      namespace: graphql-system
@@ -21,3 +21,14 @@ application:
     path: helm/istio/beauty-app
     targetRevision: main
     helm: values-frontend.yaml
+
+backend:
+  name: beauty-backend-app
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: graphql-system
+  source:
+    repoURL: https://github.com/saifsust/DevOps.git
+    path: helm/istio/beauty-app
+    targetRevision: main
+    helm: values-backend.yaml

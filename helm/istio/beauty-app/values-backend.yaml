@@ -1,0 +1,20 @@
+targetNamespace: graphql-system
+deployment:
+  name: beauty-backend-app
+  appLabel: backend-app
+  version: "v1"
+  replicaCount: 1
+  maxSurge: 40%
+  maxUnavailable: 80%
+  annotations:
+    - key: beauty-kubernetes.io/app
+      value: backend
+configMap:
+  name: frontend-conf
+  data: <h1> Beauty Backend APP is loaded </h1>
+service:
+  name: beauty-backend-svc
+  type: NodePort
+  port: 80
+  targetPort: 80
+  nodePort: 31109
