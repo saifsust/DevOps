@@ -1,7 +1,7 @@
 targetName: graphql-system
 frontend:
   frontendAppSvc: beauty-frontend-svc.graphql-system.svc.cluster.local
-  host: '*'
+  host: "*"
   gateway:
     name: beauty-frontend-app-gateway
     namespace: graphql-system
