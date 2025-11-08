@@ -14,7 +14,7 @@ configMap:
   data: <h1> Hi, Backend APP </h1>
 service:
   name: beauty-backend-svc
-  type: NodePort
+  type: ClusterIP
   port: 80
   targetPort: 80
-  nodePort: 31109
+  #nodePort: 31109
