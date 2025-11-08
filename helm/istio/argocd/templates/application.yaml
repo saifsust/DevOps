@@ -13,8 +13,8 @@ spec:
       valueFiles:
         - {{ .Values.application.source.helm }}
   destination:
-    server: {{ .Values.application.server }}
-    namespace: {{ .Values.application.namespace }}
+    server: {{ .Values.application.destination.server }}
+    namespace: {{ .Values.application.destination.namespace }}
   syncPolicy:
     automated:
       prune: true

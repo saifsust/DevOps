@@ -7,9 +7,9 @@ project:
       server: https://kubernetes.default.svc
 secret:
   name: beauty-proj-secret
-  git: https://github.com/saifsust/DevOps.git
+  repoURL: https://github.com/saifsust/DevOps.git
   username: saiful.sust.cse@gmail.com
-  password: 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
+  password: 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
 
 application:
   name: beauty-app
@@ -19,5 +19,5 @@ application:
   source:
     repoURL: https://github.com/saifsust/DevOps.git
     path: helm/istio/beauty-app
-    targetRevision: master
+    targetRevision: main
     helm: values-frontend.yaml
