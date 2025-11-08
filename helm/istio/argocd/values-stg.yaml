@@ -2,8 +2,10 @@ targetNamespace: argocd
 project:
   name: beauty-proj
   sourceRepos: https://github.com/saifsust/DevOps.git
-  destination:
-      namespace: graphql-system
+  destinations:
+    - namespace: graphql-system
+      server: https://kubernetes.default.svc
+    - namespace: istio-system
       server: https://kubernetes.default.svc
 secret:
   name: beauty-proj-secret
@@ -35,11 +37,9 @@ backend:
 
 configuration:
   name: beauty-config-app
-  destinations:
-   - server: https://kubernetes.default.svc
-     namespace: graphql-system
-   - server: https://kubernetes.default.svc
-     namespace: istio-system
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: graphql-system
   source:
     repoURL: https://github.com/saifsust/DevOps.git
     path: helm/istio/configurations/istio

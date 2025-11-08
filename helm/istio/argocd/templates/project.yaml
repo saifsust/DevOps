@@ -7,8 +7,10 @@ spec:
   sourceRepos:
     - {{ .Values.project.sourceRepos}}
   destinations:
-    - server: {{ .Values.project.destination.server }}
-      namespace: {{ .Values.project.destination.namespace }}
+    {{ range .Values.project.destinations }}
+    - server: {{ .server }}
+      namespace: {{ .namespace }}
+    {{ end }}
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
