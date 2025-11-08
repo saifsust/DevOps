@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Values.targetNamespace }}
 spec:
   hosts:
-    - {{ .Values.frontend.host }}
+    - {{ .Values.frontend.host | quote }}
   gateways:
     - {{ .Values.frontend.gateway.name }}
   http:
