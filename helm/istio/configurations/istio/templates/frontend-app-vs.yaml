@@ -15,5 +15,5 @@ spec:
             prefix: "/"
       route:
         - destination:
-            host: {{ .Values.frontend.frontendDNS }}
+            host: {{ .Values.frontend.frontendAppSvc }}
             subset: {{ .Values.frontend.destinationRule.subset.name }}

@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.frontend.destinationRule.name }}
   namespace: {{ .Values.targetNamespace }}
 spec:
-  host: {{ .Values.frontend.frontendDNS }}
+  host: {{ .Values.frontend.frontendAppSvc }}
   trafficPolicy:
     loadBalancer:
       simple: LEAST_REQUEST
