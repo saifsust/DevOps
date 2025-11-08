@@ -3,7 +3,7 @@ deployment:
    name: beauty-frontend-app
    appLabel: frontend-app
    version: "v1"
-   replicaCount: 3
+   replicaCount: 1
    maxSurge: 40%
    maxUnavailable: 80%
    annotations:
