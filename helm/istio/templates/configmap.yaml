@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configMap.name }}
+  namespace: {{ .Values.targetNamespace }}
+data:
+  index.html: |
+    {{ .Values.configMap.data }}

@@ -1,0 +1,18 @@
+targetNamespace: graphql-system
+deployment:
+   name: beauty-frontend-app
+   appLabel: frontend-app
+   version: "v1"
+   maxSurge: 40%
+   maxUnavailable: 80%
+   annotations:
+     - key: beauty-kubernetes.io/app
+       value: frontend
+configMap:
+  name: frontend-conf
+  data: <h1> Beauty Frontend APP is loaded </h1>
+service:
+  name: beauty-frontend-svc
+  type: ClusterIP
+  port: 80
+  targetPort: 80

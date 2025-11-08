@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: {{ .Values.deployment.name }}
+    namespace: {{ .Values.targetNamespace }}
+    annotations:
+      {{ range .Values.deployment.annotations}}
+      {{- .key }} : {{ .value}}
+      {{ end }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.appLabel }}
+      version: {{ .Values.deployment.appVersion }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+        maxSurge: {{ .Values.deployment.maxSurge }}
+        maxUnavailable: {{ .Values.deployment.maxUnavailable }}
+  template:
+    metadata:
+      labels:
+         app: {{ .Values.deployment.appLabel }}
+         version: {{ .Values.deployment.appVersion }}
+    spec:
+      volumes:
+        - name: app-conf
+          projected:
+             sources:
+               - configMap:
+                   name: {{.Values.configMap.name}}
+                   items:
+                     - key: index.html
+                       path: /var/html
+      containers:
+        - image: nginx:latest
+          name: app
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: app-conf
+              mountPath: /usr/share/nginx/html
+          securityContext:
+            runAsUser: 1001
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+              add:
+                - NET_BIND_SERVICE
