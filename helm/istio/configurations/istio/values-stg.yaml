@@ -4,7 +4,7 @@ frontend:
   dnsIP: 192.168.0.30
   gateway:
     name: beauty-frontend-app-gateway
-    namespace: istio-system
+    namespace: graphql-system
   destinationRule:
     name: beauty-frontend-app-dr
     subset:
