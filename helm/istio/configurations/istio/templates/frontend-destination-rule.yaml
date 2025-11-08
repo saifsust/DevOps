@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: {{ .Values.frontend.destinationRule.name }}
+  namespace: {{ .Values.targetNamespace }}
+spec:
+  host: {{ .Values.frontend.host }}
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_REQUEST
+  subsets:
+    - name: {{ .Values.frontend.destinationRule.subset.name}}
+      labels:
+        {{ range .Values.frontend.destinationRule.selectors}}
+          {{- . }}
+        {{ end }}
+      trafficPolicy:
+         loadBalancer:
+           simple: ROUND_ROBIN

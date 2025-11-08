@@ -1,0 +1,17 @@
+targetName: graphql-system
+frontend:
+  dnsIP: 192.168.0.30
+  gateway:
+    name: beauty-frontend-app-gateway
+  destinationRule:
+    name: beauty-frontend-app-dr
+    host: beauty-frontend-svc.graphql-system.svc.cluster.local
+    subset:
+      name: beauty-frontend-app-route
+    selectors:
+      - app: frontend-app
+        version: "v1"
+  virtualService:
+    name: beauty-frontend-app-vs
+    http:
+      name: beauty-frontend-app-http

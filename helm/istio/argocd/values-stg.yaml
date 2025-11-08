@@ -32,3 +32,14 @@ backend:
     path: helm/istio/beauty-app
     targetRevision: main
     helm: values-backend.yaml
+
+configuration:
+  name: beauty-config-app
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: graphql-system
+  source:
+    repoURL: https://github.com/saifsust/DevOps.git
+    path: helm/istio/configurations/istio
+    targetRevision: main
+    helm: values-stg.yaml
