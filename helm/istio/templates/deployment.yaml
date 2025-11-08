@@ -30,8 +30,8 @@ spec:
                - configMap:
                    name: {{.Values.configMap.name}}
                    items:
-                     - key: index.html
-                       path: /var/html
+                     - key: html
+                       path: index.html
       containers:
         - image: nginx:latest
           name: app

@@ -4,5 +4,5 @@ metadata:
   name: {{ .Values.configMap.name }}
   namespace: {{ .Values.targetNamespace }}
 data:
-  index.html: |
+  html: |
     {{ .Values.configMap.data }}
