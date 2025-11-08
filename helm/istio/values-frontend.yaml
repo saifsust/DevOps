@@ -13,6 +13,7 @@ configMap:
   data: <h1> Beauty Frontend APP is loaded </h1>
 service:
   name: beauty-frontend-svc
-  type: ClusterIP
+  type: NodePort
   port: 80
   targetPort: 80
+  nodePort: 31108
