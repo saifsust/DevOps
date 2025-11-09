@@ -10,8 +10,8 @@ frontend:
     subset:
       name: beauty-frontend-app-subset
     selectors:
-      - app: frontend-app
-        version: "v1"
+      - appLabel: frontend-app
+        appVersion: "v1"
   virtualService:
     name: beauty-frontend-app-vs
     http:

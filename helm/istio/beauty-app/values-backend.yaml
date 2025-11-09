@@ -2,7 +2,7 @@ targetNamespace: graphql-system
 deployment:
   name: beauty-backend-app
   appLabel: backend-app
-  version: "v1"
+  appVersion: "v1"
   replicaCount: 1
   maxSurge: 40%
   maxUnavailable: 80%
