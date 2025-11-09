@@ -5,3 +5,6 @@ metadata:
   namespace: {{ .Values.appNamespace }}
 data:
   {{ .Values.configMap.isForExternalCallKey }}: {{ .Values.configMap.isForExternalCallVal | quote }}
+  {{ if .Values.configMap.doNotEncryptKey }}
+  {{ .Values.configMap.doNotEncryptKey }} : {{ .Values.configMap.doNotEncryptVal  | quote }}
+  {{ end }}

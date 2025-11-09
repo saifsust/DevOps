@@ -45,6 +45,13 @@ spec:
                 configMapKeyRef:
                   name: {{ .Values.configMap.name }}
                   key: {{ .Values.configMap.isForExternalCallKey | quote }}
+            {{ if  .Values.configMap.doNotEncryptKey }}
+            - name: DO_NOT_ENCRYPT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.doNotEncryptKey | quote }}
+              {{ end }}
           readinessProbe:
             httpGet:
               path: /health
