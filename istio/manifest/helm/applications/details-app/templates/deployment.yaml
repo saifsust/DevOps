@@ -51,7 +51,7 @@ spec:
                 configMapKeyRef:
                   name: {{ .Values.configMap.name }}
                   key: {{ .Values.configMap.doNotEncryptKey | quote }}
-              {{ end }}
+            {{ end }}
           readinessProbe:
             httpGet:
               path: /health
