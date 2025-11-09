@@ -3,19 +3,20 @@ appNamespace: istio-stg
 
 configMap:
   name: book-details-app-conf
-  isForExternalCall: false
+  isForExternalCallKey: isForExternalCall
+  isForExternalCallVal: false
 
 deployment:
   maxSurge: 40%
   maxUnavailable: 10%
   pod:
     label: book-details-app
-    version: @version@
+    version: "v1"
     tag: istio
     port: 9080
 
 service:
   name: book-details-app-svc
   type: NodePort
-  nodePort: 31008
+  nodePort: 31108
 

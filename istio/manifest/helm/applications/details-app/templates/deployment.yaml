@@ -13,12 +13,12 @@ spec:
   selector:
      matchLabels:
         app: {{.Values.deployment.pod.label }}
-        version: {{ .Values.deployment.pod.version }}
+        version: {{ .Values.deployment.pod.version | quote }}
   template:
     metadata:
       labels:
          app: {{ .Values.deployment.pod.label }}
-         version: {{ .Values.deployment.pod.version }}
+         version: {{ .Values.deployment.pod.version | quote }}
     spec:
       containers:
         - image: saifsust/details:{{- .Values.deployment.pod.tag }}
@@ -29,8 +29,11 @@ spec:
               name: http
               protocol: TCP
           securityContext:
+            allowPrivilegeEscalation: false
             runAsUser: 1000
             runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
             capabilities:
               drop:
                 - ALL
@@ -41,4 +44,4 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: {{ .Values.configMap.name }}
-                  key: {{ .Values.configMap.isForExternalCall }}
+                  key: {{ .Values.configMap.isForExternalCallKey | quote }}

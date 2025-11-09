@@ -4,4 +4,4 @@ metadata:
   name: {{ .Values.configMap.name }}
   namespace: {{ .Values.appNamespace }}
 data:
-  isForExternalCall: {{ .Values.configMap.isForExternalCall }}
+  {{ .Values.configMap.isForExternalCallKey }}: {{ .Values.configMap.isForExternalCallVal | quote }}

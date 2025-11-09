@@ -7,12 +7,12 @@ spec:
   type: {{ .Values.service.type }}
   selector:
     app: {{ .Values.deployment.pod.label }}
-    version: {{ .Values.deployment.pod.version }}
+    version: {{ .Values.deployment.pod.version | quote }}
   ports:
     - port: {{ .Values.deployment.pod.port }}
       targetPort: {{ .Values.deployment.pod.port }}
       name: http
       protocol: TCP
-      {{ if .Values.deployment.service.nodePort }}
-      nodePort: {{ .Values.deployment.service.nodePort }}
+      {{ if .Values.service.nodePort }}
+      nodePort: {{ .Values.service.nodePort }}
       {{ end }}
