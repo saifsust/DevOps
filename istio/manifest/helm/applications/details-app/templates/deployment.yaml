@@ -21,7 +21,7 @@ spec:
          version: {{ .Values.deployment.pod.version | quote }}
     spec:
       containers:
-        - image: saifsust/details:{{- .Values.deployment.pod.tag }}
+        - image: saifsust/details:{{- .Values.deployment.pod.version }}
           name: app
           imagePullPolicy: Always
           ports:
