@@ -1,0 +1,22 @@
+appName: book-mysql-app
+appNamespace: istio-stg
+
+secret:
+  name: book-rating-mysql-secret
+  password:
+    key: MYSQL_ROOT_PASSWORD
+    value: cGFzc3dvcmQK
+
+service:
+  name: book-rating-mysql-svc
+  type: ClusterIP
+  # nodePort: 31108
+
+deployment:
+  replicaCount: 2
+  maxSurge: 40%
+  maxUnavailable: 20%
+  pod:
+    label: book-rating-mysql-app
+    version: "istio"
+    port: 3306
