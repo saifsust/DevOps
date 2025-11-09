@@ -5,8 +5,6 @@ configMap:
   name: book-details-app-conf
   isForExternalCallKey: isForExternalCall
   isForExternalCallVal: false
-  doNotEncryptKey: doNotEncrypt
-  doNotEncryptVal: false
 
 deployment:
   replicaCount: 1
