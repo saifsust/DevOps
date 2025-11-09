@@ -43,33 +43,33 @@ spec:
             - name: {{ .Values.configMap.enableRating.key }}
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.configMap.enableRating.key }}
-                  key: {{ .Values.configMap.enableRating.value }}
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.enableRating.key }}
             {{ if .Values.configMap.starColor }}
             - name: {{ .Values.configMap.starColor.key }}
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.configMap.starColor.key }}
-                  key: {{ .Values.configMap.starColor.value }}
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.starColor.key }}
             {{ end }}
             {{ if .Values.configMap.ratingHostName }}
             - name: {{ .Values.configMap.ratingHostName.key }}
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.configMap.ratingHostName.key }}
-                  key: {{ .Values.configMap.ratingHostName.value }}
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.ratingHostName.key }}
             {{ end }}
             {{ if .Values.configMap.serviceDomain }}
             - name: {{ .Values.configMap.serviceDomain.key }}
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.configMap.serviceDomain.key }}
-                  key: {{ .Values.configMap.serviceDomain.value }}
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.serviceDomain.key }}
             {{ end }}
             {{ if .Values.configMap.ratingServicePort }}
             - name: {{ .Values.configMap.ratingServicePort.key }}
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Values.configMap.ratingServicePort.key }}
-                  key: {{ .Values.configMap.ratingServicePort.value }}
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.ratingServicePort.key }}
             {{ end }}

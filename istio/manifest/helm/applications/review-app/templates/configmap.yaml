@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.configMap.name }}
   namespace: {{ .Values.appNamespace }}
 data:
-  {{ .Values.configMap.enableRating.key }} : {{ .Values.configMap.enableRating.value }}
+  {{ .Values.configMap.enableRating.key }} : {{ .Values.configMap.enableRating.value | quote }}
   {{ .Values.configMap.starColor.key }} : {{ .Values.configMap.starColor.value }}
   {{ .Values.configMap.ratingHostName.key }} : {{ .Values.configMap.ratingHostName.value }}
   {{ .Values.configMap.serviceDomain.key }} : {{ .Values.configMap.serviceDomain.value }}
