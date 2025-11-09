@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.appNamespace }}
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ .Values.deployment.maxSurge }}
+      maxUnavailable: {{ .Values.deployment.maxUnavailable }}
+  selector:
+     matchLabels:
+        app: {{.Values.deployment.pod.label }}
+        version: {{ .Values.deployment.pod.version }}
+  template:
+    metadata:
+      labels:
+         app: {{ .Values.deployment.pod.label }}
+         version: {{ .Values.deployment.pod.version }}
+    spec:
+      containers:
+        - image: saifsust/details:{{- .Values.deployment.pod.tag }}
+          name: app
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.deployment.pod.port }}
+              name: http
+              protocol: TCP
+          env:
+            - name: ENABLE_EXTERNAL_BOOK_SERVICE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.isForExternalCall }}

@@ -1,0 +1,21 @@
+appName: book-details
+appNamespace: book-info-stg
+
+configMap:
+  name: book-details-app-conf
+  isForExternalCall: false
+
+deployment:
+  maxSurge: 40%
+  maxUnavailable: 10%
+  pod:
+    label: book-details-app
+    version: @version@
+    tag: istio
+    port: 9080
+
+service:
+  name: book-details-app-svc
+  type: NodePort
+  nodePort: 31008
+
