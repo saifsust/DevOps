@@ -1,0 +1,33 @@
+appName: review-app
+appNamespace: istio-stg
+
+configMap:
+  name: review-app-conf
+  enableRating:
+    key: ENABLE_RATINGS
+    value: "true"
+  starColor:
+    key: STAR_COLOR
+    value: "red"
+  ratingHostName:
+    key: RATINGS_HOSTNAME
+    value: "ratings-v3-svc"
+  serviceDomain:
+    key: SERVICES_DOMAIN
+    value: "secure-app.svc.cluster.local"
+  ratingServicePort:
+    key: RATINGS_SERVICE_PORT
+    value: "9080"
+
+service:
+  name: review-app-svc
+  type: ClusterIP
+
+deployment:
+  maxSurge: 40%
+  maxUnavailable: 10%
+  replicaCount: 2
+  pod:
+    label: review-app
+    version: "istio"
+    port: 9080
