@@ -8,4 +8,4 @@ data:
   {{ .Values.configMap.starColor.key }} : {{ .Values.configMap.starColor.value }}
   {{ .Values.configMap.ratingHostName.key }} : {{ .Values.configMap.ratingHostName.value }}
   {{ .Values.configMap.serviceDomain.key }} : {{ .Values.configMap.serviceDomain.value }}
-  {{ .Values.configMap.ratingServicePort.key }} : {{ .Values.configMap.ratingServicePort.value }}
+  {{ .Values.configMap.ratingServicePort.key }} : {{ .Values.configMap.ratingServicePort.value | quote}}
