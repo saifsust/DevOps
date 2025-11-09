@@ -13,11 +13,13 @@ spec:
   selector:
     matchLabels:
       app: {{ .Values.deployment.pod.label }}
+      generation: {{ .Values.deployment.pod.generation | quote }}
       version: {{ .Values.deployment.pod.version | quote }}
   template:
     metadata:
       labels:
         app: {{ .Values.deployment.pod.label }}
+        generation: {{ .Values.deployment.pod.generation | quote }}
         version: {{ .Values.deployment.pod.version | quote }}
     spec:
       containers:

@@ -4,8 +4,8 @@ metadata:
   name: {{ .Values.configMap.name }}
   namespace: {{ .Values.appNamespace }}
 data:
-  {{ .Values.configMap.serverVersion.key }} : {{ .Values.serverVersion.value }}
-  {{ if .Values.configmap.dbType }}
+  {{ .Values.configMap.serverVersion.key }} : {{ .Values.configMap.serverVersion.value }}
+  {{ if .Values.configMap.dbType }}
   {{ .Values.configMap.dbType.key }} : {{ .Values.configMap.dbType.value }}
   {{ end }}
   {{ .Values.configMap.url.key  }} : {{ .Values.configMap.url.value }}

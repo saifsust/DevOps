@@ -13,3 +13,6 @@ spec:
       targetPort: {{ .Values.deployment.pod.port }}
       name: tcp
       protocol: TCP
+      {{ if .Values.service.nodePort }}
+      nodePort: {{ .Values.service.nodePort }}
+      {{ end }}

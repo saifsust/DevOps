@@ -25,6 +25,11 @@ secret:
     key: MYSQL_DB_PASSWORD
     value: "password"
 
+service:
+  name: book-rating-svc
+  type: ClusterIP
+  #nodePort: 31108
+
 deployment:
   maxSurge: 40%
   maxUnavailable: 10%
@@ -32,5 +37,6 @@ deployment:
   mysql: "true"
   pod:
     label: book-rating-app
+    generation: "v2"
     version: "istio"
     port: 9080
