@@ -1,5 +1,5 @@
 appName: book-details
-appNamespace: istio-stg
+appNamespace: istio-pod
 
 configMap:
   name: book-details-app-conf
@@ -7,17 +7,16 @@ configMap:
   isForExternalCallVal: false
 
 deployment:
-  replicaCount: 1
+  replicaCount: 2
   maxSurge: 40%
   maxUnavailable: 10%
   pod:
     label: book-details-app
-    version: "v1"
+    version: "-version-"
     tag: istio
     port: 9080
 
 service:
   name: book-details-app-svc
-  type: NodePort
-  nodePort: 31108
+  type: ClusterIP
 

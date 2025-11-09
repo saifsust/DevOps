@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.appName }}
   namespace: {{ .Values.appNamespace }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.deployment.replicaCount }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
