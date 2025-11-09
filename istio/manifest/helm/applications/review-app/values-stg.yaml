@@ -11,10 +11,10 @@ configMap:
     value: "red"
   ratingHostName:
     key: RATINGS_HOSTNAME
-    value: "ratings-v3-svc"
+    value: "ratings-app-v3-svc"
   serviceDomain:
     key: SERVICES_DOMAIN
-    value: "secure-app.svc.cluster.local"
+    value: "istio-stg.svc.cluster.local"
   ratingServicePort:
     key: RATINGS_SERVICE_PORT
     value: "9080"
