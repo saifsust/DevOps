@@ -23,7 +23,7 @@ spec:
         version: {{ .Values.deployment.pod.version | quote }}
     spec:
       containers:
-        - image: saifsust/rating:{{ .Values.deployment.pod.version }}
+        - image: saifsust/ratings:{{ .Values.deployment.pod.version }}
           name: app
           imagePullPolicy: Always
           ports:
