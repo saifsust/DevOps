@@ -21,7 +21,7 @@ spec:
         version: {{ .Values.deployment.pod.version | quote }}
     spec:
       containers:
-        - image: saifsust/mysql:{{-  .Values.deployment.pod.version}}
+        - image: saifsust/mysql:{{  .Values.deployment.pod.version}}
           name: app
           ports:
             - containerPort: {{ .Values.deployment.pod.port }}
@@ -31,6 +31,8 @@ spec:
             runAsUser: 1001
             runAsNonRoot: true
             allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
             capabilities:
               drop:
                 - ALL
@@ -40,5 +42,5 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{- .Values.secret.name }}
-                  key: {{- .Values.secret.password.key }}
+                  name: {{ .Values.secret.name }}
+                  key: {{ .Values.secret.password.key }}
