@@ -12,6 +12,6 @@ deployment:
   maxUnavailable: 10%
   pod:
     label: rating-mongodb-app
-    version: "istio"
+    version: "1.0.99"
     port: 27017
 
