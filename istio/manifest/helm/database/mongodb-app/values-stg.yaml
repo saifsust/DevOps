@@ -1,0 +1,17 @@
+appName: book-mongodb-app
+appNamespace: istio-stg
+
+service:
+  name: rating-mongodb-app-svc
+  type: ClusterIP
+  # nodePort: 31108
+
+deployment:
+  replicaCount: 1
+  maxSurge: 40%
+  maxUnavailable: 10%
+  pod:
+    label: rating-mongodb-app
+    version: "istio"
+    port: 27017
+
