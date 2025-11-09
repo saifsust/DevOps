@@ -14,7 +14,7 @@ deployment:
   maxUnavailable: 10%
   pod:
     label: book-details-app
-    version: "-version-"
+    version: "@version@"
     tag: istio
     port: 9080
 
