@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.appNamespace }}
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ .Values.deployment.maxSurge }}
+      maxUnavailable: {{ .Values.deployment.maxUnavailable }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.pod.label }}
+      version: {{ .Values.deployment.pod.version | quote }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.pod.label }}
+        version: {{ .Values.deployment.pod.version | quote }}
+    spec:
+      containers:
+        - image: saifsust/rating:{{ .Values.deployment.pod.version }}
+          name: app
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.deployment.pod.port }}
+              name: tcp
+              protocol: TCP
+          securityContext:
+            runAsUser: 1000
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop:
+                - ALL
+              add:
+                - NET_BIND_SERVICE
+          {{- if eq .Values.deployment.mysql "true" -}}
+          env:
+            - name: SERVICE_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.serverVersion.key }}
+            - name: DB_TYPE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.dbType.key }}
+            - name: MYSQL_DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.url.key }}
+            - name: MYSQL_DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.port.key }}
+            - name: MYSQL_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name}}
+                  key: {{ .Values.secret.username.key }}
+            - name: MYSQL_DB_PASSWORD
+              valueFrom:
+                 secretKeyRef:
+                   name: {{ .Values.secret.name }}
+                   key: {{ .Values.secret.password.key }}
+          {{ end }}
+          {{- if eq .Values.deployment.mongodb "true" -}}
+          env:
+            - name: SERVICE_VERSION
+              valueFrom:
+                name: {{ .Values.configMap.name }}
+                key: {{ .Values.configMap.serverVersion.key }}
+            - name: MONGO_DB_URL
+              valueFrom:
+                name: {{ .Values.configMap.name }}
+                key: {{ .Values.configMap.url.key }}
+          {{ end }}

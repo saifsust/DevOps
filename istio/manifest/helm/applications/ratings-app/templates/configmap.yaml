@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configMap.name }}
+  namespace: {{ .Values.appNamespace }}
+data:
+  {{ .Values.configMap.serverVersion.key }} : {{ .Values.serverVersion.value }}
+  {{ if .Values.configmap.dbType }}
+  {{ .Values.configMap.dbType.key }} : {{ .Values.configMap.dbType.value }}
+  {{ end }}
+  {{ .Values.configMap.url.key  }} : {{ .Values.configMap.url.value }}
+  {{ .Values.configMap.port.key }} : {{ .Values.configMap.port.value }}
