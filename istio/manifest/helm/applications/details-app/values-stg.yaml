@@ -1,5 +1,5 @@
 appName: book-details
-appNamespace: book-info-stg
+appNamespace: istio-stg
 
 configMap:
   name: book-details-app-conf
