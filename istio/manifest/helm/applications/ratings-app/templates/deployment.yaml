@@ -41,7 +41,7 @@ spec:
                 - ALL
               add:
                 - NET_BIND_SERVICE
-          {{- if eq .Values.deployment.mysql "true" -}}
+          {{ if eq .Values.deployment.mysql "true" }}
           env:
             - name: SERVICE_VERSION
               valueFrom:
