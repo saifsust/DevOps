@@ -13,7 +13,7 @@ service:
   # nodePort: 31108
 
 deployment:
-  replicaCount: 2
+  replicaCount: 1
   maxSurge: 40%
   maxUnavailable: 20%
   pod:
