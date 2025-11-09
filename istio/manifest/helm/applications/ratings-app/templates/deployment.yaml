@@ -78,10 +78,12 @@ spec:
           env:
             - name: SERVICE_VERSION
               valueFrom:
-                name: {{ .Values.configMap.name }}
-                key: {{ .Values.configMap.serverVersion.key }}
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.serverVersion.key }}
             - name: MONGO_DB_URL
               valueFrom:
-                name: {{ .Values.configMap.name }}
-                key: {{ .Values.configMap.url.key }}
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.url.key }}
           {{ end }}
