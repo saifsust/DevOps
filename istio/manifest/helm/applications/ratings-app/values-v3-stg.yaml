@@ -1,0 +1,27 @@
+appName: book-rating-app
+appNamespace: istio-stg
+
+configMap:
+  name: book-rating-app-conf
+  serverVersion:
+    key: SERVICE_VERSION
+    value: "v3"
+  url:
+    key: MONGO_DB_URL
+    value: "mongodb://mongodb-app-svc.istio-stg.svc.cluster.local:27017/test"
+
+service:
+  name: book-rating-svc
+  type: ClusterIP
+  #nodePort: 31108
+
+deployment:
+  maxSurge: 40%
+  maxUnavailable: 10%
+  replicaCount: 1
+  mysql: "true"
+  pod:
+    label: book-rating-app
+    generation: "v2"
+    version: "istio"
+    port: 9080

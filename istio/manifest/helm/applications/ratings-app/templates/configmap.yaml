@@ -9,4 +9,6 @@ data:
   {{ .Values.configMap.dbType.key }} : {{ .Values.configMap.dbType.value }}
   {{ end }}
   {{ .Values.configMap.url.key  }} : {{ .Values.configMap.url.value }}
+  {{ if .Values.configMap.port }}
   {{ .Values.configMap.port.key }} : {{ .Values.configMap.port.value | quote}}
+  {{ end }}
