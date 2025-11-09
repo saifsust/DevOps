@@ -21,7 +21,7 @@ spec:
         version: {{ .Values.deployment.pod.version | quote }}
     spec:
       containers:
-        - image: saifsust/mysql-server:{{  .Values.deployment.pod.version}}
+        - image: saifsust/mysql-server:{{  .Values.deployment.pod.version }}
           name: app
           ports:
             - containerPort: {{ .Values.deployment.pod.port }}

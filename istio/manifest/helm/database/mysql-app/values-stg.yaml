@@ -5,7 +5,7 @@ secret:
   name: book-rating-mysql-secret
   password:
     key: MYSQL_ROOT_PASSWORD
-    value: cGFzc3dvcmQK
+    value: cGFzc3dvcmQ=
 
 service:
   name: book-rating-mysql-svc
