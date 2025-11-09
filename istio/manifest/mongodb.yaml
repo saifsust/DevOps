@@ -1,26 +1,35 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app: mongodb
   name: mongodb
-  namespace: secure-app
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: mongodb
-  strategy: {}
   template:
     metadata:
       labels:
         app: mongodb
     spec:
       containers:
-      - image: saifsust/mongodb-server:istio
+      - image: saifsust/mongodb-server:1.0.99
         name: mongodb-server
         imagePullPolicy: Always
         resources: {}
         ports:
         - containerPort: 27017
+        securityContext:
+          runAsUser: 999
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+              - ALL
+            add:
+              - NET_BIND_SERVICE
 status: {}
