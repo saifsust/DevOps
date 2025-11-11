@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.appNamespace }}
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ .Values.deployment.maxSurge }}
+      maxUnavailable: {{ .Values.deployment.maxUnavailable }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.pod.label }}
+      version: {{ .Values.deployment.pod.version | quote }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.pod.label }}
+        version: {{ .Values.deployment.pod.version | quote }}
+    spec:
+      containers:
+        - image: saifsust/productpage:{{ .Values.deployment.pod.version }}
+          name: app
+          ports:
+            - containerPort: {{ .Values.deployment.pod.port }}
+              name: tcp
+              protocol: TCP
+          securityContext:
+            runAsUser: 1000
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop:
+                - ALL
+              add:
+                - NET_BIND_SERVICE
+          env:
+            - name: SERVICES_DOMAIN
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: SERVICES_DOMAIN
+            - name: DETAILS_HOSTNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: DETAILS_HOSTNAME
+            - name: DETAILS_SERVICE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: DETAILS_SERVICE_PORT
+            - name: RATINGS_HOSTNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: RATINGS_HOSTNAME
+            - name: RATINGS_SERVICE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: RATINGS_SERVICE_PORT
+            - name: REVIEWS_HOSTNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: REVIEWS_HOSTNAME
+            - name: REVIEWS_SERVICE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: REVIEWS_SERVICE_PORT

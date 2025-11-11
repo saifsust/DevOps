@@ -1,0 +1,25 @@
+appName: product-page-app
+appNamespace: istio-stg
+
+configMap:
+  name: product-page-app-conf
+  servicesDomain: svc.cluster.local
+  detailsHostname: book-details-app
+  detailsServicePort: 9080
+  ratingHostname: book-rating-svc
+  ratingServicePort: 9080
+  reviewHostname: review-app-svc
+  reviewServicePort: 9080
+
+service:
+  name: product-app-svc
+  type: ClusterIP
+
+deployment:
+  replicaCount: 1
+  maxSurge: 40%
+  maxUnavailable: 10%
+  pod:
+    label: product-app
+    version: "istio"
+    port: 9080

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configMap.name }}
+  namespace: {{ .Values.appNamespace }}
+data:
+   SERVICES_DOMAIN: {{ .Values.configMap.servicesDomain }}
+   DETAILS_HOSTNAME: {{ .Values.configMap.detailsHostname }}
+   DETAILS_SERVICE_PORT: {{ .Values.configMap.detailsServicePort }}
+   RATINGS_HOSTNAME: {{ .Values.configMap.ratingHostname }}
+   RATINGS_SERVICE_PORT: {{ .Values.configMap.ratingServicePort }}
+   REVIEWS_HOSTNAME: {{ .Values.configMap.reviewHostname }}
+   REVIEWS_SERVICE_PORT: {{ .Values.configMap.reviewServicePort }}
