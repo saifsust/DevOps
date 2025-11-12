@@ -30,3 +30,5 @@ applications:
     name: review-app
   mysqlServer:
     name: mysql-server-app
+  mongodbServer:
+    name: mongodb-server-app
