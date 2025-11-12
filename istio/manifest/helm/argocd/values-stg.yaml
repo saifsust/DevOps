@@ -28,3 +28,5 @@ applications:
       name: e-book-ratings-app-v3
   review:
     name: review-app
+  mysqlServer:
+    name: mysql-server-app
