@@ -17,3 +17,5 @@ applications:
     name: product-page-app
   configuration:
     name: istio-configuration-app
+  details:
+    name: book-details
