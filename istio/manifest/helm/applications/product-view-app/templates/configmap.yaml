@@ -6,8 +6,8 @@ metadata:
 data:
    SERVICES_DOMAIN: {{ .Values.configMap.servicesDomain }}
    DETAILS_HOSTNAME: {{ .Values.configMap.detailsHostname }}
-   DETAILS_SERVICE_PORT: {{ .Values.configMap.detailsServicePort }}
+   DETAILS_SERVICE_PORT: {{ .Values.configMap.detailsServicePort | quote}}
    RATINGS_HOSTNAME: {{ .Values.configMap.ratingHostname }}
-   RATINGS_SERVICE_PORT: {{ .Values.configMap.ratingServicePort }}
+   RATINGS_SERVICE_PORT: {{ .Values.configMap.ratingServicePort | quote }}
    REVIEWS_HOSTNAME: {{ .Values.configMap.reviewHostname }}
-   REVIEWS_SERVICE_PORT: {{ .Values.configMap.reviewServicePort }}
+   REVIEWS_SERVICE_PORT: {{ .Values.configMap.reviewServicePort | quote }}
