@@ -1,4 +1,4 @@
-appName: book-rating-app
+appName: book-rating-app-v2
 appNamespace: istio-stg
 
 configMap:
