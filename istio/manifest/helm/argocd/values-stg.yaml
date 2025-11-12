@@ -26,3 +26,5 @@ applications:
      name: e-book-ratings-app-v2
     v3:
       name: e-book-ratings-app-v3
+  review:
+    name: review-app
