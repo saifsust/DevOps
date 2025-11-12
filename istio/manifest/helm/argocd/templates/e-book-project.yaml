@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: {{ .Values.project.name }}
+  namespace: {{ .Values.argoNamespace }}
+spec:
+  sourceRepos:
+    - https://github.com/saifsust/DevOps.git
+  destinations:
+    - namespace: {{ .Values.appNamespace }}
+      server: {{ .Values.k8sServer }}
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'

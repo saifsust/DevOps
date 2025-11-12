@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Values.applications.product.name }}
+  namespace: {{ .Values.argoNamespace }}
+spec:
+  project: {{ .Values.project.name }}
+  source:
+    path: istio/manifest/helm/applications/product-view-app
+    repoURL: https://github.com/saifsust/DevOps.git
+    targetRevision: main
+  destination:
+    namespace: {{ .Values.appNamespace }}
+    server: {{ .Values.k8sServer }}
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true

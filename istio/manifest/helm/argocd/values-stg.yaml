@@ -1,0 +1,17 @@
+argoNamespace: argocd
+appNamespace: istio-stg
+
+k8sServer: https://kubernetes.default.svc
+
+project:
+  name: e-book-service-project
+
+secret:
+  name: ecommerce-book-service-secret
+  url: https://github.com/saifsust/DevOps.git
+  username: saiful.sust.cse@gmail.com
+  password: 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
+
+applications:
+  product:
+    name: product-page-app
