@@ -19,3 +19,10 @@ applications:
     name: istio-configuration-app
   details:
     name: book-details
+  ratings:
+    v1:
+      name: e-book-ratings-app-v1
+    v2:
+     name: e-book-ratings-app-v2
+    v3:
+      name: e-book-ratings-app-v3
