@@ -1,7 +1,7 @@
 apiVersion: v2
 name: book mongodb Rating APP
 version: 0.0.1
-kubeVersion: 1.33.4
+#kubeVersion: 1.33.4
 description: A book rating is provided to user from MONGODB app. Information is stored within MONGODB.
 keywords:
   - rating
