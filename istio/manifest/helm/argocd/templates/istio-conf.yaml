@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Values.applications.product.name }}
+  name: {{ .Values.applications.configuration.name }}
   namespace: {{ .Values.argoNamespace }}
 spec:
   project: {{ .Values.project.name }}
   source:
-    path: istio/manifest/helm/applications/product-view-app
+    path: istio/manifest/helm/istio
     repoURL: https://github.com/saifsust/DevOps.git
     targetRevision: main
     helm:
