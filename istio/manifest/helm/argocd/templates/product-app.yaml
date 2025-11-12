@@ -9,6 +9,9 @@ spec:
     path: istio/manifest/helm/applications/product-view-app
     repoURL: https://github.com/saifsust/DevOps.git
     targetRevision: main
+    helm:
+      valueFiles:
+        - values-stg.yaml
   destination:
     namespace: {{ .Values.appNamespace }}
     server: {{ .Values.k8sServer }}
