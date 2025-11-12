@@ -1,0 +1,23 @@
+host: '*'
+appNamespace: istio-stg
+
+vs:
+  name: product-app-vs
+dr:
+  name: product-app-dr
+  subset:
+    name: product-app-subset
+
+pod:
+  label: product-app
+  version: istio
+  port: 9080
+
+service:
+  name: product-app-svc
+  domain: svc.cluster.local
+
+gateway:
+  name: product-app-gateway
+  ingress:
+    label: istio-ingressgateway

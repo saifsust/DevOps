@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: {{ .Values.vs.name }}
+  namespace: {{ .Values.appNamespace }}
+spec:
+  hosts:
+    - {{ .Values.host | quote }}
+  gateways:
+    - {{ .Values.gateway.name }}
+  http:
+    - route:
+        - destination:
+            host: {{ printf "%s.%s.%s" .Values.service.name .Values.appNamespace .Values.service.domain }}
+            subset: {{ .Values.dr.subset.name }}
