@@ -349,7 +349,7 @@ def getProductReviews(product_id, headers):
         try:
             url = reviews['name'] + "/" + reviews['endpoint'] + "/" + str(product_id)
             res = send_request(url, headers=headers, timeout=3.0)
-            app.logger.info(res)
+            app.logger.info(res.json())
         except BaseException:
             res = None
         if res and res.status_code == 200:
