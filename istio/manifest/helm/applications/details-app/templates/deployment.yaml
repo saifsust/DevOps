@@ -34,11 +34,11 @@ spec:
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
-            capabilities:
-              drop:
-                - ALL
-              add:
-                - NET_BIND_SERVICE
+#            capabilities:
+#              drop:
+#                - ALL
+#              add:
+#                - NET_BIND_SERVICE
           env:
             - name: ENABLE_EXTERNAL_BOOK_SERVICE
               valueFrom:
