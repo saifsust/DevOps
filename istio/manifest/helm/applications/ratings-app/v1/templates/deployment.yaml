@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.appNamespace }}
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ .Values.deployment.maxSurge }}
+      maxUnavailable: {{ .Values.deployment.maxUnavailable }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.pod.label }}
+      generation: {{ .Values.deployment.pod.generation | quote }}
+      version: {{ .Values.deployment.pod.version | quote }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.pod.label }}
+        generation: {{ .Values.deployment.pod.generation | quote }}
+        version: {{ .Values.deployment.pod.version | quote }}
+    spec:
+      containers:
+        - image: saifsust/ratings:{{ .Values.deployment.pod.version }}
+          name: app
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.deployment.pod.port }}
+              name: tcp
+              protocol: TCP
+          securityContext:
+            runAsUser: 1000
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop:
+                - ALL
+              add:
+                - NET_BIND_SERVICE

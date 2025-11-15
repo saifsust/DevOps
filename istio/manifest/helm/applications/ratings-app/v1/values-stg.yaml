@@ -1,0 +1,12 @@
+appName: book-rating-app-v1
+appNamespace: istio-stg
+
+deployment:
+  maxSurge: 40%
+  maxUnavailable: 10%
+  replicaCount: 1
+  pod:
+    label: book-rating-app
+    generation: "v1"
+    version: "istio"
+    port: 9080

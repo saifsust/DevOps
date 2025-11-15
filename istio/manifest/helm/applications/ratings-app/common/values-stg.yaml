@@ -1,0 +1,11 @@
+appNamespace: istio-stg
+
+service:
+  name: book-rating-svc
+  type: ClusterIP
+
+deployment:
+  pod:
+    label: book-rating-app
+    version: "istio"
+    port: 9080

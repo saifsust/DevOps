@@ -1,8 +1,8 @@
 apiVersion: v2
-name: book rating app
+name: book rating app service
 version: 0.0.1
 #kubeVersion: 1.33.4
-description: Book rating API
+description: Book rating API service
 keywords:
   - productId
 home: https://github.com/saifsust/DevOps/tree/main/istio

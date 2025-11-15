@@ -1,14 +1,20 @@
-appName: book-rating-app-v1
+appName: book-rating-app-v2
 appNamespace: istio-stg
 
 configMap:
-  name: book-rating-app-v1-conf
+  name: book-rating-app-v2-conf
   serverVersion:
     key: SERVICE_VERSION
-    value: "v1"
+    value: "v2"
+  dbType:
+    key: DB_TYPE
+    value: "mysql"
   url:
-    key: MONGO_DB_URL
-    value: "mongodb://mongodb-app-svc.istio-stg.svc.cluster.local:27017/test"
+    key: MYSQL_DB_HOST
+    value: "book-mysql-svc.istio-stg.svc.cluster.local"
+  port:
+    key: MYSQL_DB_PORT
+    value: "3306"
 
 secret:
   name: book-rating-app-v2-secret
@@ -19,17 +25,12 @@ secret:
     key: MYSQL_DB_PASSWORD
     value: "password"
 
-service:
-  name: book-rating-svc
-  type: ClusterIP
-  #nodePort: 31108
-
 deployment:
   maxSurge: 40%
   maxUnavailable: 10%
   replicaCount: 1
   pod:
     label: book-rating-app
-    generation: "v1"
+    generation: "v2"
     version: "istio"
     port: 9080

@@ -5,10 +5,6 @@ metadata:
   namespace: {{ .Values.appNamespace }}
 data:
   {{ .Values.configMap.serverVersion.key }} : {{ .Values.configMap.serverVersion.value }}
-  {{ if .Values.configMap.dbType }}
   {{ .Values.configMap.dbType.key }} : {{ .Values.configMap.dbType.value }}
-  {{ end }}
   {{ .Values.configMap.url.key  }} : {{ .Values.configMap.url.value }}
-  {{ if .Values.configMap.port }}
   {{ .Values.configMap.port.key }} : {{ .Values.configMap.port.value | quote}}
-  {{ end }}

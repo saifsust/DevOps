@@ -10,25 +10,10 @@ configMap:
     key: MONGO_DB_URL
     value: "mongodb://mongodb-app-svc.istio-stg.svc.cluster.local:27017/test"
 
-secret:
-  name: book-rating-app-v3-secret
-  username:
-    key: MYSQL_DB_USER
-    value: "root"
-  password:
-    key: MYSQL_DB_PASSWORD
-    value: "password"
-
-service:
-  name: book-rating-svc
-  type: ClusterIP
-  #nodePort: 31108
-
 deployment:
   maxSurge: 40%
   maxUnavailable: 10%
   replicaCount: 1
-  mongodb: "true"
   pod:
     label: book-rating-app
     generation: "v3"
