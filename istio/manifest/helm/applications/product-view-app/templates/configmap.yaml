@@ -7,7 +7,7 @@ data:
    SERVICES_DOMAIN: {{ .Values.configMap.servicesDomain }}
    DETAILS_HOSTNAME: {{ printf "%s.%s" .Values.configMap.detailsHostname .Values.appNamespace }}
    DETAILS_SERVICE_PORT: {{ .Values.configMap.detailsServicePort | quote}}
-   RATINGS_HOSTNAME: {{ .Values.configMap.ratingHostname }}
+   RATINGS_HOSTNAME: {{ printf "%s.%s" .Values.configMap.ratingHostname .Values.appNamespace }}
    RATINGS_SERVICE_PORT: {{ .Values.configMap.ratingServicePort | quote }}
-   REVIEWS_HOSTNAME: {{ .Values.configMap.reviewHostname }}
+   REVIEWS_HOSTNAME: {{ printf "%s.%s" .Values.configMap.reviewHostname .Values.appNamespace }}
    REVIEWS_SERVICE_PORT: {{ .Values.configMap.reviewServicePort | quote }}
