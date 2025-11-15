@@ -5,24 +5,23 @@ configMap:
   name: review-app-conf
   enableRating:
     key: ENABLE_RATINGS
-    value: "true"
+    value: true
   starColor:
     key: STAR_COLOR
-    value: "red"
+    value: red
   ratingHostName:
     key: RATINGS_HOSTNAME
-    value: "ratings-app-v3-svc"
+    value: book-rating-svc
   serviceDomain:
     key: SERVICES_DOMAIN
-    value: "istio-stg.svc.cluster.local"
+    value: svc.cluster.local
   ratingServicePort:
     key: RATINGS_SERVICE_PORT
-    value: "9080"
+    value: 9080
 
 service:
   name: review-app-svc
-  type: NodePort
-  nodePort: 31109
+  type: ClusterIP
 
 deployment:
   maxSurge: 40%
