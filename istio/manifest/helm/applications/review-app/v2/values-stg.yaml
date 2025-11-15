@@ -1,4 +1,4 @@
-appName: review-v1-app
+appName: review-v2-app
 appNamespace: istio-stg
 
 configMap:
