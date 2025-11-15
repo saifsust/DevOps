@@ -28,12 +28,12 @@ spec:
             - containerPort: {{ .Values.deployment.pod.port }}
               name: http
               protocol: TCP
-          securityContext:
-            runAsUser: 1001
-            runAsNonRoot: true
-            allowPrivilegeEscalation: false
-            seccompProfile:
-              type: RuntimeDefault
+#          securityContext:
+#            runAsUser: 1001
+#            runAsNonRoot: true
+#            allowPrivilegeEscalation: false
+#            seccompProfile:
+#              type: RuntimeDefault
 #            capabilities:
 #              drop:
 #                - ALL
