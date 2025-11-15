@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Values.appNamespace }}
 data:
    SERVICES_DOMAIN: {{ .Values.configMap.servicesDomain }}
-   DETAILS_HOSTNAME: {{ .Values.configMap.detailsHostname }}
+   DETAILS_HOSTNAME: {{ printf "%s.%s" .Values.configMap.detailsHostname .Values.appNamespace }}
    DETAILS_SERVICE_PORT: {{ .Values.configMap.detailsServicePort | quote}}
    RATINGS_HOSTNAME: {{ .Values.configMap.ratingHostname }}
    RATINGS_SERVICE_PORT: {{ .Values.configMap.ratingServicePort | quote }}
