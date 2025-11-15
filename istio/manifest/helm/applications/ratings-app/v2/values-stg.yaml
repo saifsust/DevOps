@@ -14,7 +14,7 @@ configMap:
     value: "book-mysql-svc.istio-stg.svc.cluster.local"
   port:
     key: MYSQL_DB_PORT
-    value: "3306"
+    value: 3306
 
 secret:
   name: book-rating-app-v2-secret
