@@ -5,13 +5,13 @@ configMap:
   name: book-rating-app-v2-conf
   serverVersion:
     key: SERVICE_VERSION
-    value: "v2"
+    value: v2
   dbType:
     key: DB_TYPE
-    value: "mysql"
+    value: mysql
   url:
     key: MYSQL_DB_HOST
-    value: "book-mysql-svc.istio-stg.svc.cluster.local"
+    value: book-mysql-svc.istio-stg.svc.cluster.local
   port:
     key: MYSQL_DB_PORT
     value: 3306
@@ -31,6 +31,6 @@ deployment:
   replicaCount: 0
   pod:
     label: book-rating-app
-    generation: "v2"
-    version: "istio"
+    generation: v2
+    version: istio
     port: 9080

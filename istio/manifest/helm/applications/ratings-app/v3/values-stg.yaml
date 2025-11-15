@@ -5,10 +5,10 @@ configMap:
   name: book-rating-app-v3-conf
   serverVersion:
     key: SERVICE_VERSION
-    value: "v2"
+    value: v2
   url:
     key: MONGO_DB_URL
-    value: "mongodb://mongodb-app-svc.istio-stg.svc.cluster.local:27017/test"
+    value: mongodb://mongodb-app-svc.istio-stg.svc.cluster.local:27017/test
 
 deployment:
   maxSurge: 40%
@@ -16,6 +16,6 @@ deployment:
   replicaCount: 1
   pod:
     label: book-rating-app
-    generation: "v3"
-    version: "istio"
+    generation: v3
+    version: istio
     port: 9080
