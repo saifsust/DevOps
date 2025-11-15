@@ -26,7 +26,7 @@ service:
 deployment:
   maxSurge: 40%
   maxUnavailable: 10%
-  replicaCount: 2
+  replicaCount: 1
   pod:
     label: review-app
     version: "istio"
