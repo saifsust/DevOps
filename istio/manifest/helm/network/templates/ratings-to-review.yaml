@@ -1,13 +1,13 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: mysql-server-to-ratings
-  namespace: graphql-system
+  name: ratings-to-review
+  namespace: {{ .Values.appNamespace }}
 spec:
   endpointSelector:
     matchLabels:
-      app: book-mysql-app
+      app: {{ .Values.network.rating }}
   ingress:
     - fromEndpoints:
         - matchLabels:
-            app: book-rating-app
+            app: {{ .Values.network.review }}

@@ -2,7 +2,7 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: default-deny
-  namespace: graphql-system
+  namespace: {{ .Values.appNamespace }}
 spec:
   endpointSelector: {}
   ingress:

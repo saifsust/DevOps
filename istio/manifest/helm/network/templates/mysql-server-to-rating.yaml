@@ -1,13 +1,13 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: detail-to-product
+  name: mysql-server-to-ratings
   namespace: graphql-system
 spec:
   endpointSelector:
     matchLabels:
-      app: book-details-app
+      app: {{ .Values.network.mysqlServer }}
   ingress:
     - fromEndpoints:
         - matchLabels:
-            app: product-app
+            app: {{ .Values.network.rating }}

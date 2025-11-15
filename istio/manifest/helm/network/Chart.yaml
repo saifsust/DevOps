@@ -1,0 +1,15 @@
+apiVersion: v2
+name: Cilium Network configuration
+version: 0.0.1
+#kubeVersion: 1.33.4
+description: Cilium network configuration
+home: https://github.com/saifsust/DevOps/tree/main/istio
+sources:
+  - https://github.com/saifsust/DevOps.git
+maintainers:
+  - name: SAIFUL ISLAM
+    email: saiful.sust.cse@gmail.com
+    url: https://www.linkedin.com/in/saiful-islam-340b51133
+appVersion: 0.0.1
+annotations:
+  maintainer: saiful.sust.cse@gmail.com

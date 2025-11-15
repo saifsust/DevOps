@@ -2,11 +2,11 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: product-app-world
-  namespace: graphql-system
+  namespace: {{ .Values.appNamespace }}
 spec:
   endpointSelector:
     matchLabels:
-      app: product-app
+      app: {{ .Values.network.product }}
   ingress:
     - fromEntities:
         - all

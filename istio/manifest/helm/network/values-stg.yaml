@@ -1,0 +1,9 @@
+appNamespace: graphql-system
+
+network:
+  detail: book-details-app
+  review: review-app
+  rating: book-rating-app
+  product: product-app
+  mysqlServer: book-mysql-app
+  mongodbServer: mongodb-app

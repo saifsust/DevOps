@@ -1,16 +1,16 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: product-to-detail
-  namespace: graphql-system
+  name: product-to-review
+  namespace: {{ .Values.appNamespace }}
 spec:
   endpointSelector:
     matchLabels:
-      app: product-app
+      app: {{ .Values.network.product }}
   egress:
     - toEndpoints:
         - matchLabels:
-            app: book-details-app
+            app: {{ .Values.network.review }}
       toPorts:
         - ports:
             - port: "9080"

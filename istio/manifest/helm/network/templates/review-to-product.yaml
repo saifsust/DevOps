@@ -1,13 +1,13 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: ratings-to-review
-  namespace: graphql-system
+  name: review-to-product
+  namespace: {{ .Values.appNamespace }}
 spec:
   endpointSelector:
     matchLabels:
-      app: book-rating-app
+      app: {{ .Values.network.review }}
   ingress:
     - fromEndpoints:
         - matchLabels:
-            app: review-app
+            app: {{ .Values.network.product }}

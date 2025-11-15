@@ -1,17 +1,17 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: rating-to-mysql-server
-  namespace: graphql-system
+  name: product-to-detail
+  namespace: {{ .Values.appNamespace }}
 spec:
   endpointSelector:
     matchLabels:
-      app: book-rating-app
+      app: {{ .Values.network.product }}
   egress:
     - toEndpoints:
         - matchLabels:
-            app: book-mysql-app
+            app: {{ .Values.network.detail }}
       toPorts:
         - ports:
-            - port: "3306"
+            - port: "9080"
               protocol: TCP
