@@ -5,4 +5,4 @@ metadata:
   namespace: {{ .Values.appNamespace }}
 data:
   {{ .Values.configMap.serverVersion.key }} : {{ .Values.configMap.serverVersion.value }}
-  {{ .Values.configMap.url.key  }} : {{ .Values.configMap.url.value }}
+  {{ .Values.configMap.url.key  }} : {{  printf "%s.%s.%s" .Values.configMap.url.mongodbHost .Values.appNamespace .Values.configMap.url.domainDb }}

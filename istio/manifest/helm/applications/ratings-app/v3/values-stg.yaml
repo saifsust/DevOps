@@ -8,7 +8,8 @@ configMap:
     value: v2
   url:
     key: MONGO_DB_URL
-    value: mongodb://mongodb-app-svc.istio-stg.svc.cluster.local:27017/test
+    mongodbHost: mongodb://mongodb-app-svc
+    domainDb: svc.cluster.local:27017/test
 
 deployment:
   maxSurge: 40%
