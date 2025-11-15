@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Values.applications.ratings.common.name }}
+  namespace: {{ .Values.argoNamespace }}
+spec:
+  project: {{ .Values.project.name }}
+  source:
+    path: istio/manifest/helm/applications/ratings-app/common
+    repoURL: https://github.com/saifsust/DevOps.git
+    targetRevision: main
+    helm:
+      valueFiles:
+        - values-stg.yaml
+  destination:
+    namespace: {{ .Values.appNamespace }}
+    server: {{ .Values.k8sServer }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true

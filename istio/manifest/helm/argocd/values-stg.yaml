@@ -20,6 +20,8 @@ applications:
   details:
     name: book-details
   ratings:
+    common:
+      name: e-book-ratings-app-common
     v1:
       name: e-book-ratings-app-v1
     v2:
