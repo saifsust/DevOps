@@ -4,7 +4,7 @@ appNamespace: istio-stg
 configMap:
   name: product-page-app-conf
   servicesDomain: svc.cluster.local
-  detailsHostname: book-details-app
+  detailsHostname: book-details-app-svc
   detailsServicePort: 9080
   ratingHostname: book-rating-svc
   ratingServicePort: 9080
