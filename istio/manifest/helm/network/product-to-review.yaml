@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: product-to-review
+  namespace: graphql-system
+spec:
+  endpointSelector:
+    matchLabels:
+      app: product-app
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            app: review-app
+      toPorts:
+        - ports:
+            - port: "9080"
+              protocol: TCP

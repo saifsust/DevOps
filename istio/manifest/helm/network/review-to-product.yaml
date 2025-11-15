@@ -1,0 +1,13 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: review-to-product
+  namespace: graphql-system
+spec:
+  endpointSelector:
+    matchLabels:
+      app: review-app
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            app: product-app
