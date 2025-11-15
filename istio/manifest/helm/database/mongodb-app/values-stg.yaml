@@ -12,6 +12,6 @@ deployment:
   maxUnavailable: 10%
   pod:
     label: mongodb-app
-    version: "1.0.99"
+    version: "1.0.98"
     port: 27017
 
