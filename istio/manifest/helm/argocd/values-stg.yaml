@@ -29,7 +29,14 @@ applications:
     v3:
       name: e-book-ratings-app-v3
   review:
-    name: review-app
+    common:
+      name: review-app-common
+    v1:
+      name: review-app-v1
+    v2:
+      name: review-app-v2
+    v3:
+      name: review-app-v3
   mysqlServer:
     name: mysql-server-app
   mongodbServer:
