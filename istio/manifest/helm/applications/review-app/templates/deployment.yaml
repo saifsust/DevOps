@@ -54,10 +54,7 @@ spec:
             {{ end }}
             {{ if .Values.configMap.ratingHostName }}
             - name: {{ .Values.configMap.ratingHostName.key }}
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Values.configMap.name }}
-                  key: {{ .Values.configMap.ratingHostName.key }}
+              value: {{ printf "%s.%s" .Values.configMap.ratingHostName.value .Values.appNamespace}}
             {{ end }}
             {{ if .Values.configMap.serviceDomain }}
             - name: {{ .Values.configMap.serviceDomain.key }}
