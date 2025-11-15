@@ -1,0 +1,14 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: default-deny
+  namespace: graphql-system
+spec:
+  endpointSelector: {}
+  ingress:
+    - {}
+  egress:
+    - toPorts:
+        - ports:
+          - port: "53"
+            protocol: ANY
