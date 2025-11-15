@@ -192,6 +192,7 @@ def getForwardHeaders(request):
 @app.route('/')
 @app.route('/index.html')
 def index():
+    app.logger.info("Home page !")
     """ Display productpage with normal user and test user buttons"""
     global productpage
 
@@ -211,6 +212,8 @@ def login():
     user = request.values.get('username')
     response = app.make_response(redirect(request.referrer))
     session['user'] = user
+    app.logger.info("Login request")
+
     return response
 
 
@@ -218,6 +221,7 @@ def login():
 def logout():
     response = app.make_response(redirect(request.referrer))
     session.pop('user', None)
+    app.logger.info("Log out request")
     return response
 
 # a helper function for asyncio.gather, does not return a value
@@ -254,6 +258,9 @@ def front():
         floodReviews(product_id, headers)
 
     reviewsStatus, reviews = getProductReviews(product_id, headers)
+
+    app.logger.info("Product page !")
+
     return render_template(
         'productpage.html',
         detailsStatus=detailsStatus,
@@ -267,11 +274,13 @@ def front():
 # The API:
 @app.route('/api/v1/products')
 def productsRoute():
+    app.logger.info("products list rest api")
     return json.dumps(getProducts()), 200, {'Content-Type': 'application/json'}
 
 
 @app.route('/api/v1/products/<product_id>')
 def productRoute(product_id):
+    app.logger.info("products detail rest api")
     headers = getForwardHeaders(request)
     status, details = getProductDetails(product_id, headers)
     return json.dumps(details), status, {'Content-Type': 'application/json'}
@@ -279,6 +288,7 @@ def productRoute(product_id):
 
 @app.route('/api/v1/products/<product_id>/reviews')
 def reviewsRoute(product_id):
+    app.logger.info("products review rest api")
     headers = getForwardHeaders(request)
     status, reviews = getProductReviews(product_id, headers)
     return json.dumps(reviews), status, {'Content-Type': 'application/json'}
@@ -286,6 +296,7 @@ def reviewsRoute(product_id):
 
 @app.route('/api/v1/products/<product_id>/ratings')
 def ratingsRoute(product_id):
+    app.logger.info("products ratings rest api")
     headers = getForwardHeaders(request)
     status, ratings = getProductRatings(product_id, headers)
     return json.dumps(ratings), status, {'Content-Type': 'application/json'}
