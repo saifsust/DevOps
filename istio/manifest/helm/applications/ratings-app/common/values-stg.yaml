@@ -1,4 +1,4 @@
-appNamespace: istio-stg
+appNamespace: graphql-system
 
 service:
   name: book-rating-svc

@@ -1,5 +1,5 @@
 appName: review-v2-app
-appNamespace: istio-stg
+appNamespace: graphql-system
 
 configMap:
   name: review-app-v2-conf

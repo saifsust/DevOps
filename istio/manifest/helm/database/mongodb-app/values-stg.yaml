@@ -1,5 +1,5 @@
 appName: book-mongodb-app
-appNamespace: istio-stg
+appNamespace: graphql-system
 
 service:
   name: mongodb-app-svc

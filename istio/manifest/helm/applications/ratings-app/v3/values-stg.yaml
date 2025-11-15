@@ -1,5 +1,5 @@
 appName: book-rating-app-v3
-appNamespace: istio-stg
+appNamespace: graphql-system
 
 configMap:
   name: book-rating-app-v3-conf

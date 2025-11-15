@@ -1,5 +1,5 @@
 host: '*'
-appNamespace: istio-stg
+appNamespace: graphql-system
 
 vs:
   name: product-app-vs

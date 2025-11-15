@@ -1,5 +1,5 @@
 appName: book-details
-appNamespace: istio-stg
+appNamespace: graphql-system
 
 configMap:
   name: book-details-app-conf

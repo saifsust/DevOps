@@ -1,5 +1,5 @@
 appName: book-mysql-app
-appNamespace: istio-stg
+appNamespace: graphql-system
 
 secret:
   name: book-mysql-secret

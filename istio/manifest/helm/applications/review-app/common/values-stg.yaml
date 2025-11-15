@@ -1,5 +1,5 @@
 appName: review-app
-appNamespace: istio-stg
+appNamespace: graphql-system
 
 service:
   name: review-app-svc

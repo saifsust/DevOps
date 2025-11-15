@@ -1,5 +1,5 @@
 argoNamespace: argocd
-appNamespace: istio-stg
+appNamespace: graphql-system
 
 k8sServer: https://kubernetes.default.svc
 
