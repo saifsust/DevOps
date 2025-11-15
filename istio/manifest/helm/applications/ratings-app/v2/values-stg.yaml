@@ -20,10 +20,10 @@ secret:
   name: book-rating-app-v2-secret
   username:
     key: MYSQL_DB_USER
-    value: "root"
+    value: root
   password:
     key: MYSQL_DB_PASSWORD
-    value: "password"
+    value: password
 
 deployment:
   maxSurge: 40%
