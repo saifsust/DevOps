@@ -6,7 +6,7 @@ metadata:
 spec:
   project: {{ .Values.project.name }}
   source:
-    path: istio/manifest/helm/applications/ratings-app
+    path: istio/manifest/helm/applications/ratings-app/v3
     repoURL: https://github.com/saifsust/DevOps.git
     targetRevision: main
     helm:
