@@ -3,6 +3,8 @@ appNamespace: istio-stg
 
 vs:
   name: product-app-vs
+  route:
+    name: product-app-http-route
 dr:
   name: product-app-dr
   subset:

@@ -24,3 +24,4 @@ spec:
             prefix: "/api/v1/products"
         - url:
             prefix: "/metrics"
+      name: {{ .Values.vs.route.name }}
