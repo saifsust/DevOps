@@ -7,4 +7,4 @@ data:
   {{ .Values.configMap.serverVersion.key }} : {{ .Values.configMap.serverVersion.value }}
   {{ .Values.configMap.dbType.key }} : {{ .Values.configMap.dbType.value }}
   {{ .Values.configMap.url.key  }} : {{ .Values.configMap.url.value }}
-  {{ .Values.configMap.port.key }} : {{ .Values.configMap.port.value}}
+  {{ .Values.configMap.port.key }} : {{ .Values.configMap.port.value | quote}}
