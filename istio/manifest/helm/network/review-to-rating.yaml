@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: review-to-rating
+  namespace: graphql-system
+spec:
+  endpointSelector:
+    matchLabels:
+      app: review-app
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            app: book-rating-app
+      toPorts:
+        - ports:
+            - port: "9080"
+              protocol: TCP
