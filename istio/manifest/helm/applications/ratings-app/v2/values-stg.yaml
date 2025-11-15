@@ -9,12 +9,13 @@ configMap:
   dbType:
     key: DB_TYPE
     value: mysql
-  url:
-    key: MYSQL_DB_HOST
-    value: book-mysql-svc.istio-stg.svc.cluster.local
   port:
     key: MYSQL_DB_PORT
     value: 3306
+  url:
+    key: MYSQL_DB_HOST
+    hostService: book-mysql-svc
+    domain: svc.cluster.local
 
 secret:
   name: book-rating-app-v2-secret
