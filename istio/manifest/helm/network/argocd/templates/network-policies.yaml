@@ -6,7 +6,7 @@ metadata:
 spec:
   project: {{ .Values.project.name }}
   source:
-    path: istio/manifest/helm/network
+    path: istio/manifest/helm/network/policies
     repoURL: https://github.com/saifsust/DevOps.git
     targetRevision: main
     helm:

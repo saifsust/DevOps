@@ -1,0 +1,10 @@
+argoNamespace: argocd
+appNamespace: graphql-system
+
+k8sServer: https://kubernetes.default.svc
+
+project:
+  name: e-book-service-project
+
+network:
+  name: cilium-network-policies
