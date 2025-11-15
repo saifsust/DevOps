@@ -45,28 +45,20 @@ spec:
                 configMapKeyRef:
                   name: {{ .Values.configMap.name }}
                   key: {{ .Values.configMap.enableRating.key }}
-            {{ if .Values.configMap.starColor }}
             - name: {{ .Values.configMap.starColor.key }}
               valueFrom:
                 configMapKeyRef:
                   name: {{ .Values.configMap.name }}
                   key: {{ .Values.configMap.starColor.key }}
-            {{ end }}
-            {{ if .Values.configMap.ratingHostName }}
             - name: {{ .Values.configMap.ratingHostName.key }}
               value: {{ printf "%s.%s" .Values.configMap.ratingHostName.value .Values.appNamespace}}
-            {{ end }}
-            {{ if .Values.configMap.serviceDomain }}
             - name: {{ .Values.configMap.serviceDomain.key }}
               valueFrom:
                 configMapKeyRef:
                   name: {{ .Values.configMap.name }}
                   key: {{ .Values.configMap.serviceDomain.key }}
-            {{ end }}
-            {{ if .Values.configMap.ratingServicePort }}
             - name: {{ .Values.configMap.ratingServicePort.key }}
               valueFrom:
                 configMapKeyRef:
                   name: {{ .Values.configMap.name }}
                   key: {{ .Values.configMap.ratingServicePort.key }}
-            {{ end }}

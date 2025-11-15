@@ -1,0 +1,18 @@
+appName: review-v1-app
+appNamespace: istio-stg
+
+configMap:
+  name: review-app-v1-conf
+  enableRating:
+    key: ENABLE_RATINGS
+    value: false
+
+
+deployment:
+  maxSurge: 40%
+  maxUnavailable: 10%
+  replicaCount: 1
+  pod:
+    label: review-app
+    version: "istio"
+    port: 9080

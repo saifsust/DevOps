@@ -1,0 +1,12 @@
+appName: review-app
+appNamespace: istio-stg
+
+service:
+  name: review-app-svc
+  type: ClusterIP
+
+deployment:
+  pod:
+    label: review-app
+    version: "istio"
+    port: 9080

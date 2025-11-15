@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configMap.name }}
+  namespace: {{ .Values.appNamespace }}
+data:
+  {{ .Values.configMap.enableRating.key }} : {{ .Values.configMap.enableRating.value | quote }}

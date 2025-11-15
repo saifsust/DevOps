@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.appNamespace }}
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ .Values.deployment.maxSurge }}
+      maxUnavailable: {{ .Values.deployment.maxUnavailable }}
+  selector:
+     matchLabels:
+        app: {{ .Values.deployment.pod.label }}
+        version: {{ .Values.deployment.pod.version | quote }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.pod.label }}
+        version: {{ .Values.deployment.pod.version | quote }}
+    spec:
+      containers:
+        - image: saifsust/reviews:{{- .Values.deployment.pod.version }}
+          name: app
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.deployment.pod.port }}
+              name: http
+              protocol: TCP
+          securityContext:
+            runAsUser: 1001
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop:
+                - ALL
+              add:
+                - NET_BIND_SERVICE
+          env:
+            - name: {{ .Values.configMap.enableRating.key }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.enableRating.key }}
+            - name: {{ .Values.configMap.ratingHostName.key }}
+              value: {{ printf "%s.%s" .Values.configMap.ratingHostName.value .Values.appNamespace}}
+            - name: {{ .Values.configMap.serviceDomain.key }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.serviceDomain.key }}
+            - name: {{ .Values.configMap.ratingServicePort.key }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.ratingServicePort.key }}

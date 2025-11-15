@@ -1,8 +1,8 @@
 apiVersion: v2
-name: book review app
+name: book review app no rating
 version: 0.0.1
 #kubeVersion: 1.33.4
-description: Book review API
+description: Book review API no rating
 keywords:
   - productId
 home: https://github.com/saifsust/DevOps/tree/main/istio

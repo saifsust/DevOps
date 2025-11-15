@@ -1,14 +1,11 @@
-appName: review-app
+appName: review-v1-app
 appNamespace: istio-stg
 
 configMap:
-  name: review-app-conf
+  name: review-app-v2-conf
   enableRating:
     key: ENABLE_RATINGS
     value: true
-  starColor:
-    key: STAR_COLOR
-    value: red
   ratingHostName:
     key: RATINGS_HOSTNAME
     value: book-rating-svc
@@ -19,9 +16,6 @@ configMap:
     key: RATINGS_SERVICE_PORT
     value: 9080
 
-service:
-  name: review-app-svc
-  type: ClusterIP
 
 deployment:
   maxSurge: 40%
