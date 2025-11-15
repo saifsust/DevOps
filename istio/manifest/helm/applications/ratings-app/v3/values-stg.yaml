@@ -5,7 +5,7 @@ configMap:
   name: book-rating-app-v3-conf
   serverVersion:
     key: SERVICE_VERSION
-    value: "v3"
+    value: "v2"
   url:
     key: MONGO_DB_URL
     value: "mongodb://mongodb-app-svc.istio-stg.svc.cluster.local:27017/test"
