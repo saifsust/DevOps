@@ -21,7 +21,8 @@ configMap:
 
 service:
   name: review-app-svc
-  type: ClusterIP
+  type: NodePort
+  nodePort: 31109
 
 deployment:
   maxSurge: 40%
