@@ -259,7 +259,8 @@ def front():
 
     reviewsStatus, reviews = getProductReviews(product_id, headers)
 
-    app.logger.info("Product page !")
+    app.logger.info(" Product page !")
+    app.logger.info(reviews)
 
     return render_template(
         'productpage.html',
