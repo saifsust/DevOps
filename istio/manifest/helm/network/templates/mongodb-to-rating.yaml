@@ -1,0 +1,13 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: mongodb-server-to-rating
+  namespace: {{ .Values.appNamespace }}
+spec:
+  endpointSelector:
+    matchLabels:
+      app: {{ .Values.network.mongodbServer }}
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            app: {{ .Values.network.rating }}

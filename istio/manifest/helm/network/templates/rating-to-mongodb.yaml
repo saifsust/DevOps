@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: rating-to-mongodb
+  namespace: {{ .Values.appNamespace }}
+spec:
+   endpointSelector:
+     matchLabels:
+       app: {{ .Values.network.rating }}
+   egress:
+     - toEndpoints:
+         - matchLabels:
+             app: {{ .Values.network.mongodbServer }}
+       toPorts:
+          - ports:
+              - port: "27017"
+                protocol: TCP
