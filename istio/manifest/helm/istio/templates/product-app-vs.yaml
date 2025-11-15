@@ -14,14 +14,14 @@ spec:
             host: {{ printf "%s.%s.%s" .Values.service.name .Values.appNamespace .Values.service.domain }}
             subset: {{ .Values.dr.subset.name }}
       match:
-        - url:
+        - uri:
             prefix: "/login"
-        - url:
+        - uri:
             prefix: "/logout"
-        - url:
+        - uri:
             prefix: "/productpage"
-        - url:
+        - uri:
             prefix: "/api/v1/products"
-        - url:
+        - uri:
             prefix: "/metrics"
       name: {{ .Values.vs.route.name }}
