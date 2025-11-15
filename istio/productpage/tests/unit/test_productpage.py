@@ -14,9 +14,6 @@ class ApplianceTest(unittest.TestCase):
     def test_header_propagation_reviews(self, m):
         """ Check that tracing headers are forwarded correctly """
         product_id = 0
-        # Register expected headers with the mock. If the headers
-        # don't match, the mock won't fire, an E500 will be triggered
-        # and the test will fail.
         expected_headers = {
             'x-request-id': '34eeb41d-d267-9e49-8b84-dde403fc5b72',
             'x-b3-traceid': '80f198ee56343ba864fe8b2a57d3eff7',
