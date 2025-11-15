@@ -18,5 +18,5 @@ deployment:
   maxUnavailable: 20%
   pod:
     label: book-mysql-app
-    version: "istio"
+    version: "1.0.99"
     port: 3306
