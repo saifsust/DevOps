@@ -187,21 +187,6 @@ def getForwardHeaders(request):
 
     return headers
 
-
-# The UI:
-@app.route('/')
-@app.route('/index.html')
-def index():
-    app.logger.info("Home page !")
-    """ Display productpage with normal user and test user buttons"""
-    global productpage
-
-    table = json2html.convert(json=json.dumps(productpage),
-                              table_attributes="class=\"table table-condensed table-bordered table-hover\"")
-
-    return render_template('index.html', serviceTable=table)
-
-
 @app.route('/health')
 def health():
     return 'Product page is healthy'
@@ -246,7 +231,8 @@ def floodReviews(product_id, headers):
     loop.close()
 
 
-@app.route('/productpage')
+@app.route('/')
+@app.route('/home')
 def front():
     product_id = 0  # TODO: replace default value
     headers = getForwardHeaders(request)
