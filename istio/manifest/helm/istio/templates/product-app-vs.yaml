@@ -13,3 +13,14 @@ spec:
         - destination:
             host: {{ printf "%s.%s.%s" .Values.service.name .Values.appNamespace .Values.service.domain }}
             subset: {{ .Values.dr.subset.name }}
+      match:
+        - url:
+            prefix: "/login"
+        - url:
+            prefix: "/logout"
+        - url:
+            prefix: "/productpage"
+        - url:
+            prefix: "/api/v1/products"
+        - url:
+            prefix: "/metrics"
