@@ -13,7 +13,7 @@ configMap:
 deployment:
   maxSurge: 40%
   maxUnavailable: 10%
-  replicaCount: 1
+  replicaCount: 0
   pod:
     label: book-rating-app
     generation: v3
