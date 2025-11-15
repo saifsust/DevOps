@@ -12,6 +12,9 @@ secret:
   username: saiful.sust.cse@gmail.com
   password: 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
 
+network:
+  name: cilium-network-policies
+
 applications:
   product:
     name: product-page-app
