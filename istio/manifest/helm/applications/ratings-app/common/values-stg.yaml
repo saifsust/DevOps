@@ -2,8 +2,8 @@ appNamespace: istio-stg
 
 service:
   name: book-rating-svc
-  type: NodePort
-  nodePort: 31009
+  type: ClusterIP
+  #nodePort: 31009
 
 deployment:
   pod:
