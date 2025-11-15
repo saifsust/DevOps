@@ -12,7 +12,6 @@ dr:
 
 pod:
   label: product-app
-  version: istio
   port: 9080
 
 service:

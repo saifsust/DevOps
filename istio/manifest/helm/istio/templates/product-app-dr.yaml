@@ -12,4 +12,3 @@ spec:
     - name: {{ .Values.dr.subset.name }}
       labels:
         app: {{ .Values.pod.label }}
-        version: {{ .Values.pod.version | quote }}
