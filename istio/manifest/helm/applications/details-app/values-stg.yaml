@@ -17,6 +17,6 @@ deployment:
 
 service:
   name: book-details-app-svc
-  type: NodePort
-  nodePort: 31108
+  type: ClusterIP
+  #nodePort: 31108
 
