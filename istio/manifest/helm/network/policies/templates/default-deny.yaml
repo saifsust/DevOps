@@ -12,3 +12,15 @@ spec:
         - ports:
           - port: "53"
             protocol: ANY
+    - toEndpoints:
+        - matchLabels:
+            app: istiod
+            k8s:io.kubernetes.pod.namespace: istio-system
+      toPorts:
+         - ports:
+             - port: "15010"
+               protocol: TCP
+             - port: "15012"
+               protocol: TCP
+             - port: "443"
+               protocol: TCP
