@@ -4,7 +4,7 @@ appNamespace: graphql-system
 deployment:
   maxSurge: 40%
   maxUnavailable: 10%
-  replicaCount: 0
+  replicaCount: 1
   pod:
     label: book-rating-app
     generation: "v1"
