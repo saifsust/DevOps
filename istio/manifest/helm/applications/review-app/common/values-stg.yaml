@@ -8,5 +8,4 @@ service:
 deployment:
   pod:
     label: review-app
-    version: "istio"
     port: 9080
