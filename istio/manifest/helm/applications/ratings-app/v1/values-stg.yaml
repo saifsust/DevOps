@@ -8,5 +8,5 @@ deployment:
   pod:
     label: book-rating-app
     generation: "v1"
-    version: "istio"
+    version: "1.0.0"
     port: 9080

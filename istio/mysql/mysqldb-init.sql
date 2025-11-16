@@ -9,5 +9,5 @@ CREATE TABLE `ratings` (
   `Rating` INT,
   PRIMARY KEY (`ReviewID`)
 );
-INSERT INTO ratings (ReviewID, Rating) VALUES (1, 1);
-INSERT INTO ratings (ReviewID, Rating) VALUES (2, 10);
+INSERT INTO ratings (ReviewID, Rating) VALUES (1, 4);
+INSERT INTO ratings (ReviewID, Rating) VALUES (2, 8);
