@@ -41,3 +41,9 @@ spec:
 #                - ALL
 #              add:
 #                - NET_BIND_SERVICE
+          env:
+            - name: SERVICE_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMap.name }}
+                  key: {{ .Values.configMap.serverVersion.key }}
