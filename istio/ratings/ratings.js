@@ -49,6 +49,8 @@ dispatcher.onPost(/^\/ratings\/[0-9]*/, function (req, res) {
   var productId = parseInt(productIdStr)
   var ratings = {}
 
+    console.log("Post request %s", productId)
+
   if (Number.isNaN(productId)) {
     res.writeHead(400, {'Content-type': 'application/json'})
     res.end(JSON.stringify({error: 'please provide numeric product ID'}))
@@ -76,7 +78,7 @@ dispatcher.onGet(/^\/ratings\/[0-9]*/, function (req, res) {
   var productIdStr = req.url.split('/').pop()
   var productId = parseInt(productIdStr)
 
-  console.log("product id : "+ productId)
+  console.log("product id : %s", productId)
 
   if (Number.isNaN(productId)) {
     res.writeHead(400, {'Content-type': 'application/json'})
@@ -163,7 +165,7 @@ dispatcher.onGet(/^\/ratings\/[0-9]*/, function (req, res) {
       })
     }
   } else {
-       console.log("service_VERSION : " + process.env.SERVICE_VERSION)
+       console.log("service_VERSION : %s" , process.env.SERVICE_VERSION)
 
       if (process.env.SERVICE_VERSION === 'v-faulty') {
         // in half of the cases return error,
