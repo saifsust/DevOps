@@ -1,0 +1,12 @@
+- rule: passwd_read
+  desc: >
+    password read suspicious activities detected within container
+  condition: >
+    evt.type in (open, openat) and
+    evt.dir = < and
+    fd.name = '/etc/passwd'
+  output: >
+    Risky suspicious actions detected within |
+    time=%evt.time,container-name=%container.name,user-uid=%user.uid,repos=%container.image.repo
+  tags: [WARNING]
+  priority: WARNING
