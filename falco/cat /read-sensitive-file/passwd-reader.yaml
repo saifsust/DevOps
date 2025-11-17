@@ -2,6 +2,7 @@
   desc: >
     password read suspicious activities detected within container
   condition: >
+    container.id != host and
     evt.type in (open, openat) and
     evt.dir = < and
     fd.name = '/etc/passwd'
