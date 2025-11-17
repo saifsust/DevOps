@@ -7,6 +7,6 @@
     fd.name = '/etc/passwd'
   output: >
     Risky suspicious actions detected within |
-    time=%evt.time,container-name=%container.name,user-uid=%user.uid,repos=%container.image.repo
+    time=%evt.time,container-name=%container.name,user-uid=%user.uid,repos=%container.image.repo,namespace=%k8s.ns.name,pod-name=%k8s.pod.name
   tags: [WARNING]
   priority: WARNING
