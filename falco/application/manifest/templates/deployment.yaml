@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.appNamespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ .Values.maxSurge }}
+      maxUnavailable: {{ .Values.maxUnavailable }}
+  selector:
+    matchLabels:
+      app: {{ .Values.label }}
+      version: {{ .Values.version | quote }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.label }}
+        version: {{ .Values.version | quote }}
+    spec:
+      containers:
+        - image: saifsust/ubuntu:{{ .Values.version }}
+          name: app
+          imagePullPolicy: Always

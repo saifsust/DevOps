@@ -1,0 +1,7 @@
+apiVersion: v2
+name: falco suspicious app
+version: 4.0.0
+maintainers: # (optional)
+  - name: Saiful Islam
+    email: saiful.sust.cse@gmail.com
+    url: https://www.linkedin.com/in/saiful-islam-340b51133/

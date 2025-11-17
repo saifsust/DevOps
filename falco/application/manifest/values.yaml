@@ -1,0 +1,9 @@
+appName: attacker
+appNamespace: cks
+
+replicaCount: 1
+maxSurge: 40%
+maxUnavailable: 10%
+
+label: suspicious-app
+version: 24.04
