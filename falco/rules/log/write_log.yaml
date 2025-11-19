@@ -1,0 +1,25 @@
+- macro: write_operation
+  condition: (evt.type in (open, openat, openat2) and evt.is_open_write=true and fd.typechar='f' and fd.num>=0)
+
+- macro: has_no_evt
+  condition: (evt.num=0)
+
+- list: falco_log_directories
+  items: [
+    /var/log/falco,
+    /etc/falco_logs
+  ]
+
+- rule: Falco Log Deletion Activities
+  desc: >
+    Detect deleting of falco log files, typicallyy done to erase evidence that could be attributed to an adversary's actions.
+  condition: >
+    container.id != host
+    and evt.dir = < 
+    and write_operation
+    and fd.directory in (falco_log_directories)
+    and not has_no_evt
+  output: >
+    Log files were tampered |
+    time=%evt.time file=%fd.name evt_type=%evt.type user=%user.uid user=%user.name process=%proc.name
+  tags: [WARNING]
