@@ -1,0 +1,20 @@
+- list: sensitive_files
+  items: [
+    /app/test.txt
+  ]
+- rule: sensitive file read
+  desc: >
+    Malicious users may try to read sensitive files
+  condition: >
+    container.id != host
+    and evt.dir = < 
+    and evt.type in (open,openat,openat2)
+    and fd.num >= 0
+    and evt.is_open_read=true
+    and fd.typechar='f'
+    and fd.name in (sensitive_files)
+  tags: [ALERT, WARNING]
+  priority: ALERT
+  output: >
+    Malicious user within %container.name container try to read sensitive data |
+    time=%evt.time,ns=%k8s.ns.name,container-id=%container.id,cmdline=%proc.cmdline,fd-num=%fd.num,proc=%proc.name
