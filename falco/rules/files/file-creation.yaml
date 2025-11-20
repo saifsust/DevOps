@@ -1,0 +1,21 @@
+- list: directories
+  items: [
+    /var/log/falco,
+    /app
+  ]
+
+- rule: Detected Creation Activity Already Exist File
+  desc: >
+    When fail to create that already exit
+  condition: >
+    container.id != host
+    and evt.dir = <
+    and evt.type in (open,openat,openat2)
+    and fd.typechar='f'
+    and fd.num >= 0
+    and fd.directory in (directories)
+  tags: [WARNING, NOTICE, ALERT]
+  priority: WARNING
+  output: >
+    container %container.name try to create file |
+    time=%evt.time,user-name=%user.name,ns=%k8s.ns.name,repo=%container.image.repository,container-id=%container.id,fd-name=%fd.name,proc=%proc.name,cmdline=%proc.cmdline
