@@ -4,7 +4,7 @@ FROM nginx:1.28.0-alpine
 RUN addgroup --gid 1001 vagrant && \
     adduser --system --uid 1001 --ingroup vagrant vagrant
 
-COPY app/ /etc/nginx
+COPY app /etc/nginx
 RUN chown -R vagrant:vagrant /usr/share/nginx/html && \
     chown -R vagrant:vagrant /var/cache/nginx && \
     chown -R vagrant:vagrant /var/log/nginx && \
