@@ -7,10 +7,10 @@ service:
   nodePort: 31002
 
 deployment:
-  replicaCount: 2
+  replicaCount: 1
   maxUnavailable: 10%
   maxSurge: 50%
   pod:
     label: webhook-server-app
     port: 8081
-    version: 1.1.0
+    version: 1.1.1
