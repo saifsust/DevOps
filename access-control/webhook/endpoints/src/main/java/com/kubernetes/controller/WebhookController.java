@@ -28,13 +28,14 @@ public class WebhookController {
             @RequestBody String webhookRequest,
             HttpServletRequest request
     ) {
+        log.info("Receive request ....");
         return ResponseEntity
                 .ok(webhookService.processor(webhookRequest));
     }
 
     @GetMapping(path = "health")
     public ResponseEntity<@NonNull Void> healthChecker() {
-        log.info("Health check request receiving.....");
+        //log.info("Health check request receiving.....");
         return ResponseEntity.ok()
                 .build();
     }
