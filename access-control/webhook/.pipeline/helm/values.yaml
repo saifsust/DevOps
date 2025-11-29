@@ -1,0 +1,16 @@
+appName: webhook-server
+appNamespace: graphql-system
+
+service:
+  name: webhook-server-svc
+  type: NodePort
+  nodePort: 31002
+
+deployment:
+  replicaCount: 2
+  maxUnavailable: 10%
+  maxSurge: 50%
+  pod:
+    label: webhook-server-app
+    port: 8081
+    version: 0.0.1

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.appNamespace }}
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.pod.label }}
+      version: {{ .Values.deployment.pod.version | quote }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: {{ .Values.deployment.maxUnavailable }}
+      maxSurge: {{ .Values.deployment.maxSurge }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.pod.label }}
+        version: {{ .Values.deployment.pod.version | quote }}
+    spec:
+      containers:
+        - name: app
+          image: saifsust/webhook-server:{{ .Values.deployment.pod.version }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.deployment.pod.port }}
+              name: http
+              protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.deployment.pod.port }}
+            initialDelaySeconds: 10
+            periodSeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.deployment.pod.port }}
+            initialDelaySeconds: 10
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.deployment.pod.port }}
+            initialDelaySeconds: 10
+            periodSeconds: 3
