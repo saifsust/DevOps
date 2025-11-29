@@ -5,6 +5,7 @@ import com.kubernetes.service.WebhookService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static com.kubernetes.controller.WebhookController.API_PATH;
 
+@Slf4j
 @RestController
 @RequestMapping(path = API_PATH)
 @RequiredArgsConstructor
@@ -32,6 +34,7 @@ public class WebhookController {
 
     @GetMapping(path = "health")
     public ResponseEntity<@NonNull Void> healthChecker() {
+        log.info("Health check request receiving.....");
         return ResponseEntity.ok()
                 .build();
     }
