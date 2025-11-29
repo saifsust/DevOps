@@ -1,0 +1,5 @@
+rootProject.name = 'webhook'
+
+include 'endpoints'
+include 'biz'
+include 'biz:webhook-server'
