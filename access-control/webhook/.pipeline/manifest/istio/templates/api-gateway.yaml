@@ -6,7 +6,6 @@ metadata:
 spec:
   selector:
     app: istio-ingressgateway
-    app.kubernetes.io/name: istio-ingressgateway
   servers:
     - port:
         number: {{ .Values.service.port }}

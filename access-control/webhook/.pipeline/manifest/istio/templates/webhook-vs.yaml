@@ -4,8 +4,10 @@ metadata:
   name: {{ .Values.vs.name }}
   namespace: {{ .Values.appNamespace }}
 spec:
+  gateways:
+    - {{ .Values.gateway.name }}
   hosts:
-    - {{ printf "%s.%s.%s" .Values.service.name .Values.appNamespace .Values.service.domain }}
+    - {{ .Values.host | quote }}
   http:
     - name: webhook-route
       match:
