@@ -3,11 +3,11 @@ appNamespace: graphql-system
 
 service:
   name: webhook-server-svc
-  type: NodePort
-  nodePort: 31002
-  ssl:
-    port: 443
-    nodePort: 31443
+  type: ClusterIP
+#  nodePort: 31002
+#  ssl:
+#    port: 443
+#    nodePort: 31443
 
 deployment:
   replicaCount: 1
