@@ -25,24 +25,24 @@ spec:
           image: saifsust/webhook-server:{{ .Values.deployment.pod.version }}
           imagePullPolicy: Always
           ports:
-            - containerPort: {{ .Values.deployment.pod.port }}
+            - containerPort: {{ .Values.deployment.pod.targetPort }}
               name: http
               protocol: TCP
           startupProbe:
             httpGet:
               path: /health
-              port: {{ .Values.deployment.pod.port }}
+              port: {{ .Values.deployment.pod.targetPort }}
             initialDelaySeconds: 10
             periodSeconds: 3
           livenessProbe:
             httpGet:
               path: /health
-              port: {{ .Values.deployment.pod.port }}
+              port: {{ .Values.deployment.pod.targetPort }}
             initialDelaySeconds: 10
             periodSeconds: 3
           readinessProbe:
             httpGet:
               path: /health
-              port: {{ .Values.deployment.pod.port }}
+              port: {{ .Values.deployment.pod.targetPort }}
             initialDelaySeconds: 10
             periodSeconds: 3

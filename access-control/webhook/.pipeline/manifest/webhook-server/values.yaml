@@ -16,4 +16,5 @@ deployment:
   pod:
     label: webhook-server-app
     port: 8081
+    targetPort: 8081
     version: 1.3.99

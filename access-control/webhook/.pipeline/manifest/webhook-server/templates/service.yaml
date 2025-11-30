@@ -10,7 +10,7 @@ spec:
   ports:
     - protocol: TCP
       port: {{ .Values.deployment.pod.port }}
-      targetPort: {{ .Values.deployment.pod.port }}
+      targetPort: {{ .Values.deployment.pod.targetPort }}
       {{- if .Values.service.nodePort }}
       nodePort: {{ .Values.service.nodePort }}
       {{ end }}

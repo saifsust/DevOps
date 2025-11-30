@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: {{ .Values.vs.name }}
+  namespace: {{ .Values.appNamespace }}
+spec:
+  hosts:
+    - {{ printf "%s.%s.%s" .Values.service.name .Values.appNamespace .Values.service.domain }}
+  http:
+    - name: webhook-route
+      match:
+        - uri:
+            prefix: "/validate"
+        - uri:
+            prefix: "/health"
+      route:
+        - destination:
+            host: {{ printf "%s.%s.%s" .Values.service.name .Values.appNamespace .Values.service.domain }}
+            subset: {{ .Values.dr.subset }}

@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: {{ .Values.dr.name }}
+  namespace: {{ .Values.appNamespace }}
+spec:
+  host: {{ printf "%s.%s.%s" .Values.service.name .Values.appNamespace .Values.service.domain }}
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_REQUEST
+  subsets:
+    - name: {{ .Values.dr.subset }}
+      labels:
+        app: {{ .Values.deployment.pod.label }}
+      trafficPolicy:
+        loadBalancer:
+          simple: ROUND_ROBIN

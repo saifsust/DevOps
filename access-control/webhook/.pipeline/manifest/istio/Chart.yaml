@@ -1,12 +1,10 @@
 apiVersion: v2
-name: ImagePolicyWebhook
+name: Admission Controller Istio Configuration
 version: 4.0.0
 sources:
   - https://github.com/saifsust/DevOps.git
-maintainers: # (optional)
+maintainers:
   - name: Saiful Islam
     email: saiful.sust.cse@gmail.com
     url: https://github.com/saifsust
 appVersion: 0.0.1
-annotations:
-  k8s-app: self-deployment
