@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder(toBuilder = true)
-public class K8sResponse {
+public class K8sAdmissionReviewResponse {
     private boolean allowed;
     private String uid;
 }
