@@ -20,5 +20,5 @@ spec:
       hosts:
         - {{ .Values.host | quote }}
       tls:
-        mode: SIMPLE
+        mode: MUTUAL
         credentialName: webhook-credentials
