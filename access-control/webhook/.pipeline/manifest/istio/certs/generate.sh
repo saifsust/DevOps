@@ -12,3 +12,6 @@ openssl x509 -req -in client.csr -days 3560 -passin pass:bjit1234 -CA ca.crt -CA
 openssl verify -CAfile ca.crt client.crt
 
 rm *.csr
+
+kubectl -n istio-system delete secret webhook-credentials
+kubectl -n istio-system create secret tls webhook-credentials --cert=client.crt --key=client.key
