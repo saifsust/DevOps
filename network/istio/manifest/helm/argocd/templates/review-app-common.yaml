@@ -6,7 +6,7 @@ metadata:
 spec:
   project: {{ .Values.project.name }}
   source:
-    path: istio/manifest/helm/applications/review-app/common
+    path: network/istio/manifest/helm/applications/review-app/common
     repoURL: https://github.com/saifsust/DevOps.git
     targetRevision: main
     helm:

@@ -6,7 +6,7 @@ metadata:
 spec:
   project: {{ .Values.project.name }}
   source:
-    path: istio/manifest/helm/database/mongodb-app
+    path: network/istio/manifest/helm/database/mongodb-app
     repoURL: https://github.com/saifsust/DevOps.git
     targetRevision: main
     helm:
