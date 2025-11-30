@@ -15,3 +15,7 @@ spec:
       nodePort: {{ .Values.service.nodePort }}
       {{ end }}
       name: http
+    - protocol: TCP
+      port: {{ .Values.service.ssl.port }}
+      targetPort: {{ .Values.deployment.pod.targetPort }}
+      name: https

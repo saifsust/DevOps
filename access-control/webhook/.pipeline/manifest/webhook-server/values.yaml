@@ -5,9 +5,9 @@ service:
   name: webhook-server-svc
   type: ClusterIP
 #  nodePort: 31002
-#  ssl:
-#    port: 443
-#    nodePort: 31443
+  ssl:
+    port: 443
+ #   nodePort: 31443
 
 deployment:
   replicaCount: 1
