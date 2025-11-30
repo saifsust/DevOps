@@ -14,3 +14,11 @@ spec:
       {{- if .Values.service.nodePort }}
       nodePort: {{ .Values.service.nodePort }}
       {{ end }}
+      name: http
+#    - protocol: TCP
+#      port: {{ .Values.service.ssl.port }}
+#      targetPort: {{ .Values.deployment.pod.port }}
+#      {{- if .Values.service.ssl.nodePort }}
+#      nodePort: {{ .Values.service.ssl.nodePort }}
+#      {{ end }}
+#      name: https
