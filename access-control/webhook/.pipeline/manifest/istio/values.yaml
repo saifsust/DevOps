@@ -4,7 +4,8 @@ host: '*'
 service:
   name: webhook-server-svc
   domain: svc.cluster.local
-  port: 8081
+  port: 443
+  targetPort: 8081
 
 deployment:
   pod:

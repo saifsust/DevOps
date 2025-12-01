@@ -19,4 +19,4 @@ spec:
         - destination:
             host: {{ printf "%s.%s.%s" .Values.service.name .Values.appNamespace .Values.service.domain }}
             port:
-              number: {{ .Values.service.port }}
+              number: {{ .Values.service.targetPort }}
