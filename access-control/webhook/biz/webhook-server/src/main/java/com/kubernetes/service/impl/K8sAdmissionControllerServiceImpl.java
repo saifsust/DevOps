@@ -1,5 +1,6 @@
 package com.kubernetes.service.impl;
 
+import com.kubernetes.model.dto.enums.Kind;
 import com.kubernetes.model.dto.k8s.AdmissionControllerResponse;
 import com.kubernetes.model.dto.k8s.AdmissionReviewRequestDto;
 import com.kubernetes.model.dto.k8s.AdmissionReviewResponse;
@@ -22,7 +23,7 @@ public class K8sAdmissionControllerServiceImpl implements K8sAdmissionController
         log.info("k8s review request: {}", admissionReviewRequest);
         AdmissionControllerResponse response = buildResponse(admissionReviewRequest);
 
-        if (haveAllImagesValidRegistry(admissionReviewRequest)) {
+        if (isAllowedRegistry(admissionReviewRequest)) {
             return response.toBuilder()
                     .response(
                             response.getResponse().toBuilder()
@@ -33,6 +34,18 @@ public class K8sAdmissionControllerServiceImpl implements K8sAdmissionController
         }
 
         return response;
+    }
+
+    private boolean isAllowedRegistry(AdmissionReviewRequestDto reviewRequest) {
+        return isPodDeploymentRequest(reviewRequest) &&
+                haveAllImagesValidRegistry(new AdmissionReviewRequestDto());
+    }
+
+    private boolean isPodDeploymentRequest(AdmissionReviewRequestDto reviewRequest) {
+        return reviewRequest.getRequest()
+                .getKind()
+                .getKind()
+                .equals(Kind.Pod);
     }
 
     private AdmissionControllerResponse buildResponse(AdmissionReviewRequestDto admissionReviewRequest) {
