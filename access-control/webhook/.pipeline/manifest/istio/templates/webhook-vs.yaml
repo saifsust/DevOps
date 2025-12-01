@@ -18,4 +18,5 @@ spec:
       route:
         - destination:
             host: {{ printf "%s.%s.%s" .Values.service.name .Values.appNamespace .Values.service.domain }}
-            subset: {{ .Values.dr.subset }}
+            port:
+              number: {{ .Values.service.port }}

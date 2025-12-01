@@ -9,16 +9,16 @@ spec:
   servers:
     - port:
         number: {{ .Values.service.port }}
-        name: https
-        protocol: HTTPS
-      hosts:
-        - {{ .Values.host | quote }}
-      tls:
-        mode: SIMPLE
-        credentialName: webhook-credentials
-    - port:
-        number: {{ .Values.service.port }}
         name: http
         protocol: HTTP
       hosts:
         - {{ .Values.host | quote }}
+#    - port:
+#        number: {{ .Values.service.port }}
+#        name: https
+#        protocol: HTTPS
+#      hosts:
+#        - {{ .Values.host | quote }}
+#      tls:
+#        mode: SIMPLE
+#        credentialName: webhook-credentials

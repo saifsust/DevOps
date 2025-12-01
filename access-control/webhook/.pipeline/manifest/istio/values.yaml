@@ -18,4 +18,4 @@ vs:
   name: webhook-server-vs
 
 gateway:
-  name: webhook-server-gateway
+  name: webhook-server-api-gateway
