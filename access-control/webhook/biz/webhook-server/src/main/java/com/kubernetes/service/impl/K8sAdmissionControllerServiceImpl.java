@@ -38,7 +38,7 @@ public class K8sAdmissionControllerServiceImpl implements K8sAdmissionController
 
     private boolean isAllowedRegistry(AdmissionReviewRequestDto reviewRequest) {
         return isPodDeploymentRequest(reviewRequest) &&
-                haveAllImagesValidRegistry(new AdmissionReviewRequestDto());
+                haveAllImagesValidRegistry(reviewRequest);
     }
 
     private boolean isPodDeploymentRequest(AdmissionReviewRequestDto reviewRequest) {
