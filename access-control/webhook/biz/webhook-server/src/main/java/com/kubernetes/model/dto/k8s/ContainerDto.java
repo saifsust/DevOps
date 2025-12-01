@@ -6,4 +6,5 @@ import lombok.Data;
 public class ContainerDto {
     private String name;
     private String image;
+    private String imagePullPolicy;
 }

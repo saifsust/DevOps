@@ -5,5 +5,7 @@ public enum Kind {
     Deployment,
     StatefulSet,
     DaemonSet,
-    ConfigMap
+    ConfigMap,
+    Secret,
+    Service;
 }
