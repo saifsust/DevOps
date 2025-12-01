@@ -1,7 +1,8 @@
 package com.kubernetes.service.impl;
 
-import com.kubernetes.model.dto.K8sAdmissionReviewResponse;
-import com.kubernetes.model.dto.K8sAdmissionControllerResponse;
+import com.kubernetes.model.dto.k8s.AdmissionReviewRequestDto;
+import com.kubernetes.model.dto.k8s.AdmissionReviewResponse;
+import com.kubernetes.model.dto.k8s.AdmissionControllerResponse;
 import com.kubernetes.service.K8sAdmissionControllerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,14 +14,17 @@ import java.util.UUID;
 public class K8sAdmissionControllerServiceImpl implements K8sAdmissionControllerService {
 
     @Override
-    public K8sAdmissionControllerResponse processor(String admissionReviewRequest) {
-        log.info("k8s request received: {}", admissionReviewRequest);
-        return K8sAdmissionControllerResponse.builder()
+    public AdmissionControllerResponse processor(AdmissionReviewRequestDto admissionReviewRequest) {
+        log.info("k8s review request: {}", admissionReviewRequest.getRequest());
+        log.info("Pod name request: {}", admissionReviewRequest.getRequest().getObject().getMetadata().getName());
+        log.info("Pod name request: {}", admissionReviewRequest.getRequest().getObject().getSpec().getContainers());
+
+        return AdmissionControllerResponse.builder()
                 .apiVersion("admission.k8s.io/v1")
                 .kind("AdmissionReview")
                 .response(
-                        K8sAdmissionReviewResponse.builder()
-                                .uid(UUID.randomUUID().toString())
+                        AdmissionReviewResponse.builder()
+                                .uid(admissionReviewRequest.getRequest().getUid())
                                 .allowed(true)
                                 .build()
                 )

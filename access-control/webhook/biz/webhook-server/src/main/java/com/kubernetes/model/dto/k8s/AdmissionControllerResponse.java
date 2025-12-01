@@ -1,12 +1,12 @@
-package com.kubernetes.model.dto;
+package com.kubernetes.model.dto.k8s;
 
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder(toBuilder = true)
-public class K8sAdmissionControllerResponse {
+public class AdmissionControllerResponse {
     private String apiVersion;
     private String kind;
-    private K8sAdmissionReviewResponse response;
+    private AdmissionReviewResponse response;
 }

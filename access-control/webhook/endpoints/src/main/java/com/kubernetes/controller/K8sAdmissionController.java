@@ -1,6 +1,7 @@
 package com.kubernetes.controller;
 
-import com.kubernetes.model.dto.K8sAdmissionControllerResponse;
+import com.kubernetes.model.dto.k8s.AdmissionControllerResponse;
+import com.kubernetes.model.dto.k8s.AdmissionReviewRequestDto;
 import com.kubernetes.service.K8sAdmissionControllerService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.NonNull;
@@ -24,8 +25,8 @@ public class K8sAdmissionController {
     private final K8sAdmissionControllerService k8sAdmissionControllerService;
 
     @PostMapping(path = "validate")
-    public ResponseEntity<@NonNull K8sAdmissionControllerResponse> webhook(
-            @RequestBody String admissionReviewRequest,
+    public ResponseEntity<@NonNull AdmissionControllerResponse> webhook(
+            @RequestBody AdmissionReviewRequestDto admissionReviewRequest,
             HttpServletRequest request
     ) {
         log.info("Receive request ....");
