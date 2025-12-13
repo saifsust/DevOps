@@ -8,4 +8,5 @@ import lombok.Data;
 public class AdmissionReviewResponse {
     private boolean allowed;
     private String uid;
+    private ResponseStatus status;
 }

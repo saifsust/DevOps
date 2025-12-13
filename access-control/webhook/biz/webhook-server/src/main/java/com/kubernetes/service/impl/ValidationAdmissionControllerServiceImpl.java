@@ -1,10 +1,12 @@
 package com.kubernetes.service.impl;
 
+import com.kubernetes.constants.CommonConstants;
 import com.kubernetes.model.dto.enums.Kind;
 import com.kubernetes.model.dto.k8s.AdmissionControllerResponse;
 import com.kubernetes.model.dto.k8s.AdmissionReviewRequestDto;
 import com.kubernetes.model.dto.k8s.AdmissionReviewResponse;
 import com.kubernetes.model.dto.k8s.ContainerDto;
+import com.kubernetes.model.dto.k8s.ResponseStatus;
 import com.kubernetes.service.ValidationAdmissionController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import static com.kubernetes.constants.CommonConstants.ADMISSION_REVIEW_API_VERS
 import static com.kubernetes.constants.CommonConstants.ADMISSION_REVIEW_KIND;
 import static com.kubernetes.constants.CommonConstants.ALLOWED;
 import static com.kubernetes.constants.CommonConstants.ALLOWED_REGISTRIES;
+import static com.kubernetes.constants.CommonConstants.DISALLOWED;
 
 @Slf4j
 @Service
@@ -26,8 +29,17 @@ public class ValidationAdmissionControllerServiceImpl implements ValidationAdmis
         if (isAllowedRegistry(admissionReviewRequest)) {
             return response.toBuilder()
                     .response(
-                            response.getResponse().toBuilder()
+                            response.getResponse()
+                                    .toBuilder()
                                     .allowed(ALLOWED)
+                                    .status(
+                                            ResponseStatus.builder()
+                                                    .code(CommonConstants.OK)
+                                                    .message(
+                                                            String.format("Successfully deploy the resource %s", admissionReviewRequest.getRequest().getKind().getKind())
+                                                    )
+                                                    .build()
+                                    )
                                     .build()
                     )
                     .build();
@@ -55,6 +67,17 @@ public class ValidationAdmissionControllerServiceImpl implements ValidationAdmis
                 .response(
                         AdmissionReviewResponse.builder()
                                 .uid(admissionReviewRequest.getRequest().getUid())
+                                .allowed(DISALLOWED)
+                                .status(
+                                        ResponseStatus
+                                                .builder()
+                                                .code(CommonConstants.BAD_REQUEST)
+                                                .message(
+                                                        String.format("You can not deploy the resource %s", admissionReviewRequest.getRequest().getKind().getKind())
+                                                )
+                                                .build()
+
+                                )
                                 .build()
                 )
                 .build();

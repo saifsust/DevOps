@@ -4,7 +4,10 @@ import java.util.List;
 
 public class CommonConstants {
     public static final boolean ALLOWED = true;
-    private static final boolean DISALLOWED = false;
+    public static final boolean DISALLOWED = false;
+
+    public static final Integer OK = 200;
+    public static final Integer BAD_REQUEST = 400;
 
     public static final String ADMISSION_REVIEW_API_VERSION = "admission.k8s.io/v1";
     public static final String ADMISSION_REVIEW_KIND = "AdmissionReview";
