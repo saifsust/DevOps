@@ -14,6 +14,8 @@ spec:
         - uri:
             prefix: "/validate"
         - uri:
+            prefix: "/mutate"
+        - uri:
             prefix: "/health"
       route:
         - destination:
