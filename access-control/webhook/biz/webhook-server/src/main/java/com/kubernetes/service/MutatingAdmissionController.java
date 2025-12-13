@@ -1,7 +1,8 @@
 package com.kubernetes.service;
 
-import com.kubernetes.model.dto.k8s.AdmissionControllerResponse;
+import com.kubernetes.model.dto.k8s.response.AdmissionControllerResponse;
+import com.kubernetes.model.dto.k8s.request.AdmissionReviewRequestDto;
 
 public interface MutatingAdmissionController {
-    AdmissionControllerResponse mutate(String request);
+    AdmissionControllerResponse mutate(AdmissionReviewRequestDto admissionReviewRequest);
 }

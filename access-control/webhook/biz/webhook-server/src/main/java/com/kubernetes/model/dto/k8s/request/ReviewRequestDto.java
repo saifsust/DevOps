@@ -1,5 +1,6 @@
-package com.kubernetes.model.dto.k8s;
+package com.kubernetes.model.dto.k8s.request;
 
+import com.kubernetes.model.dto.k8s.kind.KindDto;
 import lombok.Data;
 
 @Data

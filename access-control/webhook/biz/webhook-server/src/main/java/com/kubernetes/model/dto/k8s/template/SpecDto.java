@@ -1,5 +1,6 @@
-package com.kubernetes.model.dto.k8s;
+package com.kubernetes.model.dto.k8s.template;
 
+import com.kubernetes.model.dto.k8s.container.ContainerDto;
 import lombok.Data;
 
 import java.util.List;

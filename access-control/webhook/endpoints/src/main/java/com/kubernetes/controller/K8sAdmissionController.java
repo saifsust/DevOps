@@ -1,7 +1,7 @@
 package com.kubernetes.controller;
 
-import com.kubernetes.model.dto.k8s.AdmissionControllerResponse;
-import com.kubernetes.model.dto.k8s.AdmissionReviewRequestDto;
+import com.kubernetes.model.dto.k8s.response.AdmissionControllerResponse;
+import com.kubernetes.model.dto.k8s.request.AdmissionReviewRequestDto;
 import com.kubernetes.service.MutatingAdmissionController;
 import com.kubernetes.service.ValidationAdmissionController;
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,12 +38,12 @@ public class K8sAdmissionController {
 
     @PostMapping(path = "mutate")
     public ResponseEntity<@NonNull AdmissionControllerResponse> mutateK8sObject(
-            @RequestBody String admissionReviewRequestDto,
+            @RequestBody AdmissionReviewRequestDto admissionReviewRequest,
             HttpServletRequest request
     ) {
         log.info("K8s Object is mutated");
         return ResponseEntity
-                .ok(mutatingAdmissionController.mutate(admissionReviewRequestDto));
+                .ok(mutatingAdmissionController.mutate(admissionReviewRequest));
     }
 
     @GetMapping(path = "health")

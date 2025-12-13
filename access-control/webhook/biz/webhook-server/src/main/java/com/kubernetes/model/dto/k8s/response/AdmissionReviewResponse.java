@@ -1,4 +1,4 @@
-package com.kubernetes.model.dto.k8s;
+package com.kubernetes.model.dto.k8s.response;
 
 import lombok.Builder;
 import lombok.Data;

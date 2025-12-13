@@ -1,7 +1,7 @@
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
-  name: webhook-server
+  name: webhook
 webhooks:
 - name: 192.168.0.30
   rules:
