@@ -5,17 +5,14 @@ import com.kubernetes.model.dto.enums.Kind;
 import com.kubernetes.model.dto.k8s.container.ContainerDto;
 import com.kubernetes.model.dto.k8s.request.AdmissionReviewRequestDto;
 import com.kubernetes.model.dto.k8s.response.AdmissionControllerResponse;
-import com.kubernetes.model.dto.k8s.response.AdmissionReviewResponse;
 import com.kubernetes.model.dto.k8s.response.ResponseStatus;
 import com.kubernetes.service.ValidationAdmissionController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import static com.kubernetes.constants.CommonConstants.ADMISSION_REVIEW_API_VERSION;
-import static com.kubernetes.constants.CommonConstants.ADMISSION_REVIEW_KIND;
 import static com.kubernetes.constants.CommonConstants.ALLOWED;
 import static com.kubernetes.constants.CommonConstants.ALLOWED_REGISTRIES;
-import static com.kubernetes.constants.CommonConstants.DISALLOWED;
+import static com.kubernetes.utils.CommonUtils.defaultResponse;
 
 @Slf4j
 @Service
@@ -24,7 +21,7 @@ public class ValidationAdmissionControllerServiceImpl implements ValidationAdmis
     @Override
     public AdmissionControllerResponse validate(AdmissionReviewRequestDto admissionReviewRequest) {
         log.info("k8s review request: {}", admissionReviewRequest);
-        AdmissionControllerResponse response = buildResponse(admissionReviewRequest);
+        AdmissionControllerResponse response = defaultResponse(admissionReviewRequest);
 
         if (isAllowedRegistry(admissionReviewRequest)) {
             return response.toBuilder()
@@ -58,29 +55,6 @@ public class ValidationAdmissionControllerServiceImpl implements ValidationAdmis
                 .getKind()
                 .getKind()
                 .equals(Kind.Pod);
-    }
-
-    private AdmissionControllerResponse buildResponse(AdmissionReviewRequestDto admissionReviewRequest) {
-        return AdmissionControllerResponse.builder()
-                .apiVersion(ADMISSION_REVIEW_API_VERSION)
-                .kind(ADMISSION_REVIEW_KIND)
-                .response(
-                        AdmissionReviewResponse.builder()
-                                .uid(admissionReviewRequest.getRequest().getUid())
-                                .allowed(DISALLOWED)
-                                .status(
-                                        ResponseStatus
-                                                .builder()
-                                                .code(CommonConstants.BAD_REQUEST)
-                                                .message(
-                                                        String.format("You can not deploy the resource %s", admissionReviewRequest.getRequest().getKind().getKind())
-                                                )
-                                                .build()
-
-                                )
-                                .build()
-                )
-                .build();
     }
 
     private boolean haveAllImagesValidRegistry(AdmissionReviewRequestDto reviewRequest) {
