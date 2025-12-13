@@ -1,4 +1,5 @@
 #!/bin/bash
+kubectl delete ValidatingWebhookConfiguration pod-creation-validating-admission-conf
 kubectl apply -f - <<EOF
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
