@@ -3,7 +3,7 @@ package com.kubernetes.service;
 import com.kubernetes.model.dto.k8s.AdmissionControllerResponse;
 import com.kubernetes.model.dto.k8s.AdmissionReviewRequestDto;
 
-public interface K8sAdmissionControllerService {
+public interface ValidationAdmissionController {
 
-    AdmissionControllerResponse processor(AdmissionReviewRequestDto admissionReviewRequest);
+    AdmissionControllerResponse validate(AdmissionReviewRequestDto admissionReviewRequest);
 }

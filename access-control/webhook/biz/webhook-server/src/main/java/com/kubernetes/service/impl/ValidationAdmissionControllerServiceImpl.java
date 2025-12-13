@@ -5,7 +5,7 @@ import com.kubernetes.model.dto.k8s.AdmissionControllerResponse;
 import com.kubernetes.model.dto.k8s.AdmissionReviewRequestDto;
 import com.kubernetes.model.dto.k8s.AdmissionReviewResponse;
 import com.kubernetes.model.dto.k8s.ContainerDto;
-import com.kubernetes.service.K8sAdmissionControllerService;
+import com.kubernetes.service.ValidationAdmissionController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +16,10 @@ import static com.kubernetes.constants.CommonConstants.ALLOWED_REGISTRIES;
 
 @Slf4j
 @Service
-public class K8sAdmissionControllerServiceImpl implements K8sAdmissionControllerService {
+public class ValidationAdmissionControllerServiceImpl implements ValidationAdmissionController {
 
     @Override
-    public AdmissionControllerResponse processor(AdmissionReviewRequestDto admissionReviewRequest) {
+    public AdmissionControllerResponse validate(AdmissionReviewRequestDto admissionReviewRequest) {
         log.info("k8s review request: {}", admissionReviewRequest);
         AdmissionControllerResponse response = buildResponse(admissionReviewRequest);
 

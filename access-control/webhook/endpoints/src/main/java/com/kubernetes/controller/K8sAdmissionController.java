@@ -2,7 +2,7 @@ package com.kubernetes.controller;
 
 import com.kubernetes.model.dto.k8s.AdmissionControllerResponse;
 import com.kubernetes.model.dto.k8s.AdmissionReviewRequestDto;
-import com.kubernetes.service.K8sAdmissionControllerService;
+import com.kubernetes.service.ValidationAdmissionController;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -22,16 +22,16 @@ import static com.kubernetes.controller.K8sAdmissionController.API_PATH;
 @RequiredArgsConstructor
 public class K8sAdmissionController {
     static final String API_PATH = "/";
-    private final K8sAdmissionControllerService k8sAdmissionControllerService;
+    private final ValidationAdmissionController validationAdmissionController;
 
     @PostMapping(path = "validate")
-    public ResponseEntity<@NonNull AdmissionControllerResponse> webhook(
+    public ResponseEntity<@NonNull AdmissionControllerResponse> validateAdmissionReview(
             @RequestBody AdmissionReviewRequestDto admissionReviewRequest,
             HttpServletRequest request
     ) {
         log.info("Receive request ....");
         return ResponseEntity
-                .ok(k8sAdmissionControllerService.processor(admissionReviewRequest));
+                .ok(validationAdmissionController.validate(admissionReviewRequest));
     }
 
     @GetMapping(path = "health")
