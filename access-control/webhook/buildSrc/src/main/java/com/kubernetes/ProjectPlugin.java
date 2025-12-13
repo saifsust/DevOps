@@ -36,10 +36,10 @@ public final class ProjectPlugin implements Plugin<@NotNull Project> {
 
     @Override
     public void apply(Project project) {
-        loadPrivateDependencies(project);
-        loadRepositories(project);
+        configurePrivateDependencies(project);
+        configureRepositories(project);
         loadPlugins(project);
-        loadJava(project);
+        configureJava(project);
         enabledBuildingJarTask(project);
         usedJUnitTestPlatform(project);
     }
@@ -77,7 +77,7 @@ public final class ProjectPlugin implements Plugin<@NotNull Project> {
         jar.setEnabled(ENABLED_BUILDING_JAR_TASK);
     }
 
-    private void loadJava(Project project) {
+    private void configureJava(Project project) {
         project.getExtensions().getByType(JavaToolchainService.class)
                 .launcherFor(
                         this::applyJava
@@ -95,26 +95,26 @@ public final class ProjectPlugin implements Plugin<@NotNull Project> {
         project.getPluginManager().apply(GroovyPlugin.class);
     }
 
-    private void loadRepositories(Project project) {
+    private void configureRepositories(Project project) {
         project.getRepositories().mavenCentral();
         project.getRepositories().mavenLocal();
     }
 
-    private void loadPrivateDependencies(Project project) {
+    private void configurePrivateDependencies(Project project) {
         DependencyHandler handler = project.getDependencies();
 
-        addRepository(handler, IMPLEMENTATION_CONFIGURATION_NAME, LOMBOK.getRepo());
-        addRepository(handler, ANNOTATION_PROCESSOR_CONFIGURATION_NAME, LOMBOK.getRepo());
-        addRepository(handler, TEST_IMPLEMENTATION_CONFIGURATION_NAME, SPOCK_CORE.getRepo());
-        addRepository(handler, TEST_IMPLEMENTATION_CONFIGURATION_NAME, SPOCK_SPRING.getRepo());
-        addRepository(handler, TEST_RUNTIME_ONLY_CONFIGURATION_NAME, JUPITER_API.getRepo());
-        addRepository(handler, TEST_RUNTIME_ONLY_CONFIGURATION_NAME, JUPITER_ENGINE.getRepo());
-        addRepository(handler, TEST_RUNTIME_ONLY_CONFIGURATION_NAME, JUPITER_PLATFORM_COMMONS.getRepo());
-        addRepository(handler, TEST_RUNTIME_ONLY_CONFIGURATION_NAME, JUPITER_PLATFORM_ENGINE.getRepo());
-        addRepository(handler, TEST_RUNTIME_ONLY_CONFIGURATION_NAME, JUPITER_PLATFORM_LAUNCHER.getRepo());
+        addDependency(handler, IMPLEMENTATION_CONFIGURATION_NAME, LOMBOK.getRepo());
+        addDependency(handler, ANNOTATION_PROCESSOR_CONFIGURATION_NAME, LOMBOK.getRepo());
+        addDependency(handler, TEST_IMPLEMENTATION_CONFIGURATION_NAME, SPOCK_CORE.getRepo());
+        addDependency(handler, TEST_IMPLEMENTATION_CONFIGURATION_NAME, SPOCK_SPRING.getRepo());
+        addDependency(handler, TEST_RUNTIME_ONLY_CONFIGURATION_NAME, JUPITER_API.getRepo());
+        addDependency(handler, TEST_RUNTIME_ONLY_CONFIGURATION_NAME, JUPITER_ENGINE.getRepo());
+        addDependency(handler, TEST_RUNTIME_ONLY_CONFIGURATION_NAME, JUPITER_PLATFORM_COMMONS.getRepo());
+        addDependency(handler, TEST_RUNTIME_ONLY_CONFIGURATION_NAME, JUPITER_PLATFORM_ENGINE.getRepo());
+        addDependency(handler, TEST_RUNTIME_ONLY_CONFIGURATION_NAME, JUPITER_PLATFORM_LAUNCHER.getRepo());
     }
 
-    private void addRepository(
+    private void addDependency(
             DependencyHandler handler,
             String configName,
             String repository
