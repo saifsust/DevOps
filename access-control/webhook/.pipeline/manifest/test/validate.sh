@@ -1,1 +1,1 @@
-curl -v -H "Content-Type: application/json"  --cacert ca.crt https://192.168.0.30:30733/validate --data @validate.json
+curl -v -H "Content-Type: application/json"  --cacert ../certs/ca.crt https://$(cat ../certs/host):$(cat ../certs/port)/validate --data @validate.json

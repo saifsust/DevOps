@@ -1,22 +1,22 @@
-appNamespace: graphql-system
+appNamespace: webhook-system
 host: '*'
 
 service:
-  name: webhook-server-svc
+  name: webhook-controller-svc
   domain: svc.cluster.local
   port: 443
   targetPort: 8081
 
 deployment:
   pod:
-    label: webhook-server-app
+    label: webhook-controller-app
 
 dr:
-  name: webhook-server-dr
-  subset: webhook-server-subset
+  name: webhook-controller-dr
+  subset: webhook-controller-subset
 
 vs:
-  name: webhook-server-vs
+  name: webhook-controller-vs
 
 gateway:
-  name: webhook-server-api-gateway
+  name: webhook-controller-api-gateway

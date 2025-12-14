@@ -6,7 +6,7 @@ kind: MutatingWebhookConfiguration
 metadata:
   name: pod-creation-mutation-admission-conf
 webhooks:
-- name: 192.168.0.30
+- name: $(cat host)
   rules:
   - apiGroups:   [""]
     apiVersions: ["v1"]
@@ -14,7 +14,7 @@ webhooks:
     resources:   ["pods"]
     scope:       "Namespaced"
   clientConfig:
-     url: "https://192.168.0.30:30733/mutate"
+     url: "https://$(cat host):$(cat port)/mutate"
      caBundle: $(cat ca.crt | base64 -w 0)
   admissionReviewVersions: ["v1"]
   sideEffects: None
