@@ -22,6 +22,7 @@ import static com.kubernetes.constants.CommonConstants.METADATA_LABELS;
 import static com.kubernetes.constants.CommonConstants.OK;
 import static com.kubernetes.constants.CommonConstants.REQUIRED_LABEL;
 import static com.kubernetes.utils.CommonUtils.defaultResponse;
+import static com.kubernetes.utils.CommonUtils.toForwardSlash;
 
 @Slf4j
 @Service
@@ -137,7 +138,7 @@ public class MutatingAdmissionControllerServiceImpl implements MutatingAdmission
                     .path(METADATA_LABELS)
                     .value(
                             Map.of(
-                                    REQUIRED_LABEL,
+                                    toForwardSlash(REQUIRED_LABEL),
                                     admissionReviewRequest.getNamespace()
                             )
                     )
