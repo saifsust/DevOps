@@ -186,9 +186,6 @@ public class MutatingAdmissionControllerServiceImpl implements MutatingAdmission
 
     private boolean hasNoRequiredLabels(AdmissionReviewRequestDto admissionReviewRequest) {
         return !admissionReviewRequest
-                .getRequest()
-                .getObject()
-                .getMetadata()
                 .getLabels()
                 .containsKey(REQUIRED_LABEL);
     }

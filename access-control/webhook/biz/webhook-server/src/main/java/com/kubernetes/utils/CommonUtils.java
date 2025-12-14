@@ -9,10 +9,13 @@ import lombok.experimental.UtilityClass;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Objects;
 
 import static com.kubernetes.constants.CommonConstants.ADMISSION_REVIEW_API_VERSION;
 import static com.kubernetes.constants.CommonConstants.ADMISSION_REVIEW_KIND;
 import static com.kubernetes.constants.CommonConstants.DISALLOWED;
+import static com.kubernetes.constants.CommonConstants.PATCH_DECODED_FORWARD_SLASH;
+import static com.kubernetes.constants.CommonConstants.PATCH_ENCODED_FORWARD_SLASH;
 
 @UtilityClass
 public class CommonUtils {
@@ -47,5 +50,10 @@ public class CommonUtils {
                 ),
                 StandardCharsets.UTF_8
         );
+    }
+
+    public static String toForwardSlash(String label) {
+        return Objects.requireNonNull(label)
+                .replaceAll(PATCH_ENCODED_FORWARD_SLASH, PATCH_DECODED_FORWARD_SLASH);
     }
 }

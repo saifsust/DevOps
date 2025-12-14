@@ -10,5 +10,5 @@ public class Metadata {
     private String uid;
     private String name;
     private String namespace;
-    private Map<String, String> labels = new HashMap<>();
+    private Map<String, Object> labels = new HashMap<>();
 }

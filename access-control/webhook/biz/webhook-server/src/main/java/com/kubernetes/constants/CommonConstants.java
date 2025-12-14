@@ -9,6 +9,8 @@ public class CommonConstants {
     public static final String REQUIRED_LABEL = "k8s-webhook.io~1ns-name";
     public static final String METADATA_LABELS = "/metadata/labels";
     public static final String DEFAULT_NAMESPACE = "default";
+    public static final String PATCH_ENCODED_FORWARD_SLASH = "~1";
+    public static final String PATCH_DECODED_FORWARD_SLASH = "/";
 
     public static final Integer OK = 200;
     public static final Integer BAD_REQUEST = 400;

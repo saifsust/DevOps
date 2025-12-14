@@ -5,6 +5,7 @@ import com.kubernetes.model.dto.k8s.kind.KindDto;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import static com.kubernetes.constants.CommonConstants.DEFAULT_NAMESPACE;
@@ -25,6 +26,13 @@ public class AdmissionReviewRequestDto {
     public KindDto getKindDto() {
         return Objects.requireNonNull(this.request)
                 .getKind();
+    }
+
+    public Map<String, Object> getLabels() {
+        return Objects.requireNonNull(this.request)
+                .getObject()
+                .getMetadata()
+                .getLabels();
     }
 
     public List<ContainerDto> getContainers() {
