@@ -15,8 +15,10 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.kubernetes.constants.CommonConstants.ALLOWED;
+import static com.kubernetes.constants.CommonConstants.METADATA_LABELS;
 import static com.kubernetes.constants.CommonConstants.OK;
 import static com.kubernetes.constants.CommonConstants.REQUIRED_LABEL;
 import static com.kubernetes.utils.CommonUtils.defaultResponse;
@@ -129,11 +131,23 @@ public class MutatingAdmissionControllerServiceImpl implements MutatingAdmission
     }
 
     private PatchRequest.Request getMutatedLabelsRequest(AdmissionReviewRequestDto admissionReviewRequest) {
+        if (CollectionUtils.isEmpty(admissionReviewRequest.getRequest().getObject().getMetadata().getLabels())) {
+            return PatchRequest.Request.builder()
+                    .op(PatchOperation.ADD)
+                    .path(METADATA_LABELS)
+                    .value(
+                            Map.of(
+                                    REQUIRED_LABEL,
+                                    admissionReviewRequest.getNamespace()
+                            )
+                    )
+                    .build();
+        }
         return PatchRequest.Request.builder()
                 .op(PatchOperation.ADD)
                 .path(String.format("/metadata/labels/%s", REQUIRED_LABEL))
                 .value(
-                        String.format("%s", admissionReviewRequest.getRequest().getObject().getMetadata().getNamespace())
+                        String.format("%s", admissionReviewRequest.getNamespace())
                 )
                 .build();
     }
@@ -141,7 +155,7 @@ public class MutatingAdmissionControllerServiceImpl implements MutatingAdmission
     private List<PatchRequest.Request> getMutatedImagePullPolicyRequests(AdmissionReviewRequestDto admissionReviewRequest) {
         List<PatchRequest.Request> requests = new ArrayList<>();
 
-        List<ContainerDto> containers = getContainers(admissionReviewRequest);
+        List<ContainerDto> containers = admissionReviewRequest.getContainers();
         for (int containerIdx = 0; containerIdx < containers.size(); containerIdx++) {
             if (nonAlwaysImagePullPolicy(containers.get(containerIdx))) {
                 requests.add(
@@ -157,7 +171,8 @@ public class MutatingAdmissionControllerServiceImpl implements MutatingAdmission
     }
 
     private boolean hasNoAlwaysImagePullPolicy(AdmissionReviewRequestDto admissionReviewRequest) {
-        return getContainers(admissionReviewRequest)
+        return admissionReviewRequest
+                .getContainers()
                 .stream()
                 .allMatch(this::nonAlwaysImagePullPolicy);
     }
@@ -167,14 +182,6 @@ public class MutatingAdmissionControllerServiceImpl implements MutatingAdmission
                 .equals(
                         ImagePullPolicy.Always
                 );
-    }
-
-    private List<ContainerDto> getContainers(AdmissionReviewRequestDto admissionReviewRequest) {
-        return admissionReviewRequest
-                .getRequest()
-                .getObject()
-                .getSpec()
-                .getContainers();
     }
 
     private boolean hasNoRequiredLabels(AdmissionReviewRequestDto admissionReviewRequest) {

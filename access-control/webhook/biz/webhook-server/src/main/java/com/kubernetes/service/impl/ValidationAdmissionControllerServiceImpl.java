@@ -51,8 +51,8 @@ public class ValidationAdmissionControllerServiceImpl implements ValidationAdmis
     }
 
     private boolean isPodDeploymentRequest(AdmissionReviewRequestDto reviewRequest) {
-        return reviewRequest.getRequest()
-                .getKind()
+        return reviewRequest
+                .getKindDto()
                 .getKind()
                 .equals(Kind.Pod);
     }
