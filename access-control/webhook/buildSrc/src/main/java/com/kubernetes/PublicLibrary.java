@@ -5,7 +5,8 @@ import org.codehaus.groovy.runtime.typehandling.ShortTypeHandling;
 
 public enum PublicLibrary {
     SPRING_WEB_MVC("org.springframework.boot:spring-boot-starter-webmvc", ""),
-    SPRING_WEB_MVC_TEST("org.springframework.boot:spring-boot-starter-webmvc-test", "");
+    SPRING_WEB_MVC_TEST("org.springframework.boot:spring-boot-starter-webmvc-test", ""),
+    SPRING_OPEN_FEIGN("org.springframework.cloud:spring-cloud-starter-openfeign", "");
 
     private final String artifact;
     private final String version;

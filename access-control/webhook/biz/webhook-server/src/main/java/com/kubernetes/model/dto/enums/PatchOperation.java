@@ -1,4 +1,4 @@
-package com.kubernetes.model.dto.k8s.request;
+package com.kubernetes.model.dto.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,5 +1,6 @@
 package com.kubernetes.model.dto.k8s.request;
 
+import com.kubernetes.model.dto.enums.PatchOperation;
 import lombok.Builder;
 import lombok.Getter;
 import tools.jackson.databind.ObjectMapper;

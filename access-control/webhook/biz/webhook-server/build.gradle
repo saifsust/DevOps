@@ -13,5 +13,6 @@ version = '0.0.1-SNAPSHOT'
 
 dependencies {
     implementation(PublicLibrary.SPRING_WEB_MVC.getRepo())
+
     testImplementation(PublicLibrary.SPRING_WEB_MVC_TEST.getRepo())
 }
