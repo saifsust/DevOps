@@ -25,8 +25,8 @@ jenkinsHomeVolume:
   pvcName: jenkins-home-pvc
   storageClassName: jenkins-resources-storage-class
   accessMode: ReadWriteMany
-  capacity: 500Mi
-  hostPath: /var/jenkins/home
+  capacity: 1Gi
+  hostPath: /var/jenkins_home
 
 dockerRegistrySecret:
   name: docker-registry-configurations
