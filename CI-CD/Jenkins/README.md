@@ -1,3 +1,27 @@
+## Helm Deployment
+- Generate remote docker server's secret using it's credentials
+- Generate k8s cluster's secrets using it's credentials 
+- there have already been two **bash scripts**. They can be modified or retain directories same for scripts.
+- helm installation command
+```shell
+helm install jenkins -f values.yaml
+```
+or 
+```shell
+helm install jenkins .
+```
+- helm uninstallation command
+```shell
+helm uninstall jenkins
+```
+- helm debug commands
+```shell
+helm install jenkins --debug .
+```
+or 
+```shell
+helm install jenkins --dry-run=server -f values.yaml
+```
 ## Docker Credential Configuration
 - Generate self-signed certificates for Docker-server, Client and CA certificates
 - Openssl scripts are given below
