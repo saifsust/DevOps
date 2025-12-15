@@ -1,3 +1,4 @@
+nodeTaints: node-role.kubernetes.io/control-plane
 nodeName: controlplane
 appName: jenkins-controller
 appNamespace: jenkins-system

@@ -63,7 +63,7 @@ spec:
                     - key: {{ .Values.dockerCertSecret.dockerCaCert }}
                       path:  ca.pem
       tolerations:
-        - key: node-role.kubernetes.io/{{ .Values.nodeName }}
+        - key: {{ .Values.nodeTaint }}
           operator: Exists
           effect: NoSchedule
       affinity:
@@ -110,7 +110,7 @@ spec:
               value: "1"
             - name: DOCKER_HOST
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: {{ .Values.dockerRegistrySecret.name }}
                   key: host
             # End remote docker credentials and host configuration
