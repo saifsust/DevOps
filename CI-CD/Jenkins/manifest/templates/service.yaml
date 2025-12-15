@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.name }}
+  namespace: {{ .Values.appNamespace }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: {{ .Values.pod.label }}
+    version: {{ .Values.pod.version | quote }}
+  ports:
+    - port: {{ .Values.pod.operationalPort }}
+      name: operational
+      targetPort: {{ .Values.pod.operationalPort }}
+      protocol: TCP
+      {{ if .Values.service.operationalNodePort }}
+      nodePort: {{ .Values.service.operationalNodePort }}
+      {{ end }}
+    - port: {{ .Values.pod.highAvailableManagementPort }}
+      name: management
+      targetPort: {{ .Values.pod.highAvailableManagementPort }}
+      protocol: TCP
+      {{ if .Values.service.highAvailableManagementNodePort }}
+      nodePort: {{ .Values.service.highAvailableManagementNodePort }}
+      {{ end }}

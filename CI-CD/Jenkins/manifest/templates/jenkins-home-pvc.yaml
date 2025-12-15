@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ name: {{ .Values.jenkinsHomeVolume.pvcName }}
+ namespace: {{ .Values.appNamespace }}
+spec:
+ accessModes:
+ - {{ .Values.jenkinsHomeVolume.accessMode }}
+ resources:
+    requests:
+      storage: {{ .Values.jenkinsHomeVolume.capacity }}
+ volumeName: {{ .Values.jenkinsHomeVolume.pvName }}
+ storageClassName: {{ .Values.jenkinsHomeVolume.storageClassName }}

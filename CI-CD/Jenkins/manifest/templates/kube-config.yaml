@@ -1,0 +1,26 @@
+apiVersion: v1
+data:
+  config: |
+    apiVersion: v1
+    clusters:
+    - cluster:
+        certificate-authority: /home/.kube/ca.crt
+        server: https://{{ printf "%s:%s" .Values.host .Values.kubeConfigMap.port }}
+      name: kubernetes
+    contexts:
+    - context:
+        cluster: kubernetes
+        user: jenkins-user
+      name: jenkins-user@jkubernetes
+    current-context: jenkins-user@kubernetes
+    kind: Config
+    preferences: {}
+    users:
+    - name: jenkins-user
+      user:
+        client-certificate: /home/.kube/{{ .Values.k8sAdminCredentialsSecret.k8sAdminCert }}
+        client-key: /home/.kube/{{ .Values.k8sAdminCredentialsSecret.k8sAdminKey }}
+kind: ConfigMap
+metadata:
+  name: {{ .Values.kubeConfigMap.name }}
+  namespace: {{ .Values.appNamespace }}

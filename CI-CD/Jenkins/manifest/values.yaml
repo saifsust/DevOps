@@ -1,0 +1,50 @@
+nodeName: controlplane
+appName: jenkins-controller
+appNamespace: jenkins-system
+replicaCount: 1
+host: "192.168.0.30"
+
+# Pod configuration
+pod:
+  label: jenkins-controller-app
+  version: "21"
+  operationalPort: 8080
+  highAvailableManagementPort: 50000
+
+# Service configuration
+service:
+  name: jenkins-controller-svc
+  type: NodePort
+  operationalNodePort: 30080
+  highAvailableManagementNodePort: 30085
+
+# Jenkins build resources storage
+jenkinsHomeVolume:
+  pvName: jenkins-home-pv
+  pvcName: jenkins-home-pvc
+  storageClassName: jenkins-resources-storage-class
+  accessMode: ReadWriteMany
+  capacity: 500Mi
+  hostPath: /var/jenkins/home
+
+dockerRegistrySecret:
+  name: docker-registry-configurations
+  email: c2FpZnVsLnN1c3QuY3NlQGdtYWlsLmNvbQ==
+  username: c2FpZnN1c3Q=
+  password: U0BpRmxpVDBO
+  port: "2376"
+
+kubeConfigMap:
+  name: k8s-cluster-configuration
+  port: "6443"
+
+k8sAdminCredentialsSecret:
+  name: k8s-admin-credentials-secret
+  k8sAdminCert: admin.crt
+  k8sAdminKey: admin.key
+
+dockerCertSecret:
+  name: docker-remote-server-credential-secret
+  dockerServerCert: docker-server-cert
+  dockerServerKey: docker-server-key
+  dockerCaCert: docker-ca-cert

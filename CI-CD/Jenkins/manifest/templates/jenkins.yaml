@@ -1,0 +1,117 @@
+# Jenkins Deployment used for CI/CD's operations
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.appNamespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 10%
+  selector:
+    matchLabels:
+      app: {{ .Values.pod.label }}
+      version: {{ .Values.pod.version | quote }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.pod.label }}
+        version: {{ .Values.pod.version | quote }}
+    spec:
+      volumes:
+        - name: jenkins-home
+          persistentVolumeClaim:
+            claimName: {{ .Values.jenkinsHomeVolume.pvcName }}
+        - name: certs-configuration
+          projected:
+            sources:
+              # Secret contains k8s cluster's admin user credentials
+              - secret:
+                  name: {{ .Values.k8sAdminCredentialsSecret.name }}
+                  items:
+                    - key: {{ .Values.k8sAdminCredentialsSecret.k8sAdminCert }}
+                      path: {{ .Values.k8sAdminCredentialsSecret.k8sAdminCert }}
+                    - key: {{ .Values.k8sAdminCredentialsSecret.k8sAdminKey }}
+                      path: {{ .Values.k8sAdminCredentialsSecret.k8sAdminKey }}
+              # ConfigMap is a default k8s cluster root ca certificate.
+              # used to communicate within k8s cluster
+              - configMap:
+                 name: kube-root-ca.crt
+                 items:
+                   - key: ca.crt
+                     path: ca.crt
+              # ConfigMap used to communicate with kubernetes cluster.
+              # Jenkins will deploy k8s resources within this cluster
+              - configMap:
+                  name: {{ .Values.kubeConfigMap.name }}
+                  items:
+                    - key: config
+                      path: config
+             # Secret contains docker credentials and used to communicate with a remote docker server.
+             # docker used to build image and push within private or public registry
+             # credential files must not need to change
+              - secret:
+                  name: {{ .Values.dockerCertSecret.name }}
+                  items:
+                    - key: {{ .Values.dockerCertSecret.dockerServerCert }}
+                      path: cert.pem
+                    - key: {{ .Values.dockerCertSecret.dockerServerKey }}
+                      path: key.pem
+                    - key: {{ .Values.dockerCertSecret.dockerCaCert }}
+                      path:  ca.pem
+      tolerations:
+        - key: node-role.kubernetes.io/{{ .Values.nodeName }}
+          operator: Exists
+          effect: NoSchedule
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - controlplane
+      containers:
+        - name: app
+          image: saifsust/jenkins:{{ .Values.pod.version }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.pod.operationalPort }}
+              name: operational
+            - containerPort: {{ .Values.pod.highAvailableManagementPort }}
+              name: management
+          volumeMounts:
+            - name: certs-configuration
+              mountPath: /home/.docker
+            - name: jenkins-home
+              mountPath:  /var/jenkins_home
+          env:
+            # Remote docker registry credentials and it's host address or domain name.
+            - name: DOCKER_REGISTRY_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dockerRegistrySecret.name }}
+                  key: email
+            - name: DOCKER_REGISTRY_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dockerRegistrySecret.name  }}
+                  key: username
+            - name: DOCKER_REGISTRY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dockerRegistrySecret.name }}
+                  key: password
+            - name: DOCKER_TLS_VERIFY
+              value: "1"
+            - name: DOCKER_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.dockerRegistrySecret.name }}
+                  key: host
+            # End remote docker credentials and host configuration
+

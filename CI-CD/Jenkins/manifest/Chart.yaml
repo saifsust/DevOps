@@ -1,0 +1,12 @@
+apiVersion: v2
+name: jenkins controller app
+version: 0.0.1
+description: jenkins configuration may be used for jenkins CI/CD development.
+home: https://github.com/saifsust/DevOps/tree/main
+sources:
+  - https://github.com/saifsust/DevOps.git
+maintainers:
+  - name: SAIFUL ISLAM
+    email: saiful.sust.cse@gmail.com
+    url: https://www.linkedin.com/in/saiful-islam-340b51133
+appVersion: 0.0.1
