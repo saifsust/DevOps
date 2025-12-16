@@ -29,7 +29,7 @@ spec:
           command:
             - sh
             - -c
-            - while true; do curl http://{{printf "%s.%s.svc.cluster.local:80" .Values.backend.serviceName .Values.backend.appNamespace }} && sleep 5; done
+            - while true; do echo $(date); curl http://{{printf "%s.%s.svc.cluster.local:80" .Values.backend.serviceName .Values.backend.appNamespace }} && sleep 5; done
           volumeMounts:
             - name: html
               mountPath: /usr/share/nginx/html
