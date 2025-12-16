@@ -1,3 +1,5 @@
+# FOR YOUR INFORMATION:
+### Istio APPs are actually copied from ISTIO example's APPs but some modifications were done for learning purpose nothings else
 # Istio APP deployed 
 
 ## Detail APP
