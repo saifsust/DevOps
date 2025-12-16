@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.name }}
+  namespace: {{ .Values.appNamespace }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: {{ .Values.pod.label }}
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+      {{ if and (eq .Values.service.type "NodePort") .Values.service.httpNodePort }}
+      nodePort: {{ .Values.service.httpNodePort }}
+      {{ end }}
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 80
+      {{ if and (eq .Values.service.type  "NodePort") .Values.service.httpsNodePort }}
+      nodePort: {{ .Values.service.httpsNodePort }}
+      {{ end }}

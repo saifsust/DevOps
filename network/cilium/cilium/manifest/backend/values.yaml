@@ -1,0 +1,15 @@
+appName: backend-app
+appNamespace: applications
+replicaCounts: 2
+
+pod:
+  label: backend-cilium-app
+
+configMap:
+  name: backend-cilium-configmap
+
+service:
+  name: backend-cilium-svc
+  type: NodePort
+  httpNodePort: 31080
+  httpsNodePort: 31443
