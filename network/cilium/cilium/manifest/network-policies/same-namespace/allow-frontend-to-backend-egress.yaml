@@ -1,0 +1,13 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-frontend-to-backend-egress
+  namespace: applications
+spec:
+  endpointSelector: 
+    matchLabels:
+     app: frontend-cilium-app
+  egress:
+  - toEndpoints:
+    - matchLabels:
+         app: backend-cilium-app
