@@ -1,6 +1,6 @@
 appName: backend-app
 appNamespace: applications
-replicaCounts: 2
+replicaCounts: 1
 
 pod:
   label: backend-cilium-app

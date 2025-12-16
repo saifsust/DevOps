@@ -1,6 +1,6 @@
 appName: frontend-app
 appNamespace: applications
-replicaCounts: 2
+replicaCounts: 1
 
 pod:
   label: frontend-cilium-app
@@ -13,3 +13,7 @@ service:
   type: NodePort
   httpNodePort: 30080
   httpsNodePort: 30443
+
+backend:
+  appNamespace: applications
+  serviceName: backend-cilium-svc
