@@ -1,0 +1,19 @@
+appName: frontend-app
+appNamespace: applications
+replicaCounts: 1
+
+pod:
+  label: frontend-cilium-app
+
+configMap:
+  name: frontend-cilium-configmap
+
+service:
+  name: frontend-cilium-svc
+  type: NodePort
+  httpNodePort: 30080
+  httpsNodePort: 30443
+
+backend:
+  appNamespace: cassandra
+  serviceName: backend-cilium-svc
