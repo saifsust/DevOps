@@ -4,6 +4,8 @@ import java.util.List;
 
 public class CommonConstants {
     public static final boolean ALLOWED = true;
+    public static final boolean DENIED = true;
+    public static final boolean NON_DENIED = false;
     public static final boolean DISALLOWED = false;
 
     public static final String REQUIRED_LABEL = "k8s-webhook.io~1ns-name";
