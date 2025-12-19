@@ -1,0 +1,10 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+ name: default-deny
+ namespace: applications
+spec:
+  endpointSelector: {}
+  ingressDeny:
+  - fromCIDR:
+    - 0.0.0.0/0
