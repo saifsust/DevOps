@@ -9,7 +9,7 @@ public class ResourceAttributes {
     private String namespace;
     private String verb;
     private String group;
-    private String resources;
+    private String resource;
     private LabelSelector fieldSelector;
     private LabelSelector labelSelector;
     private String uid;

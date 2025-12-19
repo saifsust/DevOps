@@ -34,7 +34,7 @@ public class AuthorizationReviewServiceImpl implements AuthorizationReviewer {
                                     String.format(
                                             "User has no permission to %s resource %s",
                                             authorizationRequest.getSpec().getResourceAttributes().getVerb(),
-                                            authorizationRequest.getSpec().getResourceAttributes().getResources()
+                                            authorizationRequest.getSpec().getResourceAttributes().getResource()
                                     )
                             )
                             .allowed(DISALLOWED)
