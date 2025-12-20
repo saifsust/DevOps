@@ -1,0 +1,1 @@
+curl -v -H "Content-Type: application/json"  --cacert  ../certs/ca.crt https://$(cat ../certs/host):$(cat ../certs/port)/authorize --data @authentication.json
