@@ -1,0 +1,38 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: requiredlabel
+spec:
+  crd:
+    spec:
+      names:
+        kind: RequiredLabel
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            labels:
+              type: array
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                  value:
+                    type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package requiredlabel
+        
+        violation[{"msg": msg}]{
+          provided := input.review.object.metadata.labels
+          required := input.parameters.labels
+          not is_matched(provided, required)
+          msg := sprintf("You must provide label %v", [required])
+        }
+        
+        is_matched(provided, required){
+          some idx;
+          provided[required[idx].key] == required[idx].value
+        }
