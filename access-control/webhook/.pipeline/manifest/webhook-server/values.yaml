@@ -17,4 +17,4 @@ deployment:
     label: webhook-controller-app
     port: 8081
     targetPort: 8081
-    version: 5.2.99
+    version: 6.0.0

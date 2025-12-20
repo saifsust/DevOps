@@ -16,6 +16,8 @@ spec:
         - uri:
             prefix: "/mutate"
         - uri:
+           prefix: "/authorize"
+        - uri:
             prefix: "/health"
       route:
         - destination:
