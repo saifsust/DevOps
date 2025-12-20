@@ -20,7 +20,7 @@ public class k8sAuthorizationController {
 
     @PostMapping(path = "/authorize")
     public ResponseEntity<@NonNull AccessReviewResponse> authorize(
-            @RequestBody SubjectAccessReviewRequest authorizationRequest,
+            @RequestBody String authorizationRequest,
             HttpServletRequest request
     ) {
         log.info("{}", authorizationRequest);
