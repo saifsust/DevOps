@@ -22,29 +22,30 @@ sudo apt install docker-ce docker-ce-cli containerd.io -y
 sudo docker run -d -p 9080:9080 saifsust/productpage:1.0.98
 
 # Proxy Setup
+sudo chown $USER /etc/nginx/sites-available
 sudo rm -f /etc/nginx/sites-available/proxy-conf
 config="/etc/nginx/sites-available/proxy-conf"
-sudo cat <<EOF > $config
+cat <<EOF > $config
 server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
+   listen 80 default_server;
+   listen [::]:80 default_server;
 
-	server_name _;
-	location / {
-	   proxy_buffers 16 4k;
-	   proxy_buffer_size 2k;
-	   proxy_pass http://127.0.0.1:9080;
-	}
+   server_name _;
+   location / {
+      proxy_buffers 16 4k;
+      proxy_buffer_size 2k;
+      proxy_pass http://127.0.0.1:9080;
+   }
 }
 
 server {
-	listen 443;
-	listen [::]:443;
-	location / {
-		proxy_buffers 16 4k;
-		proxy_buffer_size 2k;
-		proxy_pass http://127.0.0.1:9080;
-	}
+   listen 443;
+   listen [::]:443;
+   location / {
+      proxy_buffers 16 4k;
+      proxy_buffer_size 2k;
+      proxy_pass http://127.0.0.1:9080;
+   }
 }
 EOF
 sudo rm /etc/nginx/sites-enabled/default
