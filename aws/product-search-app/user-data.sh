@@ -1,6 +1,7 @@
 #!/bin/bash
 # Proxy Server Installation
 sudo apt-get install nginx -y
+sudo rm -f /etc/nginx/sites-available/proxy-conf
 config="/etc/nginx/sites-available/proxy-conf"
 sudo cat <<EOF > $config
 server {
@@ -25,13 +26,13 @@ server {
 	}
 }
 EOF
-
+sudo rm /etc/nginx/sites-enabled/default
 sudo ln -s /etc/nginx/sites-available/proxy-conf /etc/nginx/sites-enabled/default
 sudo systemctl restart nginx
 
 ## Docker Installation
 sudo apt update
-sudo apt install ca-certificates curl
+sudo apt install ca-certificates curl -y
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -45,7 +46,5 @@ Signed-By: /etc/apt/keyrings/docker.asc
 EOF
 
 sudo apt update
-
-sudo apt install docker-ce docker-ce-cli containerd.io
-
+sudo apt install docker-ce docker-ce-cli containerd.io -y
 sudo docker run -d -p 9080:9080 saifsust/productpage:1.0.98
