@@ -1,7 +1,4 @@
 #!/bin/bash
-# Proxy Server Installation
-sudo apt-get install nginx -y
-
 ## Docker Installation
 sudo apt update
 sudo apt install ca-certificates curl -y
@@ -20,6 +17,9 @@ EOF
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io -y
 sudo docker run -d -p 9080:9080 saifsust/productpage:1.0.98
+
+# Proxy Server Installation
+sudo apt-get install nginx -y
 
 # Proxy Setup
 sudo chown $USER /etc/nginx/sites-available
