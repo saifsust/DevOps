@@ -53,14 +53,16 @@ sudo ln -s /etc/nginx/sites-available/proxy-conf /etc/nginx/sites-enabled/defaul
 sudo systemctl restart nginx
 
 # APIs Environment variables are set up
-cat <<EOF >> ~/.bashrc
+sudo chown $USER /home/ubuntu/.bashrc
+cat <<EOF >> /home/ubuntu/.bashrc
+# Required environment variables are set up
 export STAR_COLOR="red"
 export ENABLE_RATINGS=false
 export SERVICES_DOMAIN=""
 export RATINGS_HOSTNAME=""
 export RATINGS_SERVICE_PORT=80
 EOF
-source ~/.bashrc
+source /home/ubuntu/.bashrc
 
 # Run Application
 sudo docker run -d -p 9080:9080 saifsust/reviews:istio

@@ -53,12 +53,14 @@ sudo ln -s /etc/nginx/sites-available/proxy-conf /etc/nginx/sites-enabled/defaul
 sudo systemctl restart nginx
 
 # APIs Environment variables are set up
-cat <<EOF >> ~/.bashrc
+sudo chown $USER /home/ubuntu/.bashrc
+cat <<EOF >> /home/ubuntu/.bashrc
+# Required environment variables are set up
 export SERVICE_VERSION="v2"
 export DB_TYPE="mongodb"
 export MONGO_DB_URL=""
 EOF
-source ~/.bashrc
+source /home/ubuntu/.bashrc
 
 # Run Application
 sudo docker run -d -p 9080:9080 saifsust/ratings:1.2.0

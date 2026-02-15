@@ -53,10 +53,12 @@ sudo ln -s /etc/nginx/sites-available/proxy-conf /etc/nginx/sites-enabled/defaul
 sudo systemctl restart nginx
 
 # APIs Environment variables are set up
-cat <<EOF >> ~/.bashrc
+sudo chown $USER /home/ubuntu/.bashrc
+cat <<EOF >> /home/ubuntu/.bashrc
+# Required environment variables are set up
 export ENABLE_RATINGS=false
 EOF
-source ~/.bashrc
+source /home/ubuntu/.bashrc
 
 # Run Application
 sudo docker run -d -p 9080:9080 saifsust/reviews:istio
