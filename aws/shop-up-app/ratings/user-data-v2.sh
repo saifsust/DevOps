@@ -58,8 +58,12 @@ cat <<EOF >> /home/ubuntu/.bashrc
 # Required environment variables are set up
 export SERVICE_VERSION="v2"
 export DB_TYPE="mysql"
+
+# Mysql Host name
 export MYSQL_DB_PORT=80
-export MYSQL_DB_HOST=
+export MYSQL_DB_HOST=""
+
+# Credentials
 export MYSQL_DB_USER=root
 export MYSQL_DB_PASSWORD=password
 EOF

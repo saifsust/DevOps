@@ -56,10 +56,15 @@ sudo systemctl restart nginx
 sudo chown $USER /home/ubuntu/.bashrc
 cat <<EOF >> /home/ubuntu/.bashrc
 # Required environment variables are set up
-export ENABLE_RATINGS=false
+# Domain name
 export SERVICES_DOMAIN="us-east-1.elb.amazonaws.com"
+
+# Rating Host name
 export RATINGS_HOSTNAME=""
 export RATINGS_SERVICE_PORT=80
+
+# Environment values
+export ENABLE_RATINGS=false
 EOF
 source /home/ubuntu/.bashrc
 

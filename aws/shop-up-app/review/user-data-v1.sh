@@ -56,6 +56,7 @@ sudo systemctl restart nginx
 sudo chown $USER /home/ubuntu/.bashrc
 cat <<EOF >> /home/ubuntu/.bashrc
 # Required environment variables are set up
+# Environment values
 export ENABLE_RATINGS=false
 EOF
 source /home/ubuntu/.bashrc

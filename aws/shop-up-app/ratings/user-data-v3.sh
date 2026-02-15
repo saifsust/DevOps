@@ -58,6 +58,8 @@ cat <<EOF >> /home/ubuntu/.bashrc
 # Required environment variables are set up
 export SERVICE_VERSION="v2"
 export DB_TYPE="mongodb"
+
+# Mongo DB host URL
 export MONGO_DB_URL=""
 EOF
 source /home/ubuntu/.bashrc
