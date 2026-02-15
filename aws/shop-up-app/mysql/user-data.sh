@@ -26,26 +26,15 @@ sudo chown $USER /etc/nginx/sites-available
 sudo rm -f /etc/nginx/sites-available/proxy-conf
 config="/etc/nginx/sites-available/proxy-conf"
 cat <<EOF > $config
-server {
-   listen 80 default_server;
-   listen [::]:80 default_server;
+stream {
+  upstream mysql_db_server {
+    server 127.0.0.1:3306;
+  }
 
-   server_name _;
-   location / {
-      proxy_buffers 16 4k;
-      proxy_buffer_size 2k;
-      proxy_pass http://127.0.0.1:3306;
-   }
-}
-
-server {
-   listen 443;
-   listen [::]:443;
-   location / {
-      proxy_buffers 16 4k;
-      proxy_buffer_size 2k;
-      proxy_pass http://127.0.0.1:3306;
-   }
+  server {
+    listen 3306;
+    proxy_pass mysql_db_server;
+  }
 }
 EOF
 sudo rm /etc/nginx/sites-enabled/default
@@ -53,4 +42,4 @@ sudo ln -s /etc/nginx/sites-available/proxy-conf /etc/nginx/sites-enabled/defaul
 sudo systemctl restart nginx
 
 # Run Application
-sudo docker run -d -p 9080:9080 saifsust/mysql-server:1.0.99
+sudo docker run -d -p 3306:3306 saifsust/mysql-server:1.0.99
