@@ -56,8 +56,8 @@ sudo systemctl restart nginx
 sudo chown $USER /home/ubuntu/.bashrc
 cat <<EOF >> /home/ubuntu/.bashrc
 # Required environment variables are set up
-export SERVICES_DOMAIN="service-domain"
-export DETAILS_HOSTNAME="details-hostname"
+export SERVICES_DOMAIN="us-east-1.elb.amazonaws.com"
+export DETAILS_HOSTNAME="internal-detail-app-alb-1713347723"
 export DETAILS_SERVICE_PORT=80
 export RATINGS_HOSTNAME="rating-hostname"
 export RATINGS_SERVICE_PORT=80

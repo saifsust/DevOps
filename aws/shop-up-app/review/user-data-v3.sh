@@ -58,7 +58,7 @@ cat <<EOF >> /home/ubuntu/.bashrc
 # Required environment variables are set up
 export STAR_COLOR="red"
 export ENABLE_RATINGS=false
-export SERVICES_DOMAIN=""
+export SERVICES_DOMAIN="us-east-1.elb.amazonaws.com"
 export RATINGS_HOSTNAME=""
 export RATINGS_SERVICE_PORT=80
 EOF

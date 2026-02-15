@@ -57,7 +57,7 @@ sudo chown $USER /home/ubuntu/.bashrc
 cat <<EOF >> /home/ubuntu/.bashrc
 # Required environment variables are set up
 export ENABLE_RATINGS=false
-export SERVICES_DOMAIN=""
+export SERVICES_DOMAIN="us-east-1.elb.amazonaws.com"
 export RATINGS_HOSTNAME=""
 export RATINGS_SERVICE_PORT=80
 EOF
