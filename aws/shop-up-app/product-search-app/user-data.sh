@@ -53,16 +53,17 @@ sudo ln -s /etc/nginx/sites-available/proxy-conf /etc/nginx/sites-enabled/defaul
 sudo systemctl restart nginx
 
 # APIs Environment variables are set up
+sudo chown $USER ~/.bashrc
 cat <<EOF >> ~/.bashrc
-export SERVICES_DOMAIN=
-export DETAILS_HOSTNAME=
+# Required environment variables are set up
+export SERVICES_DOMAIN="service-domain"
+export DETAILS_HOSTNAME="details-hostname"
 export DETAILS_SERVICE_PORT=80
-export RATINGS_HOSTNAME=
+export RATINGS_HOSTNAME="rating-hostname"
 export RATINGS_SERVICE_PORT=80
-export REVIEWS_HOSTNAME=
+export REVIEWS_HOSTNAME="review-hostname"
 export REVIEWS_SERVICE_PORT=80
 EOF
-
 source ~/.bashrc
 
 # Run Application
