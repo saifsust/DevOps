@@ -53,8 +53,8 @@ sudo ln -s /etc/nginx/sites-available/proxy-conf /etc/nginx/sites-enabled/defaul
 sudo systemctl restart nginx
 
 # APIs Environment variables are set up
-sudo chown $USER ~/.bashrc
-cat <<EOF >> ~/.bashrc
+sudo chown $USER /home/ubuntu/.bashrc
+cat <<EOF >> /home/ubuntu/.bashrc
 # Required environment variables are set up
 export SERVICES_DOMAIN="service-domain"
 export DETAILS_HOSTNAME="details-hostname"
@@ -64,7 +64,6 @@ export RATINGS_SERVICE_PORT=80
 export REVIEWS_HOSTNAME="review-hostname"
 export REVIEWS_SERVICE_PORT=80
 EOF
-source ~/.bashrc
-
+source /home/ubuntu/.bashrc
 # Run Application
 sudo docker run -d -p 9080:9080 saifsust/productpage:1.0.98
