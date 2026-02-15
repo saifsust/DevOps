@@ -16,9 +16,9 @@ EOF
 
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io -y
-sudo docker run -d -p 9080:9080 saifsust/productpage:1.0.98
 
 # Proxy Server Installation
+sudo apt update
 sudo apt-get install nginx -y
 
 # Proxy Setup
@@ -51,3 +51,15 @@ EOF
 sudo rm /etc/nginx/sites-enabled/default
 sudo ln -s /etc/nginx/sites-available/proxy-conf /etc/nginx/sites-enabled/default
 sudo systemctl restart nginx
+
+# APIs Environment variables are set up
+cat <<EOF >> ~/.bashrc
+export SERVICE_VERSION="v2"
+export DB_TYPE="mongodb"
+export MONGO_DB_URL=""
+EOF
+source ~/.bashrc
+
+# Run Application
+sudo docker run -d -p 9080:9080 saifsust/ratings:1.2.0
+
