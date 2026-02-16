@@ -60,12 +60,12 @@ export SERVICE_VERSION="v2"
 export DB_TYPE="mysql"
 
 # Mysql Host name
-export MYSQL_DB_PORT=80
-export MYSQL_DB_HOST=""
+export MYSQL_DB_PORT=3306
+export MYSQL_DB_HOST="mysql-server.cafuqkquo0s1.us-east-1.rds.amazonaws.com"
 
 # Credentials
-export MYSQL_DB_USER=root
-export MYSQL_DB_PASSWORD=password
+export MYSQL_DB_USER=admin
+export MYSQL_DB_PASSWORD=Sa1FliT0N
 EOF
 source /home/ubuntu/.bashrc
 
