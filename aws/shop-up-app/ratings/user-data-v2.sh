@@ -70,5 +70,5 @@ EOF
 source /home/ubuntu/.bashrc
 
 # Run Application
-sudo docker run -d -p 9080:9080 saifsust/ratings:1.2.0
+sudo docker run -d -p 9080:9080 saifsust/ratings:aws
 
