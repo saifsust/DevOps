@@ -1,0 +1,18 @@
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::k del:role/AwsEKSLoadBalancer
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: aws-elb-sa
+  # Automount API credentials for a Service Account.
+  automountServiceAccountToken: true
+  # List of image pull secrets to add to the Service Account.
+  imagePullSecrets:
+  # - name: docker
+
+region: us-east-1
+vpcId: vpc-0325daead2652c229
+clusterName: UddomEksCluster

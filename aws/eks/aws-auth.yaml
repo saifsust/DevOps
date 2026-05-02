@@ -10,8 +10,3 @@ data:
       - system:bootstrappers
       - system:nodes
       username: system:node:{{EC2PrivateDNSName}}
-  mapUsers: |
-    - userarn: arn:aws:iam::494309281386:user/UddomEksUser
-      groups:
-      - system:masters
-      username: UddomEksUser
