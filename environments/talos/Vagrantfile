@@ -1,0 +1,30 @@
+def getBridge()
+  return %x{ip route show | grep default | awk '{print $5}'}.chomp
+end
+
+Vagrant.configure("2") do |config|
+  config.vm.box="generic/alpine318"
+  config.vm.box_version = "4.3.12"
+  config.vm.boot_timeout = 900
+  config.vm.box_check_update = false
+  
+  config.vm.define "controlplane" do |controlplane|
+    controlplane.vm.provider "virtualbox" do |domain|
+      domain.name="talos-controlplane"
+      domain.cpus = 2
+      domain.memory = 2048
+    end
+    controlplane.vm.hostname = "controlplane"
+    controlplane.vm.network :public_network, ip: "192.168.0.10", brige: getBridge()
+  end
+  
+  config.vm.define "node01" do |node01|
+    node01.vm.provider "virtualbox" do |domain|
+      domain.name="talos-node01"
+      domain.cpus = 2
+      domain.memory = 2048
+    end
+    node01.vm.hostname = "node01"
+    node01.vm.network :public_network, ip: "192.168.0.11", brige: getBridge()
+  end
+end
