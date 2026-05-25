@@ -1,5 +1,5 @@
 appName: product-page-app
-appNamespace: graphql-system
+appNamespace: uddom-beta-stg
 
 configMap:
   name: product-page-app-conf

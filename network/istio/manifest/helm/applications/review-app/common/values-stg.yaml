@@ -1,5 +1,5 @@
 appName: review-app
-appNamespace: graphql-system
+appNamespace: uddom-beta-stg
 
 service:
   name: review-app-svc

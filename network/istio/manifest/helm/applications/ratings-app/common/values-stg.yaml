@@ -1,4 +1,4 @@
-appNamespace: graphql-system
+appNamespace: uddom-beta-stg
 
 service:
   name: book-rating-svc

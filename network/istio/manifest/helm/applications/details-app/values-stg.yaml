@@ -1,5 +1,5 @@
 appName: book-details
-appNamespace: graphql-system
+appNamespace: uddom-beta-stg
 
 configMap:
   name: book-details-app-conf
@@ -12,7 +12,7 @@ deployment:
   maxUnavailable: 10%
   pod:
     label: book-details-app
-    version: "istio"
+    version: "beta"
     port: 9080
 
 service:

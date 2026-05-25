@@ -1,5 +1,5 @@
 appName: book-mysql-app
-appNamespace: graphql-system
+appNamespace: uddom-beta-stg
 
 secret:
   name: book-mysql-secret

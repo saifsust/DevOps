@@ -1,5 +1,5 @@
 appName: review-v1-app
-appNamespace: graphql-system
+appNamespace: uddom-beta-stg
 
 configMap:
   name: review-app-v1-conf

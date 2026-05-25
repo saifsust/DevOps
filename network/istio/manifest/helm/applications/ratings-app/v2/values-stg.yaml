@@ -1,5 +1,5 @@
 appName: book-rating-app-v2
-appNamespace: graphql-system
+appNamespace: uddom-beta-stg
 
 configMap:
   name: book-rating-app-v2-conf

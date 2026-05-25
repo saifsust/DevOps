@@ -1,5 +1,5 @@
 appName: book-mongodb-app
-appNamespace: graphql-system
+appNamespace: uddom-beta-stg
 
 service:
   name: mongodb-app-svc
@@ -14,4 +14,3 @@ deployment:
     label: mongodb-app
     version: "1.0.98"
     port: 27017
-

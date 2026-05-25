@@ -1,6 +1,5 @@
 appName: review-v3-app
-appNamespace: graphql-system
-
+appNamespace: uddom-beta-stg
 configMap:
   name: review-app-v3-conf
   enableRating:
