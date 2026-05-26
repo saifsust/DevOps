@@ -1,0 +1,6 @@
+namespaceOverride: nginx-beta-proxy
+server:
+  name: "nginx-proxy-controller"
+  replicas: 1
+  serviceType: "NodePort"
+  serviceNodePort: 30070

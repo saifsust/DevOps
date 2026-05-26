@@ -20,6 +20,7 @@ controller:
 server:
   # -- Deploy the Argo Server
   enabled: true
+  secure: true
   name: server
   serviceType: NodePort
   serviceNodePort:  32746

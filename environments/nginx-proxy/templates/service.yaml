@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-proxy-svc
+  namespace: {{ .Values.namespaceOverride }}
+spec:
+  type: {{ .Values.server.serviceType }}
+  selector:
+    app: nginx-proxy-server
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+      {{- if eq .Values.server.serviceType "NodePort" }}
+      nodePort: {{ .Values.server.serviceNodePort }}
+      {{- end }}

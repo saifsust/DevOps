@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.server.name }}
+  namespace: {{ .Values.namespaceOverride }}
+  labels:
+    app: uddom-proxy-server
+spec:
+  replicas: {{ .Values.server.replicas }}
+  selector:
+    matchLabels:
+        app: nginx-proxy-server
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 10%
+      maxSurge: 50%
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ .Files.Get "proxy.conf" | sha256sum }}
+      labels:
+        app: nginx-proxy-server
+    spec:
+      volumes:
+        - name: configuration
+          configMap:
+            name: proxy-conf
+      containers:
+        - image: nginx:latest
+          name: app
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
+            protocol: TCP
+          volumeMounts:
+            - name: configuration
+              mountPath: /etc/nginx/conf.d/

@@ -28,6 +28,7 @@ server:
   name: server
   service:
     type: NodePort
+    servicePortHttps: 443
     nodePortHttps: 30443
 
 ## Repo Server
@@ -48,3 +49,7 @@ notifications:
 
 commitServer:
   enabled: false
+
+configs:
+  params:
+    server.insecure: true
