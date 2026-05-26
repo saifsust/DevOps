@@ -1,0 +1,37 @@
+namespaceOverride: "argo-system"
+commonLabels:
+  uddom.io/proj: argo-workflow
+
+controller:
+  name: workflow-controller
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Equal
+      effect: NoSchedule
+  affinity:
+    type: hard
+    matchExpressions:
+      - key: kubernetes.io/hostname
+        operator: In
+        values:
+          - k8s-master
+server:
+  # -- Deploy the Argo Server
+  enabled: true
+  name: server
+  # -- [Tolerations] for use with node taints
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Equal
+      effect: NoSchedule
+
+  # -- Assign custom [affinity] rules
+  affinity:
+    type: hard
+    matchExpressions:
+      - key: kubernetes.io/hostname
+        operator: In
+        values:
+          - k8s-master
+
+useStaticCredentials: true
