@@ -9,12 +9,14 @@ controller:
       operator: Equal
       effect: NoSchedule
   affinity:
-    type: hard
-    matchExpressions:
-      - key: kubernetes.io/hostname
-        operator: In
-        values:
-          - k8s-master
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                  - k8s-master
 server:
   # -- Deploy the Argo Server
   enabled: true
@@ -27,11 +29,13 @@ server:
 
   # -- Assign custom [affinity] rules
   affinity:
-    type: hard
-    matchExpressions:
-      - key: kubernetes.io/hostname
-        operator: In
-        values:
-          - k8s-master
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                  - k8s-master
 
 useStaticCredentials: true
