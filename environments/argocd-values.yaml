@@ -1,11 +1,41 @@
-argocd:
+nameOverride: argocd
+namespaceOverride: "argo-system"
+
+global:
+  additionalLabels: { }
+  nodeSelector:
+    beta.kubernetes.io/os: linux
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: In
+      effect: NoSchedule
+  affinity:
+    nodeAffinity:
+      # -- Default node affinity rules. Either: `none`, `soft` or `hard`
+      type: hard
+      matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+            - k8s-master
+
+## Application controller
+controller:
+  name: application-controller
+
+## Server
+server:
+  name: server
+
+## Repo Server
+repoServer:
+  name: repo-server
+
+applicationSet:
+  name: applicationset-controller
+
+notifications:
   enabled: true
-  configs:
-    cm:
-      admin.enabled: false
-    params:
-      server.insecure: true
-  redis:
-    enabled: true
-httpRoute:
+
+commitServer:
   enabled: false
