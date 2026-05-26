@@ -26,6 +26,9 @@ controller:
 ## Server
 server:
   name: server
+  service:
+    type: NodePort
+    nodePortHttps: 30443
 
 ## Repo Server
 repoServer:
