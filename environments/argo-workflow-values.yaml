@@ -40,5 +40,5 @@ server:
                 values:
                   - k8s-master
   extraArgs:
-  - --auth-mode=server
-useStaticCredentials: true
+   - --auth-mode=server
+useStaticCredentials: false
