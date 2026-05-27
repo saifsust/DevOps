@@ -56,9 +56,9 @@ spec:
             subPath: {{ .Values.persistence.subPath }}
     volumes:
       - name: data
-      {{- if .Values.persistence.enabled }}
-      persistentVolumeClaim:
-        claimName: {{ .Values.persistence.existingClaim | default (include "elasticsearch.fullname" .) }}
-      {{- else }}
-      emptyDir: {}
-      {{- end -}}
+        {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistence.existingClaim | default (include "elasticsearch.fullname" .) }}
+        {{- else }}
+        emptyDir: {}
+        {{- end -}}
