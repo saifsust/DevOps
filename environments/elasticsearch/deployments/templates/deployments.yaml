@@ -15,50 +15,59 @@ spec:
         app: {{ template "elasticsearch.name" . }}
         release: {{ .Release.Name }}
     spec:
-    {{- if .Values.securityContext.enabled }}
-    securityContext:
-      fsGroup: {{ .Values.securityContext.fsGroup }}
-      runAsUser: {{ .Values.securityContext.runAsUser }}
-    {{- end }}
-    containers:
-      - name: {{ .Chart.Name }}
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        env:
-          - name: ES_JAVA_OPTS
-            value: "-Djava.net.preferIPv4Stack=true -Xms{{ .Values.heapSize }} -Xmx{{ .Values.heapSize }} {{ .Values.javaOpts }}"
-        {{- range $key, $value := .Values.extraEnv }}
-        - name: {{ $key }}
-          value: {{ $value | quote }}
-        {{- end }}
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 9200
-          initialDelaySeconds: 30
-          timeoutSeconds: 1
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 9200
-          initialDelaySeconds: 15
-          timeoutSeconds: 5
-        ports:
-          - name: http
-            containerPort: 9200
-          - name: transport
-            containerPort: 9300
-        resources:
-          {{ toYaml .Values.resources | nindent 12 }}
-        volumeMounts:
-          - name: data
-            mountPath: {{ .Values.persistence.path }}
-            subPath: {{ .Values.persistence.subPath }}
-    volumes:
-      - name: data
-        {{- if .Values.persistence.enabled }}
-        persistentVolumeClaim:
-          claimName: {{ .Values.persistence.existingClaim | default (include "elasticsearch.fullname" .) }}
-        {{- else }}
-        emptyDir: {}
-        {{- end -}}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - k8s-master
+      {{- if .Values.securityContext.enabled }}
+      securityContext:
+        fsGroup: {{ .Values.securityContext.fsGroup }}
+        runAsUser: {{ .Values.securityContext.runAsUser }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: ES_JAVA_OPTS
+              value: "-Djava.net.preferIPv4Stack=true -Xms{{ .Values.heapSize }} -Xmx{{ .Values.heapSize }} {{ .Values.javaOpts }}"
+          {{- range $key, $value := .Values.extraEnv }}
+          - name: {{ $key }}
+            value: {{ $value | quote }}
+          {{- end }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 9200
+            initialDelaySeconds: 30
+            timeoutSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 9200
+            initialDelaySeconds: 15
+            timeoutSeconds: 5
+          ports:
+            - name: http
+              containerPort: 9200
+            - name: transport
+              containerPort: 9300
+          resources:
+            {{ toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: data
+              mountPath: {{ .Values.persistence.path }}
+              subPath: {{ .Values.persistence.subPath }}
+      volumes:
+        - name: data
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim | default (include "elasticsearch.fullname" .) }}
+          {{- else }}
+          emptyDir: {}
+          {{- end -}}
