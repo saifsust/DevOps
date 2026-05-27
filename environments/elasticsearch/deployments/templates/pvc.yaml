@@ -2,6 +2,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: {{ template "elasticsearch.fullname" . }}
+  namespace: {{ .Values.namespace }}
   labels:
     app: {{ template "elasticsearch.name" . }}
     chart: {{ template "elasticsearch.chart" . }}
@@ -15,3 +16,10 @@ spec:
   resources:
     requests:
       storage: {{ .Values.persistence.size | quote }}
+  selector:
+    matchExpressions:
+      - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+              - k8s-master
