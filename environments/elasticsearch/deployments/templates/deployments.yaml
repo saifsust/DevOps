@@ -21,6 +21,10 @@ spec:
         app: {{ template "elasticsearch.name" . }}
         release: {{ .Release.Name }}
     spec:
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Equal
+          effect: NoSchedule
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
