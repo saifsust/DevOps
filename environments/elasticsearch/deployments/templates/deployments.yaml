@@ -80,6 +80,9 @@ spec:
             - name: data
               mountPath: {{ .Values.persistence.path }}
       volumes:
+      - name: elasticsearch-data
+        hostPath:
+          path: /usr/share/elasticsearch/data
       - name: data
         persistentVolumeClaim:
           claimName: {{ .Values.persistence.existingClaim }}
