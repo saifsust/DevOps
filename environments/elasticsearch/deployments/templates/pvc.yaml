@@ -18,8 +18,7 @@ spec:
       storage: {{ .Values.persistence.size | quote }}
   selector:
     matchExpressions:
-      - matchExpressions:
-          - key: kubernetes.io/hostname
-            operator: In
-            values:
-              - k8s-master
+    - key: kubernetes.io/hostname
+      operator: In
+      values:
+      - k8s-master
