@@ -1,0 +1,11 @@
+apiVersion: v2
+name: elastic search configuration
+version: 0.0.1
+description:  elastic search will be used for debugging and log search. Here we used googleapi elastic search.
+maintainers:
+  - name: SAIFUL ISLAM
+    email: saiful.sust.cse@gmail.com
+    url: https://www.linkedin.com/in/saiful-islam-340b51133
+appVersion: 0.0.1
+annotations:
+  maintainer: saiful.sust.cse@gmail.com
