@@ -1,5 +1,5 @@
 apiVersion: v2
-name: elastic search configuration
+name: uddom-elastic-search
 version: 0.0.1
 description:  elastic search will be used for debugging and log search. Here we used googleapi elastic search.
 maintainers:
