@@ -9,6 +9,11 @@ metadata:
     heritage: {{ .Release.Service }}
 spec:
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "elasticsearch.name" . }}
+      release: {{ .Release.Name }}
   template:
     metadata:
       labels:
