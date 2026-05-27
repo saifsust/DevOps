@@ -1,5 +1,5 @@
 fullnameOverride: elastic-search
-namespace: elasticsearch-system
+namespace: es-system
 replicas: 1
 revisionHistoryLimit: 0
 
