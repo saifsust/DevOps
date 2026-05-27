@@ -11,7 +11,7 @@ spec:
   capacity:
     storage: 2Gi
   hostPath:
-   path: /usr/local/share/es-storage
+   path: /usr/share/elasticsearch/data
   nodeAffinity:
     required:
       nodeSelectorTerms:
