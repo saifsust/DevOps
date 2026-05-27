@@ -12,11 +12,8 @@ service:
   nodePort: 30200
 
 persistence:
-  enabled: true
-  existingClaim: "es-pv"
+  existingClaim: es-pv
   path: /usr/share/elasticsearch/data
-  subPath: ""
-  accessMode: ReadWriteMany
   size: 2Gi
 
 extraEnv:

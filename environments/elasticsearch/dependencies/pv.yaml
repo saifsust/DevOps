@@ -12,3 +12,11 @@ spec:
     storage: 2Gi
   hostPath:
    path: /usr/local/share/es-storage
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - k8s-master

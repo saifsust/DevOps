@@ -7,8 +7,6 @@ metadata:
     release: {{ .Release.Name }}
     chart: {{ template "elasticsearch.chart" . }}
     heritage: {{ .Release.Service }}
-  annotations:
-    {{ toYaml .Values.service.annotations | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
