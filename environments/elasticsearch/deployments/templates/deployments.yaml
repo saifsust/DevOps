@@ -22,7 +22,7 @@ spec:
         release: {{ .Release.Name }}
     spec:
       tolerations:
-        - key: node-role.kubernetes.io/control-plane
+        - key: uddom.io/third-party-apps
           operator: Equal
           effect: NoSchedule
       affinity:
@@ -33,7 +33,7 @@ spec:
                   - key: kubernetes.io/hostname
                     operator: In
                     values:
-                      - k8s-master
+                      - broker-server
       {{- if .Values.securityContext.enabled }}
       securityContext:
         fsGroup: {{ .Values.securityContext.fsGroup }}

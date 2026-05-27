@@ -12,4 +12,4 @@ allowedTopologies:
   - matchLabelExpressions:
       - key: kubernetes.io/hostname
         values:
-          - k8s-master
+          - broker-server
