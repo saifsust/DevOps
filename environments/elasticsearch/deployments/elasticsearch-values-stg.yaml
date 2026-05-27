@@ -1,3 +1,5 @@
+fullnameOverride: elastic-search
+
 revisionHistoryLimit: 0
 
 image:
