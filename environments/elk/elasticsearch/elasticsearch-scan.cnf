@@ -1,0 +1,25 @@
+[ req ]
+default_bits       = 2048
+distinguished_name = req_distinguished_name
+req_extensions     = v3_req
+prompt             = no
+
+[ req_distinguished_name ]
+C  = BGD
+ST = Dhaka
+L  = Khilgaon
+O  = BJIT LMT
+CN = elasticsearch
+
+[ v3_req ]
+keyUsage = critical, digitalSignature, keyEncipherment, dataEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = localhost
+DNS.2 = elk-stack
+DNS.3 = elasticsearch.uddom.com
+IP.1  = 127.0.0.1
+IP.2  = 192.168.0.144
+IP.3  = ::1
