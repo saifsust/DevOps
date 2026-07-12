@@ -1,0 +1,30 @@
+apiVersion: cilium.io/v2
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: production-ip-pool
+spec:
+  blocks:
+    - cidr: "192.168.0.200/29" # <-- Your available external IP range
+---
+apiVersion: cilium.io/v2alpha1
+kind: CiliumL2AnnouncementPolicy
+metadata:
+  name: global-l2-announcement-policy
+spec:
+  loadBalancerIPs: true
+  externalIPs: true
+
+  # Target your Proxmox virtual network interface
+  interfaces:
+    - "ens18"
+
+  # GLOBAL FIX: An empty serviceSelector tells Cilium to automatically
+  # monitor and announce ALL LoadBalancer services in ALL namespaces!
+  serviceSelector: {}
+
+  nodeSelector:
+    matchExpressions:
+      - key: kubernetes.io/os
+        operator: In
+        values:
+          - linux

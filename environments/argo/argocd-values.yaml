@@ -25,9 +25,14 @@ controller:
 
 ## Server
 server:
+  httpRoute:
+    enabled: true
+    hostnames:
+      - argocd.uddom.com
   name: server
   service:
-    type: NodePort
+    type: LoadBalancer
+    nodePortHttp: 30081
     servicePortHttps: 443
     nodePortHttps: 30443
 

@@ -1,10 +1,86 @@
+# ==========================================
+# 1. Core Identifiers & Infrastructure
+# ==========================================
 namespaceOverride: "kube-system"
 commonLabels:
   cilium.io/networking-env: prod
-k8sServiceHost: "192.168.0.140"
+
+k8sServiceHost: "192.168.0.140" # Ensure this is a LoadBalancer IP if you move to Multi-Master HA!
 k8sServicePort: "6443"
-kubeProxyReplacement: "true"
-socketLB.hostNamespaceOnly: "true"
-cni.exclusive: "false"
+
+# ==========================================
+# 2. Advanced Datapath & Proxy Replacement
+# ==========================================
+kubeProxyReplacement: true
+bpfLBExternalClusterIP: true
+socketLB:
+  hostNamespaceOnly: true # Fixes Istio/KubeVirt compatibility
+cni:
+  exclusive: false       # Allows chaining/service meshes
+
+# FIX: Explicitly direct Cilium to monitor and attach eBPF maps to your Proxmox interfaces
+devices: "ens18"
+
+# FIX: Forces incoming packets through the host network layer so Layer 2 ARP works seamlessly
+hostRouting:
+  enabled: false
+
+# Production Performance Boosts
+bpf:
+  masquerade: true       # Replaces legacy iptables masquerading with eBPF native
+  tproxy: true           # Optimized Layer 7 network routing
+routingMode: tunnel      # Switch to 'tunnel' (VXLAN) if your physical switches block direct pod routing
+tunnelProtocol: vxlan
+
+# ==========================================
+# 3. IP Address Management (IPAM)
+# ==========================================
 ipam:
   mode: "cluster-pool"
+  operator:
+    clusterPoolIPv4PodCIDRList: ["10.244.0.0/16"] # Must match your kubeadm --pod-network-cidr
+    clusterPoolIPv4MaskSize: 24                  # Allocates a /24 per node (254 pods/node)
+
+# ==========================================
+# 4. Production High-Availability (HA)
+# ==========================================
+operator:
+  replicas: 1
+  rollOutPods: true
+  prometheus:
+    enabled: true # Emits Operator metrics
+
+# ==========================================
+# 5. Production Observability & Monitoring
+# ==========================================
+prometheus:
+  enabled: true # Emits Agent/Datapath metrics
+
+hubble:
+  enabled: true # Enables microservice network observability
+  relay:
+    enabled: true
+    rollOutPods: true
+  metrics:
+    enabled:
+      - dns
+      - drop
+      - tcp
+      - flow
+      - icmp
+      - http
+  ui:
+    enabled: true # Visual service-graph dashboard
+
+# ==========================================
+# 6. Native L2 Load Balancing (MetalLB Replacement)
+# ==========================================
+l2announcements:
+  enabled: true
+
+l2NeighDiscovery:
+  # -- Enable L2 neighbor discovery in the agent
+  enabled: true
+
+externalIPs:
+  enabled: true

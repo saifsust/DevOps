@@ -1,0 +1,95 @@
+# ==========================================
+# 1. Global Identifiers & Namespaces
+# ==========================================
+# Correct root-level override used by kube-prometheus-stack
+namespaceOverride: "monitor-system"
+
+# ==========================================
+# 2. Prometheus Production Configuration
+# ==========================================
+prometheus:
+  enabled: true
+  service:
+    type: NodePort
+    nodePort: 30082
+  prometheusSpec:
+    replicas: 1
+    retention: 10d
+    retentionSize: "2GiB"
+
+    # High-Availability Pod Anti-Affinity Strategy
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - "prometheus"
+            topologyKey: "kubernetes.io/hostname"
+
+    # Compute Performance Constraints
+    resources:
+      requests:
+        cpu: 200m
+        memory: "1Gi"
+      limits:
+        cpu: 200m
+        memory: "2Gi"
+
+    # Persistent Data Layer Configuration
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: "default-storage-class"
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 5Gi
+
+# ==========================================
+# 3. Grafana Integration & Service Profile
+# ==========================================
+grafana:
+  enabled: true
+  adminPassword: "admin"
+
+  # FIXED: Corrected nesting for Grafana NodePort assignment
+  service:
+    type: NodePort
+    nodePort: 30083
+
+# ==========================================
+# 4. Alertmanager Production Configuration
+# ==========================================
+alertmanager:
+  enabled: true
+  alertmanagerSpec:
+    replicas: 1
+
+  service:
+    type: NodePort
+    nodePort: 30084
+
+    # High-Availability Pod Anti-Affinity Strategy
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - "alertmanager"
+            topologyKey: "kubernetes.io/hostname"
+
+    # Persistent Data Layer Configuration
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: "default-storage-class"
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 5Gi

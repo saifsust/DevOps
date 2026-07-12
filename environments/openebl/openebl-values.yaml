@@ -1,0 +1,33 @@
+# values.yaml
+engines:
+  replicated:
+    mayastor:
+      enabled: true
+      # Enforce strict scheduling to dedicated storage hosts
+      nodeSelector:
+        openebs.io/engine: mayastor
+
+      # Production Metrics Configuration
+      metrics:
+        enabled: true
+        # Instructs the chart to automatically deploy a Prometheus Operator ServiceMonitor resource
+        serviceMonitor:
+          enabled: true
+          # Tailor this namespace to match where your prometheus-operator or kube-prometheus-stack lives
+          namespace: monitoring
+          interval: "60s" # OpenEBS recommends higher intervals (up to 5m) to reduce engine poll impact
+          metricRelabelings: []
+
+      # Storage Engine Compute Resource Constraints
+      ioEngine:
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "300Mi"
+          requests:
+            cpu: "100m"
+            memory: "200Mi"
+        hugepages:
+          enabled: true
+          size: "2Mi"
+          count: 1024

@@ -23,7 +23,7 @@ server:
   secure: true
   name: server
   serviceType: NodePort
-  serviceNodePort:  32746
+  serviceNodePort:  30080
   # -- [Tolerations] for use with node taints
   tolerations:
     - key: node-role.kubernetes.io/control-plane

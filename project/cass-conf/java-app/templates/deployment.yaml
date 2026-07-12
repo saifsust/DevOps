@@ -1,0 +1,18 @@
+apiVersion: app/v1
+kind: Deployment
+metadata:
+  name: uddom-{{ .Values.appName }}
+  namespace: {{ .Values.appNamespace }}
+spec:
+  {{ if .Values.traffic}}
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable:
+      maxSurge: 10%
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+  template:
+    met

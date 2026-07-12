@@ -1,0 +1,20 @@
+# metallb-values.yaml
+controller:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      # Select the namespace where your Prometheus Operator is running
+      namespace: ""
+      # Add labels if your Prometheus instance filters ServiceMonitors by labels
+      additionalLabels:
+        release: prometheus-stack
+
+speaker:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: ""
+      additionalLabels:
+        release: prometheus-stack
