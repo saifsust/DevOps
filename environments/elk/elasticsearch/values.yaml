@@ -247,7 +247,7 @@ imagePullSecrets: []
 nodeSelector: {}
 tolerations:
   - key: node-role.kubernetes.io/control-plane
-    operator: In
+    operator: Equal
     effect: NoSchedule
 
 # Enabling this will publicly expose your Elasticsearch instance.
