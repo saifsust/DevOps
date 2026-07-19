@@ -21,8 +21,8 @@ roles:
   - remote_cluster_client
   - transform
 
-replicas: 3
-minimumMasterNodes: 2
+replicas: 2
+minimumMasterNodes: 1
 
 esMajorVersion: ""
 
@@ -245,7 +245,10 @@ schedulerName: ""
 
 imagePullSecrets: []
 nodeSelector: {}
-tolerations: []
+tolerations:
+  - key: node-role.kubernetes.io/control-plane
+    operator: In
+    effect: NoSchedule
 
 # Enabling this will publicly expose your Elasticsearch instance.
 # Only enable this if you have security enabled on your cluster
