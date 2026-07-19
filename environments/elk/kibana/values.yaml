@@ -120,7 +120,7 @@ updateStrategy:
   type: "Recreate"
 
 service:
-  type: NotePort
+  type: NodePort
   loadBalancerIP: ""
   port: 5601
   nodePort: "30088"
