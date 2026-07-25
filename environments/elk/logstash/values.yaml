@@ -55,11 +55,11 @@ extraEnvs:
 # Allows you to load environment variables from kubernetes secret or config map
 envFrom:
   - name: ELASTICSEARCH_USERNAME
-    secretRef:
+    secretKeyRef:
      name: elasticsearch-master-credentials
      key: username
   - name: ELASTICSEARCH_PASSWORD
-    secretRef:
+    secretKeyRef:
       name: elasticsearch-master-credentials
       key: password
 # - configMapRef:
