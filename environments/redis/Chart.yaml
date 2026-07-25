@@ -1,0 +1,8 @@
+apiVersion: v1
+appVersion: 8.6.5-alpine
+description: redis server with insight.
+maintainers:
+- email: saiful.sust.cse@gmail.com
+  name: saiful
+name: redis
+version: 8.6.5

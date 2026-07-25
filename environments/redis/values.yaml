@@ -10,7 +10,11 @@ server:
     type: ClusterIP
 
 insight:
-  appName: redis-server
+  appName: redis-insight
   replicaCount: 1
-  image: redis
-  imageTag: 8.6.5-alpine
+  image: redis/redisinsight
+  imageTag: latest
+
+  service:
+    type: NodePort
+    nodePort: 30087
