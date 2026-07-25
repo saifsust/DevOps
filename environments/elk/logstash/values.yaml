@@ -29,7 +29,11 @@ logstashPipeline:
     }
     output { 
       elasticsearch {
-         hosts => "http://elasticsearch-master:9200"
+         hosts => "https://elasticsearch-master:9200"
+         ssl => true
+         user => "${ELASTICSEARCH_USERNAME}"
+         password => "${ELASTICSEARCH_PASSWORD}"
+         cacert => "${ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES}"
       }
     }
 
@@ -49,9 +53,15 @@ extraEnvs:
 #    value: the_value_goes_here
 
 # Allows you to load environment variables from kubernetes secret or config map
-envFrom: []
-# - secretRef:
-#     name: env-secret
+envFrom:
+  - name: ELASTICSEARCH_USERNAME
+    secretRef:
+     name: elasticsearch-master-credentials
+     key: username
+  - name: ELASTICSEARCH_PASSWORD
+    secretRef:
+      name: elasticsearch-master-credentials
+      key: password
 # - configMapRef:
 #     name: config-map
 
