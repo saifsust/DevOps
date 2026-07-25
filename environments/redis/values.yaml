@@ -11,7 +11,7 @@ server:
     nodePort: 31087
 
   persistentVolume:
-    storge: 1Gi
+    storage: 1Gi
     accessModes: [ "ReadWriteOnce" ]
 
 insight:
@@ -25,5 +25,5 @@ insight:
     nodePort: 30087
 
   persistentVolume:
-    storge: 1Gi
+    storage: 1Gi
     accessModes: [ "ReadWriteOnce" ]
