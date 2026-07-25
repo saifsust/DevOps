@@ -11,11 +11,12 @@ spec:
       maxUnavailable: 50%
       maxSurge: 25%
   selector:
-    app: {{ printf %s-%s .Values.insight.appName .Values.insight.imageTag }}
+    matchLabels:
+      app: {{ printf "%s-%s" .Values.insight.appName .Values.insight.imageTag }}
   template:
     metadata:
       labels:
-        app: {{ printf %s-%s .Values.insight.appName .Values.insight.imageTag }}
+        app: {{ printf "%s-%s" .Values.insight.appName .Values.insight.imageTag }}
     spec:
       volumes:
         - name: data
@@ -23,10 +24,10 @@ spec:
             path: /tmp
       containers:
         - name: app
-          image: {{ printf %s:%s .Values.insight.image .Values.insight.imageTag }}
+          image: {{ printf "%s:%s" .Values.insight.image .Values.insight.imageTag }}
           imagePullPolicy: IfNotPresent
-          containerPort:
-            - port: 5540
+          ports:
+            - containerPort: 5540
               protocol: TCP
               name: tcp
           volumeMounts:

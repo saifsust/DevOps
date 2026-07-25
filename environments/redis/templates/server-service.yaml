@@ -6,7 +6,7 @@ metadata:
 spec:
   type: {{ .Values.server.service.type }}
   selector:
-    app: {{ printf %s-%s .Values.server.appName .Values.server.imageTag}}
+    app: {{ printf "%s-%s" .Values.server.appName .Values.server.imageTag}}
   ports:
     - protocol: TCP
       port: 6379
