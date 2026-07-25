@@ -36,11 +36,13 @@ logstashPipeline:
     output { 
       elasticsearch {
          hosts => ["https://elasticsearch-master:9200"]
+         index => "env-prod-%{+YYYY.MM.dd}"
          ssl => true
          user => "${username}"
          password => "${password}"
          cacert => "${ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES}"
       }
+    stdout { codec => rubydebug }
     }
 
 # Allows you to add any pattern files in your custom pattern dir
