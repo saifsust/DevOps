@@ -35,7 +35,7 @@ logstashPipeline:
     }
     output { 
       elasticsearch {
-         hosts => ["https://elasticsearch-master:9200"]
+         hosts => ["https://elasticsearch-master.elastic-system.svc.cluster.local:9200"]
          index => "env-prod-%{+YYYY.MM.dd}"
          ssl => true
          user => "${username}"
