@@ -19,9 +19,6 @@ global:
   # Setting this will disable deployment of a vault server.
   externalVaultAddr: ""
 
-  # If deploying to OpenShift
-  openshift: false
-
   # Create PodSecurityPolicy for pods
   psp:
     enable: false
@@ -483,54 +480,11 @@ server:
     #    hosts:
     #      - chart-example.local
 
-  httproute:
-    enabled: false
-    labels: {}
-    annotations: {}
-
-    activeService: true
-    
-    hostnames: []
-      # - host-example
-     
-    # Keep in mind parentRefs field is required
-    parentRefs: [] 
-      # - name: vault-gateway-example
-      #   namespace: example-ns
-    
-    matches:
-      - path:
-          type: PathPrefix
-          value: /
-    ## Filters define the filters that are applied to requests that match this rule.
-    filters: []
-
-    ## Additional custom rules that can be added to the route
-    additionalRules: []
-
   # hostAliases is a list of aliases to be added to /etc/hosts. Specified as a YAML list.
   hostAliases: []
   # - ip: 127.0.0.1
   #   hostnames:
   #     - chart-example.local
-
-  # OpenShift only - create a route to expose the service
-  # By default the created route will be of type passthrough
-  route:
-    enabled: false
-
-    # When HA mode is enabled and K8s service registration is being used,
-    # configure the route to point to the Vault active service.
-    activeService: true
-
-    labels: {}
-    annotations: {}
-    host: chart-example.local
-    # tls will be passed directly to the route's TLS config, which
-    # can be used to configure other termination methods that terminate
-    # TLS at the router
-    tls:
-      termination: passthrough
 
   # authDelegator enables a cluster role binding to be attached to the service
   # account.  This cluster role binding can be used to setup Kubernetes auth
@@ -781,7 +735,8 @@ server:
 
     # Configures the service type for the main Vault service.  Can be ClusterIP
     # or NodePort.
-    #type: ClusterIP
+    type: NodePort
+    nodePort: 30085
 
     # The IP family and IP families options are to set the behaviour in a dual-stack environment.
     # Omitting these values will let the service fall back to whatever the CNI dictates the defaults
@@ -1127,7 +1082,7 @@ ui:
   # serviceType can be used to control the type of service created. For
   # example, setting this to "LoadBalancer" will create an external load
   # balancer (for supported K8S installations) to access the UI.
-  enabled: false
+  enabled: true
   publishNotReadyAddresses: true
   # The service should only contain selectors for active Vault pod
   activeVaultPodOnly: false
