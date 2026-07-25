@@ -29,7 +29,7 @@ spec:
       - metadata:
           name: redis-data
         spec:
-          accessModes: { { .Values.server.persistentVolume.accessModes } }
+          accessModes: {{ .Values.server.persistentVolume.accessModes }}
           resources:
             requests:
-              storage: { { .Values.server.persistentVolume.storage } }
+              storage: {{ .Values.server.persistentVolume.storage }}

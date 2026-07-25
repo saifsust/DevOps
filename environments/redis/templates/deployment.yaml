@@ -33,7 +33,7 @@ spec:
       - metadata:
           name: redis-insight-data
         spec:
-          accessModes: { { .Values.insight.persistentVolume.accessModes } }
+          accessModes: {{ .Values.insight.persistentVolume.accessModes }}
           resources:
             requests:
-              storage: { { .Values.insight.persistentVolume.storage } }
+              storage: {{ .Values.insight.persistentVolume.storage }}
