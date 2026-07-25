@@ -47,7 +47,7 @@ daemonset:
                 logs_path: "/var/log/containers/"
 
       output.logstash:
-        hosts: '["http://logstash-logstash.elastic-system.svc.cluster.local:5044"]'
+        hosts: '["http://logstash-logstash.elastic-system.svc.cluster.local"]'
   # Only used when updateStrategy is set to "RollingUpdate"
   maxUnavailable: 1
   nodeSelector: {}
