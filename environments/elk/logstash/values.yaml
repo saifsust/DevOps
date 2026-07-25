@@ -29,7 +29,7 @@ logstashPipeline:
     }
     output { 
       elasticsearch {
-         hosts => "https://elasticsearch-master:9200"
+         hosts => ["https://elasticsearch-master:9200"]
          ssl => true
          user => "${username}"
          password => "${password}"
