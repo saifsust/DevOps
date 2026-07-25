@@ -14,14 +14,6 @@ spec:
       labels:
         app: {{ printf "%s-%s" .Values.server.appName .Values.server.imageTag }}
     spec:
-      volumeClaimTemplates:
-        - metadata:
-            name: redis-data
-          spec:
-            accessModes: {{ .Values.server.persistentVolume.accessModes }}
-            resources:
-              requests:
-                storage: {{ .Values.server.persistentVolume.storage }}
       containers:
         - name: app
           image: {{ printf "%s:%s" .Values.server.image .Values.server.imageTag }}
@@ -33,3 +25,11 @@ spec:
           volumeMounts:
             - name: redis-data
               mountPath: /data
+    volumeClaimTemplates:
+      - metadata:
+          name: redis-data
+        spec:
+          accessModes: { { .Values.server.persistentVolume.accessModes } }
+          resources:
+            requests:
+              storage: { { .Values.server.persistentVolume.storage } }
