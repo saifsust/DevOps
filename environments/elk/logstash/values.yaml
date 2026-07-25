@@ -74,6 +74,7 @@ secrets: []
 # A list of secrets and their paths to mount inside the pod
 secretMounts:
   - name: elasticsearch-master-certs
+    secretName: elasticsearch-master-certs
     path: /usr/share/logstash/config/certs
 
 hostAliases: []
