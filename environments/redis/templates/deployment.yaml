@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.insight.name }}
+  name: {{ .Values.insight.appName }}
   namespace: {{ .Values.appNamespace }}
 spec:
   replicas: {{ .Values.insight.replicaCount }}
