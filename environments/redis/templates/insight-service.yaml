@@ -6,7 +6,7 @@ metadata:
 spec:
   type: {{ .Values.insight.service.type }}
   selector:
-    app: {{ printf "%s-%s" .Values.insight.appName .Values.insight.imageTag }}
+    app: {{ printf %s-%s .Values.insight.appName .Values.insight.imageTag }}
   ports:
     - port: 5540
       targetPort: 5540

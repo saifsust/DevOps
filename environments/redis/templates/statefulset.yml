@@ -7,15 +7,15 @@ spec:
   replicas: {{ .Values.server.replicaCount }}
   selector:
     matchLabels:
-      app: {{ printf "%s-%s".Values.server.appName .Values.server.imageTag }}
+      app: {{ printf %s-%s.Values.server.appName .Values.server.imageTag }}
   template:
     metadata:
       labels:
-        app: {{ printf "%s-%s" .Values.server.appName .Values.server.imageTag }}
+        app: {{ printf %s-%s .Values.server.appName .Values.server.imageTag }}
     spec:
       containers:
         - name: app
-          image: {{ printf "%s:%s" .Values.server.image .Values.server.imageTag }}
+          image: {{ printf %s:%s .Values.server.image .Values.server.imageTag }}
           imagePullPolicy: IfNotPresent
           containerPort:
             - port: 6379
