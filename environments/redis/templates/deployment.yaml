@@ -29,7 +29,7 @@ spec:
           volumeMounts:
             - name: redis-insight-data
               mountPath: /data
-    volumeClaimTemplates:
+  volumeClaimTemplates:
       - metadata:
           name: redis-insight-data
         spec:
