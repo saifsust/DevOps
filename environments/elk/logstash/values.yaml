@@ -31,8 +31,8 @@ logstashPipeline:
       elasticsearch {
          hosts => "https://elasticsearch-master:9200"
          ssl => true
-         user => "${ELASTICSEARCH_USERNAME}"
-         password => "${ELASTICSEARCH_PASSWORD}"
+         user => "${username}"
+         password => "${password}"
          cacert => "${ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES}"
       }
     }
