@@ -18,10 +18,14 @@ spec:
       labels:
         app: {{ printf "%s-%s" .Values.insight.appName .Values.insight.imageTag }}
     spec:
-      volumes:
-        - name: data
-          hostPath:
-            path: /tmp
+      volumeClaimTemplates:
+        - metadata:
+            name: redis-insight-data
+          spec:
+            accessModes: {{ .Values.insight.persistentVolume.accessModes }}
+            resources:
+              requests:
+                storage: {{ .Values.insight.persistentVolume.storage }}
       containers:
         - name: app
           image: {{ printf "%s:%s" .Values.insight.image .Values.insight.imageTag }}
@@ -31,5 +35,5 @@ spec:
               protocol: TCP
               name: tcp
           volumeMounts:
-            - name: data
-              mountPath: /usr/share/redis/data
+            - name: redis-insight-data
+              mountPath: /data

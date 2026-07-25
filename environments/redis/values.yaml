@@ -7,7 +7,12 @@ server:
   imageTag: 8.6.5-alpine
 
   service:
-    type: ClusterIP
+    type: NodePort
+    nodePort: 31087
+
+  persistentVolume:
+    storge: 1Gi
+    accessModes: [ "ReadWriteOnce" ]
 
 insight:
   appName: redis-insight
@@ -18,3 +23,7 @@ insight:
   service:
     type: NodePort
     nodePort: 30087
+
+  persistentVolume:
+    storge: 1Gi
+    accessModes: [ "ReadWriteOnce" ]
