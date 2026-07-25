@@ -5,11 +5,6 @@ metadata:
   namespace: {{ .Values.appNamespace }}
 spec:
   replicas: {{ .Values.insight.replicaCount }}
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 50%
-      maxSurge: 25%
   selector:
     matchLabels:
       app: {{ printf "%s-%s" .Values.insight.appName .Values.insight.imageTag }}
