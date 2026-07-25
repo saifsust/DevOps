@@ -1,0 +1,16 @@
+appNamespace: redis-system
+
+server:
+  appName: redis-server
+  replicaCount: 1
+  image: redis
+  imageTag: 8.6.5-alpine
+
+  service:
+    type: ClusterIP
+
+insight:
+  appName: redis-server
+  replicaCount: 1
+  image: redis
+  imageTag: 8.6.5-alpine
