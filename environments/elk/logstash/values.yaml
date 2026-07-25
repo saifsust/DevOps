@@ -1,4 +1,9 @@
 ---
+elasticsearchHosts: "https://elasticsearch-master:9200"
+elasticsearchCertificateSecret: elasticsearch-master-certs
+elasticsearchCertificateAuthoritiesFile: ca.crt
+elasticsearchCredentialSecret: elasticsearch-master-credentials
+
 replicas: 1
 
 # Allows you to add any config files in /usr/share/logstash/config/
@@ -37,7 +42,9 @@ logstashPattern: {}
 # Extra environment variables to append to this nodeGroup
 # This will be appended to the current 'env:' key. You can use any of the kubernetes env
 # syntax here
-extraEnvs: []
+extraEnvs:
+  - name: ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES
+    value: /usr/share/logstash/config/certs/ca.crt
 #  - name: MY_ENVIRONMENT_VAR
 #    value: the_value_goes_here
 
@@ -65,7 +72,9 @@ secrets: []
 #      cert.key.filepath: "secrets.crt" # The path to file should be relative to the `values.yaml` file.
 
 # A list of secrets and their paths to mount inside the pod
-secretMounts: []
+secretMounts:
+  - name: elasticsearch-master-certs
+    path: /usr/share/logstash/config/certs
 
 hostAliases: []
 #- ip: "127.0.0.1"
