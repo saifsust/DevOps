@@ -16,4 +16,9 @@
 - get all BeanDefinition names
 - check if beanName is in use ( isAlias or beanDefinition exist)
 
-
+#### DefaultSingletonBeanRegistry
+- Map of beanNameToSingletonObject
+- add SingletonObject to beanNameToSingletonObject (called register)
+- - remove SingletonObject from beanNameToSingletonObject
+- - remove earlySingletonObject from beanNameToEarlySingletonObjects
+- - add registrationSingletons. 
